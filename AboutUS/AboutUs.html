@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About US</title>
+    <link href="../src/output.css" rel="stylesheet">
+</head>
+<!-- text abu, Mengatur tinggi elemen setinggi layar monitor, padding (16px), padding/border tidak menambah lebar elemen, text san serif -->
+<body class="text-gray-800 min-h-screen p-4 box-border font-sans font-[Poppins] min-h-screen text-white overflow-x-hidden bg-[radial-gradient(circle_at_top_left,rgba(255,0,0,0.25),transparent_25%),radial-gradient(circle_at_bottom_right,rgba(255,0,0,0.2),transparent_20%),linear-gradient(135deg,#050505,#0b0b0b,#111111)]">
+    <!-- NAVBAR -->
+    <nav class="w-[90%] max-w-[1200px] mx-auto px-10 py-4 flex items-center justify-between bg-white/10 border border-white/10 rounded-[60px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+    
+        <!-- LOGO -->
+        <div>
+            <img src="img/LogoProfile.png" alt="logo"
+            class="w-10 h-10 rounded-full overflow-hidden cursor-pointer transition duration-300 hover:scale-110">
+        </div>
+
+        <!-- MENU -->
+        <div class="relative flex items-center gap-[18px]">
+            <!-- HOME -->
+            <a href="../home/home.html"
+                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
+            Home
+            </a>
+
+            <!-- PRODUCT -->
+            <a href="../Product-Detailed/product.html"
+                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
+                Product
+            </a>
+
+            <!-- CONTACT -->
+            <a  href="../contact/Contact.html"
+                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
+                Contact
+            </a>
+
+            <!-- ABOUT -->
+            <a href="../aboutus/AboutUs.html"
+                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 bg-sky-400 text-white shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] [text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
+                About us
+            </a>
+
+        </div>
+
+        <!-- ICON -->
+        <div class="flex gap-5">
+
+            <!-- USER -->
+            <a href="../login/login.html">
+                <img src="img/user2.png" alt="user"
+                    class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
+            </a>
+
+            <!-- CART -->
+            <a href="../cart/cart.html">
+                <img src="img/shopping-bag.png" alt="cart"
+                class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
+            </a>
+        </div>
+    </nav>
+    <!--Lebar max kotak, margin kiri/kanan, flexbox arah kolom (atas-bawah), memberi jarak konten (antara atas&bawah)-->
+    <div class="max-w-6xl mx-auto p-4 flex flex-col justify-between">
+        <!--flexbox (mid device kontennya ke samping), (mid Dvc text rata atas/kiri), memberi jarak 48px, jarak luar atas 32px-->
+        <div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-12 mt-8">
+            <!--(mid device lebar kontennya menjadi 1/2)-->
+            <div class="md:w-1/2">
+                <!--font tebal, ukuran font 36px, (mid Dvc text rata kiri), menengahkan item-->
+                <h1 class="font-bold text-4xl text-center md:text-left mb-8 flex justify-center">About US</h1>
+                <!--memberi jarak bawah 24px, Mengatur spasi antar baris agar nyaman dibaca-->
+                <p class="mb-6 leading-relaxed"> 
+                    <b class="text-4xl">K</b>ami adalah perusahaan yang bergerak dibidang usaha perdagangan Mobil Sport.
+                    Perusahaan kami berdiri sejak 2021, <b>KING AL FARZANI</b> selaku CEO mendirikan perusahaan 
+                    ini karena melihat potensi pasar mobil yang berkembang pesat.
+                    Saat ini kami telah berhasil menjual lebih dari 100 unit mobil dalam satu tahun terakhir.
+                </p> 
+                <p class="leading-relaxed">
+                    Kedepannya kami akan menggembangkan bisnis ini menjadi lebih luas lagi dengan 
+                    menambahkan Motor Sport sebagai bisnis utama. Kita nantinya juga akan membuat event
+                    untuk para penggemar sebagai salah satu media promosi kami.
+                </p>
+            </div>
+            <!--(mid device itemnya (gambar) akan ke pojok kanan)-->
+            <div class="md:w-1/2 flex flex-col items-center md:items-end">
+                <!--Mengatur ukuran elemen (gambar)-->
+                <div class="w-full max-w-[400px]">
+                    <!--bagian yang lebih akan diabaikan, margin bawah 16px-->
+                    <div class="w-full h-[250px] flex items-center justify-center overflow-hidden bg-white mb-4">
+                        <!--memastikan gambar memenuhi kotak elemen (cover)-->
+                        <img src="./img/amikom.png" alt="lokasiamikom" class="object-cover w-full h-full">
+                    </div>
+                    <p>
+                        Kami Berlima merupakan Pendiri dari grup <b>ECLIPSE</b>, berawal dari jokes 
+                        ingin membuat perusahaan yang anggotanya berisi satu sirkel. Tidak kami sangka ternyata 
+                        dapat terwujud dimasa sekarang.
+                    </p>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-between items-end mb-8 w-full">
+            <div class="flex flex-col gap-2">
+                <span class="text-lg font-semibold">Motto Kami:</span>
+                <!--mengatur ukuran elemen, text menjadi ke tengah, text warna item, text bold, -->
+                <div class="w-[250px] md:w-[350px] h-[100px] flex items-center justify-center text-xl text-white font-bold px-4 text-center">
+                    "Kepuasan Anda adalah kebahagiaan bagi Kami"
+                </div>
+            </div>
+            <!--membuat lingkaran dengan ukuran yg ditentukan-->
+            <div class="rounded-full w-[120px] h-[120px] md:w-[150px] md:h-[150px] flex items-center justify-center bg-gray-500 overflow-hidden">
+                <img src="../AboutUS/img/LogoProfile.png" alt="gambar-Logo" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </div>
+    <footer class="bg-black/40 border-t border-white/10 mt-20">
+        <div class="max-w-7xl mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+                <!-- BRAND -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white">
+                        ECLIPSE
+                    </h2>
+                    <p class="text-gray-400 mt-4 leading-relaxed">
+                        Eclipse is a company that 
+                        operates in the field of selling expensive cars that have original 
+                        and trusted certification for all brands of cars sold.
+                    </p>
+                </div>
+                <!-- MENU -->
+                <div>
+                    <h3 class="text-white font-semibold text-lg mb-4">
+                        Navigation
+                    </h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li>
+                            <a href="../home/home.html" class="hover:text-sky-400 transition">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../Product-Detailed/product.html" class="hover:text-sky-400 transition">
+                                Product
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../contact/Contact.html" class="hover:text-sky-400 transition">
+                                Contact
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../aboutus/AboutUs.html" class="hover:text-sky-400 transition">
+                                About us
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- CONTACT -->
+                <div>
+                    <h3 class="text-white font-semibold text-lg mb-4">
+                        Contact
+                    </h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li>Email : eclipse@email.com</li>
+                        <li>Phone : +62 1234 5678 90</li>
+                        <li>Indonesia</li>
+                    </ul>
+                </div>
+                <!-- SOCIAL -->
+                <div>
+                    <h3 class="text-white font-semibold text-lg mb-4">
+                        Follow Us
+                    </h3>
+                    <div class="flex gap-4">
+                        <a href="#"
+                        class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
+                            <img src="../AboutUS/img/Logo-IG.svg" class="w-5 invert">
+                        </a>
+                        <a href="#"
+                        class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
+                            <img src="../AboutUS/img/Logo-FB.svg" class="w-5 invert">
+                        </a>
+                        <a href="#"
+                        class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
+                            <img src="../AboutUS/img/Logo-TT.svg" class="w-5 invert">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- COPYRIGHT -->
+            <div class="border-t border-white/10 mt-10 pt-6 text-center text-gray-500 text-sm">
+                Â© 2026 ECLIPSE. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

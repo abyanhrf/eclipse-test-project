@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link href="../src/output.css" rel="stylesheet">
+</head>
+
+<body class="bg-gradient-to-br from-black via-red-950 to-black">
+    
+    <!-- NAVBAR -->
+    <nav class="w-[90%] max-w-[1200px] mx-auto px-10 py-4 flex items-center justify-between bg-white/10 border border-white/10 rounded-[60px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+    
+        <!-- LOGO -->
+        <div>
+            <img src="img/LogoProfile.png" alt="logo"
+            class="w-10 h-10 cursor-pointer transition duration-300 hover:scale-110">
+        </div>
+
+        <!-- MENU -->
+        <div class="relative flex items-center gap-[18px]">
+            
+            <!-- HOME -->
+            <a href="../home/home.html"
+                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
+            Home
+            </a>
+
+            <!-- PRODUCT -->
+            <a href="../Product-Detailed/product.html"
+                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
+                Product
+            </a>
+
+            <!-- CONTACT -->
+            <a  href="../contact/Contact.html"
+                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
+                Contact
+            </a>
+
+            <!-- ABOUT -->
+            <a href="../aboutus/AboutUs.html"
+                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
+                About us
+            </a>
+
+        </div>
+
+        <!-- ICON -->
+        <div class="flex gap-5">
+
+            <!-- INDICATOR -->
+            <div class="absolute top-1/6 right-21 w-[50px] h-[50px] bg-sky-400 rounded-[14px] shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] transition-all duration-300 z-0"></div>
+            <!-- USER -->
+            <a href="../login/login.html">
+                <img src="img/user2.png" alt="user"
+                    class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
+            </a>
+
+            <!-- CART -->
+            <a href="../cart/cart.html">
+                <img src="img/shopping-bag.png" alt="cart"
+                class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
+            </a>
+        </div>
+    </nav>
+
+    <div class="min-h-screen flex items-center justify-center">
+    <!-- Card -->
+    <div class="w-[420px] bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-10 shadow-2xl">
+
+        <!-- Title -->
+        <div class="text-center mt-6">
+            <h1 class="text-4xl font-bold text-white">
+                Admin Login
+            </h1>
+
+            <p class="text-gray-400 mt-3">
+                Enter your credentials to access dashboard
+            </p>
+        </div>
+
+        <!-- Form -->
+        <form class="mt-10 space-y-6">
+
+            <!-- Username -->
+            <div>
+                <label class="text-gray-300 text-sm">
+                    Username
+                </label>
+
+                <input type="text" class="w-full mt-2 px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500"
+                placeholder="Username">
+            </div>
+
+            <!-- Password -->
+            <div>
+                <label class="text-gray-300 text-sm">
+                    Password
+                </label>
+
+                <input type="password" class="w-full mt-2 px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500"
+                placeholder="Password">
+            </div>
+
+            <!-- Button -->
+            <a href="../dashboard/dashboard.html"
+            class="w-full mt-8 py-4 rounded-xl bg-red-500 hover:bg-red-600 transition duration-300 text-white font-bold text-lg shadow-lg flex items-center justify-center">
+            Login
+            </a>
+    </div>
+    </div>
+<footer class="bg-black/40 border-t border-white/10 mt-20">
+
+    <div class="max-w-7xl mx-auto px-6 py-12">
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+
+            <!-- BRAND -->
+            <div>
+                <h2 class="text-2xl font-bold text-white">
+                    ECLIPSE
+                </h2>
+
+                <p class="text-gray-400 mt-4 leading-relaxed">
+                    Eclipse is a company that 
+                    operates in the field of selling expensive cars that have original 
+                    and trusted certification for all brands of cars sold.
+                </p>
+            </div>
+
+            <!-- MENU -->
+            <div>
+                <h3 class="text-white font-semibold text-lg mb-4">
+                    Navigation
+                </h3>
+
+                <ul class="space-y-3 text-gray-400">
+                    <li>
+                        <a href="../home/home.html" class="hover:text-sky-400 transition">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="../Product-Detailed/product.html" class="hover:text-sky-400 transition">
+                            Product
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="../contact/Contact.html" class="hover:text-sky-400 transition">
+                            Contact
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="../aboutus/AboutUs.html" class="hover:text-sky-400 transition">
+                            About us
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- CONTACT -->
+            <div>
+                <h3 class="text-white font-semibold text-lg mb-4">
+                    Contact
+                </h3>
+
+                <ul class="space-y-3 text-gray-400">
+                    <li>Email : eclipse@email.com</li>
+                    <li>Phone : +62 1234 5678 90</li>
+                    <li>Indonesia</li>
+                </ul>
+            </div>
+
+            <!-- SOCIAL -->
+            <div>
+                <h3 class="text-white font-semibold text-lg mb-4">
+                    Follow Us
+                </h3>
+
+                <div class="flex gap-4">
+
+                    <a href="#"
+                    class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
+                        <img src="img/ig.svg" class="w-5 invert">
+                    </a>
+
+                    <a href="#"
+                    class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
+                        <img src="img/fb.svg" class="w-5 invert">
+                    </a>
+
+                    <a href="#"
+                    class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
+                        <img src="img/tiktok.svg" class="w-5 invert">
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- COPYRIGHT -->
+        <div class="border-t border-white/10 mt-10 pt-6 text-center text-gray-500 text-sm">
+            © 2026 ECLIPSE. All Rights Reserved.
+        </div>
+
+    </div>
+
+</footer>
+</body>
+</html>
