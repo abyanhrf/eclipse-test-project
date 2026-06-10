@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,14 +47,36 @@
 
         <!-- ICON -->
         <div class="nav-icons">
-            <a href="../login/login.html">
+            <?php if (isset($_SESSION['user_id'])) : ?>
+
+                <div class="relative">
+                    <button>
+                        <?php
+                        echo $_SESSION['nama'];
+                        ?>
+                    </button>
+                </div>
+            
+            <?php else : ?>
+
+            <a href="../login/login.php">
                 <img src="img/user2.png" alt="user">
             </a>
+            
+            <?php endif; ?>
+
             <a href="../cart/cart.html">
                 <img src="img/shopping-bag.png" alt="cart">
             </a>
         </div>
     </nav>
+
+    <!==Test php session==>
+    <div>
+        <h1>
+            Selamat datang <?= $_SESSION['nama'] ?>!
+        </h1>
+    </div>
 
     <!-- SEARCH -->
     <section class="search-section">
