@@ -63,7 +63,7 @@ session_start();
             <div
                 class="absolute right-0 top-full w-40 bg-white rounded-lg shadow-lg hidden group-hover:block overflow-hidden z-50">
 
-                <a href="#"
+                <a href="../profile/profile.php"
                         class="block px-4 py-1.5 text-white hover:text-blue-300 hover:bg-gray-100 transition">
                         Profil Saya
                     </a>
