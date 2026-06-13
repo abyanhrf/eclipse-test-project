@@ -49,13 +49,33 @@ session_start();
         <div class="nav-icons">
             <?php if (isset($_SESSION['user_id'])) : ?>
 
-                <div class="relative">
-                    <button>
-                        <?php
-                        echo $_SESSION['nama'];
-                        ?>
+                <div class="relative group">
+
+                    <button
+                        class="flex items-center gap-2 mr-5 text-white font-semibold hover:text-sky-400 transition duration-300">
+
+                        <img src="img/user2.png" alt="user" class="w-6 h-6 invert">
+
+                        <?= $_SESSION['nama']; ?>
+
                     </button>
+
+            <div
+                class="absolute right-0 top-full w-40 bg-white rounded-lg shadow-lg hidden group-hover:block overflow-hidden z-50">
+
+                <a href="#"
+                        class="block px-4 py-1.5 text-white hover:text-blue-300 hover:bg-gray-100 transition">
+                        Profil Saya
+                    </a>
+
+                    <a href="../process/logout.php"
+                        class="block px-4 py-1.5 text-red-600 hover:bg-red-50 transition">
+                        Logout
+                    </a>
+
                 </div>
+
+            </div>
             
             <?php else : ?>
 
@@ -70,13 +90,6 @@ session_start();
             </a>
         </div>
     </nav>
-
-    <!==Test php session==>
-    <div>
-        <h1>
-            Selamat datang <?= $_SESSION['nama'] ?>!
-        </h1>
-    </div>
 
     <!-- SEARCH -->
     <section class="search-section">
