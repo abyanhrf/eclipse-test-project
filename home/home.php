@@ -85,9 +85,20 @@ session_start();
             
             <?php endif; ?>
 
-            <a href="../cart/cart.html">
-                <img src="img/shopping-bag.png" alt="cart">
-            </a>
+            <?php if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'admin') : ?>
+
+                <a href="../dashboard/dashboard.php"
+                    class="px-3 py-2 rounded-lg bg-sky-500 text-white text-sm font-semibold hover:bg-sky-400 transition">
+                    Dashboard
+                </a>
+
+            <?php else : ?>
+
+                <a href="../cart/cart.php">
+                    <img src="img/shopping-bag.png" alt="cart">
+                </a>
+
+            <?php endif; ?>
         </div>
     </nav>
 
@@ -170,7 +181,7 @@ session_start();
 
         <div class="bg-gray-500 p-3 shadow-md hover:shadow-lg transition-shadow duration-300">
           <img src="img/mclaren.jpg" alt="lambo">
-          <h3 class="text-2xl font-bold text-gray-900 mt-3">Porssche</h3>
+          <h3 class="text-2xl font-bold text-gray-900 mt-3">Porsche</h3>
           <div text-right mt-2>
             <span class="text-xl font-bold text-white">$1300000</span>
           </div>
