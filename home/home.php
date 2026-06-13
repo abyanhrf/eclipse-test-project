@@ -203,9 +203,9 @@ session_start();
                             <h3>Lamborgini</h3>
                             <p>vehicles specifically designed to prioritize dynamic performance, such as speed, acceleration, and responsive handling.</p>
                             <div class="project-tech">
-                                <span>React</span>
+                                <!-- <span>React</span>
                                 <span>Node.js</span>
-                                <span>MongoDB</span>
+                                <span>MongoDB</span> -->
                             </div>
                             <div class="project-links">
                                 <a href="#" class="project-link">BUY</a>
@@ -221,9 +221,9 @@ session_start();
                             <h3>McLaren</h3>
                             <p>vehicles specifically designed to prioritize dynamic performance, such as speed, acceleration, and responsive handling.</p>
                             <div class="project-tech">
-                                <span>HTML</span>
+                                <!-- <span>HTML</span>
                                 <span>CSS</span>
-                                <span>JavaScript</span>
+                                <span>JavaScript</span> -->
                             </div>
                             <div class="project-links">
                                 <a href="#" class="project-link">BUY</a>
@@ -239,9 +239,9 @@ session_start();
                             <h3>Porsche</h3>
                             <p>vehicles specifically designed to prioritize dynamic performance, such as speed, acceleration, and responsive handling.</p>
                             <div class="project-tech">
-                                <span>Vue.js</span>
+                                <!-- <span>Vue.js</span>
                                 <span>Firebase</span>
-                                <span>Tailwind CSS</span>
+                                <span>Tailwind CSS</span> -->
                             </div>
                             <div class="project-links">
                                 <a href="#" class="project-link">BUY</a>
