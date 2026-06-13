@@ -23,7 +23,13 @@ if ($user) {
         $_SESSION['nama'] = $user['nama'];
         $_SESSION['role'] = $user['role'];
 
-        header("Location: ../home/home.php");
+        if ($user['role'] == 'admin') {
+            header("Location: ../dashboard/dashboard.php");
+            } 
+        else {
+                header("Location: ../home/home.php");
+            }
+
         exit;
     }
 
