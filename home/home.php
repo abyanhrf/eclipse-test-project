@@ -170,7 +170,7 @@ session_start();
 
         <div class="bg-gray-500 p-3 shadow-md hover:shadow-lg transition-shadow duration-300">
           <img src="img/mclaren.jpg" alt="lambo">
-          <h3 class="text-2xl font-bold text-gray-900 mt-3">Porsche</h3>
+          <h3 class="text-2xl font-bold text-gray-900 mt-3">Porssche</h3>
           <div text-right mt-2>
             <span class="text-xl font-bold text-white">$1300000</span>
           </div>
