@@ -47,7 +47,7 @@ session_start();
             <span class="font-medium">Dashboard</span>
         </a>
         <!---->
-        <a href="../dashbarang/dashbarangfix.html" class="flex items-center gap-3 px-4 py-3 mx-3 mb-2 text-white transition-all duration-300 rounded-xl hover:bg-red-500 hover:shadow-[0_0_15px_#ef4444,0_0_30px_rgba(239,68,68,0.6)]">
+        <a href="dashbarang.php" class="flex items-center gap-3 px-4 py-3 mx-3 mb-2 text-white transition-all duration-300 rounded-xl hover:bg-red-500 hover:shadow-[0_0_15px_#ef4444,0_0_30px_rgba(239,68,68,0.6)]">
             <i class="fas fa-home w-5 text-center"></i>
             <span class="font-medium">Atur Barang</span>
         </a>
@@ -68,7 +68,7 @@ session_start();
             <nav class="w-[90%] max-w-[1200px] mx-auto px-10 py-4 flex items-center justify-between bg-white/10 border border-white/10 rounded-[60px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
                 <!---->
                 <div>
-                    <img src="./LogoProfile.png" alt="logo" class="w-10 h-10 cursor-pointer transition duration-300 hover:scale-110">
+                    <img src="img/LogoProfile.png" alt="logo" class="w-10 h-10 cursor-pointer transition duration-300 hover:scale-110">
                 </div>
 
                 <div class="relative flex items-center gap-[18px]">
@@ -88,10 +88,10 @@ session_start();
 
                 <div class="flex gap-5">
                     <a href="../login/login.html">
-                        <img src="./user2.png" alt="user" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
+                        <img src="img/user2.png" alt="user" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
                     </a>
                     <a href="../cart/cart.html">
-                        <img src="./shopping-bag.png" alt="cart" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
+                        <img src="img/shopping-bag.png" alt="cart" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
                     </a>
                 </div>
             </nav>
