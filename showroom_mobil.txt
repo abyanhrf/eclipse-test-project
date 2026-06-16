@@ -1,0 +1,35 @@
+CREATE DATABASE showroom_mobil;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nama VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('admin','customer') DEFAULT 'customer',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    domisili VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE cars ( 
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nama_mobil VARCHAR(100) NOT NULL,
+    merek VARCHAR(50) NOT NULL,
+    tipe_mobil VARCHAR(50) NOT NULL,
+    harga BIGINT NOT NULL,
+    tahun INT NOT NULL,
+    stok INT NOT NULL DEFAULT 0,
+    deskripsi TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP );
+    
+CREATE TABLE car_img (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    car_id INT NOT NULL,
+    gambar VARCHAR(255) NOT NULL,
+    FOREIGN KEY (car_id) REFERENCES cars(id) ON DELETE CASCADE );
+
+ALTER TABLE cars
+    ADD bahan_bakar VARCHAR(15) AFTER stok,
+    ADD transmisi VARCHAR(10) AFTER bahan_bakar,
+    ADD kapasitas_mesin VARCHAR(20) AFTER transmisi,
+    ADD warna VARCHAR(25) AFTER kapasitas_mesin,
+    ADD kilometer INT AFTER warna;
