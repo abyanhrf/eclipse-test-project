@@ -1,3 +1,33 @@
+<?php
+
+    session_start();
+    require_once "../config/database.php";
+
+    $id = $_GET['id'];
+
+    $sql = "
+        SELECT cars.*, cars_img.gambar
+        FROM cars
+        LEFT JOIN cars_img
+        ON cars.id = cars_img.car_id
+        WHERE cars.id = ?
+        ";
+
+    $stmt = mysqli_prepare($conn, $sql);
+
+    mysqli_stmt_bind_param(
+        $stmt,
+        "i",
+        $id
+    );
+
+    mysqli_stmt_execute($stmt);
+
+    $result = mysqli_stmt_get_result($stmt);
+
+    $car = mysqli_fetch_assoc($result);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,31 +113,39 @@
         </div>
 
         <div class="w-[90%] max-w-[1200px] mx-auto mt-6 mb-12 text-white flex-1 flex flex-col">
-            <h2 class="text-2xl font-medium mb-6">Tambah Mobil</h2>
+            <h2 class="text-2xl font-medium mb-6">Edit Mobil</h2>
             
-            <form action="../process/add_car_process.php"
+            <form action="../process/update_car_process.php"
                 method="POST"
                 enctype="multipart/form-data"
                 class="flex flex-col gap-6">
+
+                <input
+                type="hidden"
+                name="id"
+                value="<?= $car['id']; ?>">
 
                 <div class="flex flex-col lg:flex-row gap-8">                    
                     
                     <div class="w-full lg:w-[280px]">
                         <!--Border non aktif, kode= border-[3px] border-slate-400-->
                         <img
-                            id="preview"
-                            src=""
-                            class="hidden w-full h-[180px] object-cover rounded-lg border border-slate-400">
+                        src="../uploads/<?= $car['gambar']; ?>"
+                        alt="gambar mobil"
+                        class="w-full h-[180px] object-cover rounded-lg mb-4">
 
-                            <div class="w-full border-[3px] border-slate-400 p-4 mt-3">
-                                <input
-                                type="file"
-                                name="gambar[]"
-                                id="gambar"
-                                accept="image/*"
-                                multiple
-                                class="w-full text-white">
-                            </div>
+                        <input
+                        type="hidden"
+                        name="gambar_lama"
+                        value="<?= $car['gambar']; ?>">
+
+                        <div class="w-full border-[3px] border-slate-400 p-4">
+                            <input
+                            type="file"
+                            name="gambar"
+                            accept="image/*"
+                            class="w-full text-white">
+                        </div>
                     </div>
 
                     <div class="w-full lg:flex-1 flex flex-col gap-6">                       
@@ -115,7 +153,7 @@
                             <input
                             type="text"
                             name="nama_mobil"
-                            placeholder="Nama Produk"
+                            value="<?= $car['nama_mobil']; ?>"
                             class="w-full bg-transparent outline-none text-white placeholder-slate-400">
                         </div>
 
@@ -124,7 +162,7 @@
                             <input
                             type="text"
                             name="merek"
-                            placeholder="Merek Produk"
+                            value="<?= $car['merek']; ?>"
                             class="w-full bg-transparent outline-none text-white placeholder-slate-400">
                         </div>
 
@@ -132,22 +170,22 @@
                             <select
                             name="tipe_mobil" 
                             class="w-full bg-transparent outline-none text-white">
-                                <option value="SUV" class="text-black">
+                                <option value="SUV" class="text-black" <?= $car['tipe_mobil'] == 'SUV' ? 'selected' : ''; ?>>
                                 Sport Utility Vehicle
                                 </option>
-                                <option value="Sedan" class="text-black">
+                                <option value="Sedan" class="text-black" <?= $car['tipe_mobil'] == 'Sedan' ? 'selected' : ''; ?>>
                                 Sedan
                                 </option>
-                                <option value="MPV" class="text-black">
+                                <option value="MPV" class="text-black" <?= $car['tipe_mobil'] == 'MPV' ? 'selected' : ''; ?>>
                                 Multi-Purpose Vehicle
                                 </option>
-                                <option value="Pickup" class="text-black">
+                                <option value="Pickup" class="text-black" <?= $car['tipe_mobil'] == 'Pickup' ? 'selected' : ''; ?>>
                                 Pickup Truck
                                 </option>
-                                <option value="Sport" class="text-black">
+                                <option value="Sport" class="text-black" <?= $car['tipe_mobil'] == 'Sport' ? 'selected' : ''; ?>>
                                 Sport
                                 </option>
-                                <option value="Supercar" class="text-black">
+                                <option value="Supercar" class="text-black" <?= $car['tipe_mobil'] == 'Supercar' ? 'selected' : ''; ?>>
                                 Supercar
                                 </option>
                             </select>
@@ -159,7 +197,7 @@
                             <input
                             type="text"
                             name="kapasitas_mesin"
-                            placeholder="Kapasitas Mesin"
+                            value="<?= $car['kapasitas_mesin']; ?>"
                             class="w-full bg-transparent outline-none text-white placeholder-slate-400">
                         </div>
 
@@ -167,24 +205,25 @@
                             <select
                                 name="transmisi"
                                 class="w-full bg-transparent outline-none text-white">
-
-                                <option value="Manual" class="text-black">
+                                
+                                <option value="Manual" class="text-black" <?=$car['transmisi'] == 'Manual' ? 'selected' : ''; ?>>
                                     Manual
                                 </option>
 
-                                <option value="Automatic" class="text-black">
+                                <option value="Automatic" class="text-black" <?=$car['transmisi'] == 'Automatic' ? 'selected' : ''; ?>>
                                     Automatic
                                 </option>
                             </select>
                         </div>
                     </div>
 
+
                     <div class="relative flex">
                         <div class="w-1/3 border-[3px] border-slate-400 bg-transparent p-4 focus-within:border-sky-400 transition-colors">
                             <input
                             type="text"
                             name="warna"
-                            placeholder="Warna"
+                            value="<?=$car['warna']; ?>"
                             class="w-full bg-transparent outline-none text-white placeholder-slate-400">
                         </div>
 
@@ -192,37 +231,35 @@
                             <input
                             type="number"
                             name="kilometer"
-                            placeholder="Kilometer"
+                            value="<?= $car['kilometer']; ?>"
                             class="w-full bg-transparent outline-none text-white placeholder-slate-400">
                         </div>
 
-                                                <div class="w-1/3 border-[3px] border-slate-400 bg-transparent p-4 focus-within:border-sky-400 transition-colors">
+                        <div class="w-1/3 border-[3px] border-slate-400 bg-transparent p-4 focus-within:border-sky-400 transition-colors">
                             <select
                                 name="bahan_bakar"
                                 class="w-full bg-transparent outline-none text-white">
-                                <option value="Bensin" class="text-black">
+                                <option value="Bensin" class="text-black" <?= $car['bahan_bakar'] == 'Bensin' ? 'selected' : ''; ?>>
                                     Bensin
                                 </option>
 
-                                <option value="Diesel" class="text-black">
+                                <option value="Diesel" class="text-black" <?= $car['bahan_bakar'] == 'Diesel' ? 'selected' : ''; ?>>
                                     Diesel
                                 </option>
 
-                                <option value="Hybrid" class="text-black">
+                                <option value="Hybrid" class="text-black" <?= $car['bahan_bakar'] == 'Hybrid' ? 'selected' : ''; ?>>
                                     Hybrid
                                 </option>
 
-                                <option value="Listrik" class="text-black">
+                                <option value="Listrik" class="text-black" <?= $car['bahan_bakar'] == 'Listrik' ? 'selected' : ''; ?>>
                                     Listrik
                                 </option>
                             </select>
                         </div>
                     </div>
 
-
-
                         <div class="w-full h-[180px] border-[3px] border-slate-400 bg-transparent p-4 focus-within:border-sky-400 transition-colors">
-                            <textarea name="deskripsi" placeholder="Deskripsi Produk" class="w-full h-full bg-transparent outline-none text-white resize-none placeholder-slate-400"></textarea>
+                            <textarea name="deskripsi" class="w-full h-full bg-transparent outline-none text-white resize-none placeholder-slate-400"><?= $car['deskripsi']; ?></textarea>
                         </div>
                         
                         <div class="relative flex">
@@ -230,7 +267,7 @@
                                 <input
                                 type="number"
                                 name="harga"
-                                placeholder="Harga barang"
+                                value="<?= $car['harga']; ?>"
                                 class="w-full bg-transparent outline-none text-white placeholder-slate-400">
                             </div>
 
@@ -238,7 +275,7 @@
                                 <input
                                 type="number"
                                 name="tahun"
-                                placeholder="Tahun Produksi"
+                                value="<?= $car['tahun']; ?>"
                                 class="w-full bg-transparent outline-none text-white placeholder-slate-400">
                             </div>
 
@@ -246,7 +283,7 @@
                                 <input
                                 type="number"
                                 name="stok"
-                                placeholder="Stok barang"
+                                value="<?= $car['stok']; ?>"
                                 class="w-full bg-transparent outline-none text-white placeholder-slate-400">
                             </div>
                         </div>
@@ -254,7 +291,7 @@
                             <button
                             type="submit"
                             class="border-[3px] border-slate-400 rounded-2xl bg-sky-700 text-white font-bold py-3 px-8 hover:bg-sky-500 hover:border-sky-500 transition-all cursor-pointer whitespace-nowrap">
-                                Tambah Barang
+                                Update Barang
                             </button>
                     </div>
                 </div>

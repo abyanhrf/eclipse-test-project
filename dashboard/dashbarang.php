@@ -12,7 +12,12 @@
     }
 
     require_once "../config/database.php";
-    $sql = "SELECT * FROM cars";
+    $sql = "SELECT cars.*, cars_img.gambar
+    FROM cars
+    LEFT JOIN cars_img
+    ON cars.id = cars_img.car_id
+    AND cars_img.gambar_utama = 1
+    ";
     $result = mysqli_query($conn, $sql);
 ?>
 
@@ -102,7 +107,7 @@
 
         <div class="px-10 py-6 mt-6">
             <button class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300">
-                <a href="../TambahBarang/TambahBrg.html">
+                <a href="TambahBrg.php">
                 Tambah Barang
                 </a>
             </button>
@@ -116,10 +121,10 @@
             
                     <!-- 1 -->
                     <div class="flex items-center gap-6">
-                        <img src="img/fortuner.webp" class="w-56 h-32 object-cover rounded-lg">
+                        <img src="../uploads/<?= $car['gambar']; ?>" class="w-56 h-32 object-cover rounded-lg">
 
                         <!-- Detail -->
-                        <div>
+                        <div class="w-[450px]">
                             <p class="text-3xl font-bold text-white">
                                 <?php
                                 echo $car['nama_mobil'];
@@ -144,7 +149,7 @@
                             </p>
                         </div>
 
-                        <div class="mr-5">
+                        <div class="mr-5 w-[250px] text-center">
                             <!--harga-->
                             <p class="text-3xl font-bold text-white">
                                 Rp <?php
@@ -154,10 +159,25 @@
                         </div>
 
                         <!--tombolhapus-->
-                        <div class="ml-10">
-                            <button class="px-2 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-300">
+                        <div class="ml-10 w-[120px] text-center">
+                            
+                            <a href="edit_car.php?id=<?= $car['id']; ?>"
+                                class="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition duration-300"
+                                >
+                                Edit
+                            </a>
+
+                            <div class="mt-1 mb-1">
+                                <br>
+                            </div>
+                        
+                            <a href="../process/delete_car_process.php?id=
+                                <?php echo $car['id'];?>"
+                                class="px-2 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-300"
+                                onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
+                                >
                                 Hapus
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
