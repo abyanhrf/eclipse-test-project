@@ -5,28 +5,38 @@
 
     $id = $_GET['id'];
 
-    $sql = "
-        SELECT cars.*, cars_img.gambar
-        FROM cars
-        LEFT JOIN cars_img
-        ON cars.id = cars_img.car_id
-        WHERE cars.id = ?
-        ";
+    $sqlCar = 
+    "SELECT * FROM cars WHERE id = ?";
 
-    $stmt = mysqli_prepare($conn, $sql);
+    $sqlImg = 
+    "SELECT * FROM cars_img
+    WHERE car_id = ?
+    ORDER BY gambar_utama DESC
+    ";
+
+    $stmtCar = mysqli_prepare($conn, $sqlCar);
+    $stmtImg = mysqli_prepare($conn, $sqlImg);
 
     mysqli_stmt_bind_param(
-        $stmt,
-        "i",
-        $id
+    $stmtCar,
+    "i",
+    $id
     );
 
-    mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_param(
+    $stmtImg,
+    "i",
+    $id
+    );
 
-    $result = mysqli_stmt_get_result($stmt);
+    mysqli_stmt_execute($stmtCar);
+    $resultCar = mysqli_stmt_get_result($stmtCar);
+    $car = mysqli_fetch_assoc($resultCar);
+    mysqli_stmt_execute($stmtImg);
+    $resultImg = mysqli_stmt_get_result($stmtImg);
 
-    $car = mysqli_fetch_assoc($result);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -129,22 +139,41 @@
                     
                     <div class="w-full lg:w-[280px]">
                         <!--Border non aktif, kode= border-[3px] border-slate-400-->
-                        <img
-                        src="../uploads/<?= $car['gambar']; ?>"
-                        alt="gambar mobil"
-                        class="w-full h-[180px] object-cover rounded-lg mb-4">
+                    <?php while ($img = mysqli_fetch_assoc($resultImg)) : ?>
+                        <div class="mb-4 border border-slate-600 rounded-lg p-2">
+                            <img src="../uploads/<?= $img['gambar']; ?>" class="w-full h-[180px] object-cover rounded-lg">
+                            
+                            <?php if ($img['gambar_utama']) : ?>
+                                <p class="mt-2 text-green-400 text-center">
+                                    Gambar Utama
+                                </p>
+                            <?php else : ?>
+                                <a href="../process/set_gambar_utama.php?id=<?= $img['id']; ?>&car_id=<?= $car['id']; ?>" 
+                                    class="block mt-2 text-center bg-blue-500 hover:bg-blue-600 text-white py-2 rounded">
+                                    Jadikan Utama
+                                </a>
 
-                        <input
-                        type="hidden"
-                        name="gambar_lama"
-                        value="<?= $car['gambar']; ?>">
+                            <?php endif; ?>
 
-                        <div class="w-full border-[3px] border-slate-400 p-4">
+                            <a href="../process/delete_img_process.php?id=<?= $img['id']; ?>&car_id=<?= $car['id']; ?>"
+                                class="block mt-2 text-center bg-red-500 hover:bg-red-600 text-white py-2 rounded"
+                                onclick="return confirm('Yakin ingin menghapus gambar ini?')">   
+                                Hapus
+                            </a>
+                        </div>
+                        <?php endwhile; ?>
+
+                        <div class="mt-4 border-[3px] border-slate-400 p-4">
+                            <label class="block mb-2">
+                                Tambah Gambar Baru
+                            </label>
                             <input
-                            type="file"
-                            name="gambar"
-                            accept="image/*"
-                            class="w-full text-white">
+                                type="file"
+                                name="gambar_baru[]"
+                                multiple
+                                accept="image/*"
+                                class="w-full text-white"
+                            >
                         </div>
                     </div>
 
