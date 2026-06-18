@@ -98,66 +98,15 @@ session_start();
         </div>
 
         <!--Data Toko-->
-        <div class="px-10 py-8 w-full max-w-[1200px] mx-auto">
-            <div class="grid grid-cols-3 gap-6 mb-8">
-                <div class="bg-[#212b36]/80 border border-slate-700/50 p-6 rounded-2xl flex justify-between items-center shadow-lg transition-transform hover:-translate-y-1">
-                    <div>
-                        <p class="text-sm font-medium text-slate-400 mb-1">Total Pengunjung</p>
-                        <h3 class="text-3xl font-bold text-white">8,420</h3>
-                    </div>
-                    <div class="w-12 h-12 rounded-full bg-sky-500/20 flex justify-center items-center text-sky-400">
-                        <i class="fas fa-users text-xl"></i>
-                    </div>
-                </div>
-
-                <div class="bg-[#212b36]/80 border border-slate-700/50 p-6 rounded-2xl flex justify-between items-center shadow-lg transition-transform hover:-translate-y-1">
-                    <div>
-                        <p class="text-sm font-medium text-slate-400 mb-1">Pendapatan</p>
-                        <h3 class="text-3xl font-bold text-white">Rp 12.5M</h3>
-                        <p class="text-xs text-green-400 mt-2 font-medium"><i class="fas fa-arrow-up mr-1"></i>+4.5% dari bulan lalu</p>
-                    </div>
-                    <div class="w-12 h-12 rounded-full bg-green-500/20 flex justify-center items-center text-green-400">
-                        <i class="fas fa-wallet text-xl"></i>
-                    </div>
-                </div>
-
-                <div class="bg-[#212b36]/80 border border-slate-700/50 p-6 rounded-2xl flex justify-between items-center shadow-lg transition-transform hover:-translate-y-1">
-                    <div>
-                        <p class="text-sm font-medium text-slate-400 mb-1">Jumlah Produk</p>
-                        <h3 class="text-3xl font-bold text-white">345</h3>
-                    </div>
-                    <div class="w-12 h-12 rounded-full bg-purple-500/20 flex justify-center items-center text-purple-400">
-                        <i class="fas fa-box-open text-xl"></i>
-                    </div>
-                </div>
-
+        <div class="flex-1 flex items-center justify-center px-10 py-8 w-full">
+            <div class="text-center bg-[#212b36]/80 border border-slate-700/50 p-16 rounded-3xl shadow-2xl max-w-4xl w-full">
+                <h2 class="text-7xl font-bold text-white mb-6 tracking-tight leading-tight">
+                    Selamat Datang, <?php echo isset($_SESSION['nama']) ? htmlspecialchars($_SESSION['nama']) : 'Admin'; ?>!
+                </h2>
+                <p class="text-slate-400 text-2xl font-medium">
+                    Selamat bekerja di panel kendali ECLIPSE. Semua sistem berjalan dengan normal.
+                </p>
             </div>
-
-            <div class="bg-[#212b36]/80 border border-slate-700/50 p-6 rounded-2xl shadow-lg h-[350px] flex flex-col">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-lg font-bold text-white">Statistik Kinerja</h3>
-                    <!-- <button class="px-3 py-1 bg-slate-700 hover:bg-slate-600 text-white text-sm rounded-lg transition">Bulan Ini <i class="fas fa-chevron-down ml-1 text-xs" alt="bulan"></i></button> -->
-                </div>
-                <div class="flex-1 w-full relative flex items-end">
-                    <div class="absolute inset-0 flex flex-col justify-between border-b border-slate-700/50 pb-6">
-                        <div class="border-b border-slate-700/30 w-full"></div>
-                        <div class="border-b border-slate-700/30 w-full"></div>
-                        <div class="border-b border-slate-700/30 w-full"></div>
-                        <div class="border-b border-slate-700/30 w-full"></div>
-                    </div>
-                    <svg viewBox="0 0 1000 300" class="w-full h-full relative z-10" preserveAspectRatio="none">
-                        <path d="M0,280 L80,150 L160,260 L240,80 L320,270 L400,120 L480,240 L560,110 L640,260 L720,100 L800,280 L850,50 L900,210 L920,180 L950,250 L980,200 L1000,290" fill="none" stroke="#38bdf8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M0,280 L80,150 L160,260 L240,80 L320,270 L400,120 L480,240 L560,110 L640,260 L720,100 L800,280 L850,50 L900,210 L920,180 L950,250 L980,200 L1000,290 L1000,300 L0,300 Z" fill="url(#grad1)" opacity="0.2"/>
-                        <defs>
-                            <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#38bdf8;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#38bdf8;stop-opacity:0" />
-                            </linearGradient>
-                        </defs>
-                    </svg>
-                </div>
-            </div>
-
         </div>
     </main>
 </body>
