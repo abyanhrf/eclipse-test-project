@@ -1,3 +1,37 @@
+<?php
+    require_once "../config/database.php";
+
+    $id = $_GET['id'];
+
+    $sqlCar = "SELECT * FROM cars WHERE id = ?";
+
+    $sqlImg = "SELECT * FROM cars_img WHERE car_id = ?
+    ORDER BY gambar_utama DESC 
+    ";
+
+    $stmtCar = mysqli_prepare($conn,$sqlCar);
+    $stmtImg = mysqli_prepare($conn,$sqlImg);
+
+    mysqli_stmt_bind_param(
+        $stmtCar,
+        "i",
+        $id
+        );
+
+    mysqli_stmt_bind_param($stmtImg,
+    "i",
+    $id
+    );
+
+    mysqli_stmt_execute($stmtCar);
+    $resultCar = mysqli_stmt_get_result($stmtCar);
+    $car = mysqli_fetch_assoc($resultCar);
+
+    mysqli_stmt_execute($stmtImg);
+    $resultImg = mysqli_stmt_get_result($stmtImg);
+
+?>
+
 <!doctype html>
 <html>
 <head>
@@ -67,24 +101,27 @@
 
     <!--search-->
     
-    <div class="mt-4 mb-4 flex justify-center">
-      <div class="relative w-100">
-        <img 
-        src="img/search.png" alt="search"
-        class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 opacity-60"
-        >
-      <input 
-      type="text" placeholder="Cari produk..."
-      class="w-full pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
-      >
-      </div>
-    </div>
+    <form method="GET" class="mt-4 mb-4 flex justify-center">
+
+  <div class="relative w-100">
+
+    <input
+      type="text"
+      name="keyword"
+      placeholder="Cari produk..."
+      value="<?= $_GET['keyword'] ?? '' ?>"
+      class="w-full pl-10 pr-4 py-2 rounded-full border border-gray-300 text-white"
+    >
+
+  </div>
+
+</form>
     
     <section class="max-w-5xl mx-auto py-10"><!-- TITLE -->
   <section class="bg-black py-10">
 
     <h1 class="text-white text-3xl font-sans font-bold text-center">
-      Sesuaikan dengan mobilnya
+      <?= $car['nama_mobil'];?>
     </h1>
 
   </section>
@@ -98,65 +135,49 @@
         <!-- MAIN IMAGE -->
         <div class="bg-black p-4">
 
-            <img 
-            id="mainImage"
-            src="/ISI-Product/img/mobil1.jpg" alt="Image1"
-            class="thumbnail class="w-full h-[450px] object-cover">
+        <?php
+        $index = 0;
+        $gambarUtama = mysqli_fetch_assoc($resultImg);
+        ?>
+
+        <img
+        id="mainImage"
+        src="../uploads/<?= $gambarUtama['gambar']; ?>"
+        class="w-full h-[450px] object-cover">
             
           <!-- THUMBNAIL -->
-          <div class="flex gap-3 mt-4">
+        <div class="flex gap-3 mt-4">
+            <?php
+            mysqli_data_seek($resultImg,0);
+            while($img = mysqli_fetch_assoc($resultImg)) :
+            ?>
 
-            <img
-              src="/ISI-Product/img/mobil1.jpg" alt="Image1"
-              class="thumbnail w-28 h-20 object-cover cursor-pointer"
-            >
-            <img
-              src="/ISI-Product/img/mobil2.jpg" alt="Image2"
-              class="thumbnail w-28 h-20 object-cover cursor-pointer"
-            >
-            <img
-              src="/ISI-Product/img/mobil3.jpg" alt="Image3"
-              class="thumbnail w-28 h-20 object-cover cursor-pointer"
-            >
-            <img
-              src="/ISI-Product/img/mobil4.jpg" alt="Image4"
-              class="thumbnail w-28 h-20 object-cover cursor-pointer"
-            >
-            <img
-              src="/ISI-Product/img/mobil5.jpg" alt="Image5"
-              class="thumbnail w-28 h-20 object-cover cursor-pointer"
-            >
+            <img src="../uploads/<?= $img['gambar']; ?>"
+            class="thumbnail w-28 h-20 object-cover cursor-pointer
+            <?= $index==0 ? 'border-4 border-purple-600' : ''; ?>">
+
+            <?php $index++; endwhile; ?>
         </div>    
-    </div>
 
     <!-- DESCRIPTION -->
         <div class=" mt-6 p-6">
 
           <h2 class="text-2xl text-white font-sans font-bold mb-4">
-            Mercedes-Benz GLC 300 4MATIC AMG Line
+            <?= $car['nama_mobil']; ?>
           </h2>
 
           <ul class="space-y-2 font-sans text-white">
 
-            <li>• Tahun 2023</li>
-            <li>• Kilometer 15.000 KM</li>
-            <li>• Automatic Transmission</li>
-            <li>• Warna Hitam</li>
-            <li>• Mesin 2000cc Turbo</li>
-            <li>• Full Original</li>
-            <li>• Pajak Panjang</li>
-            <li>• Interior Premium</li>
-            <li>• Sunroof</li>
+            <li>• <?= $car['tahun']; ?></li>
+            <li>• Kilometer <?= $car['kilometer']; ?></li>
+            <li>• <?= $car['transmisi']; ?> Transmission</li>
+            <li>• Warna <?= $car['warna']; ?></li>
+            <li>• Mesin <?= $car['kapasitas_mesin'] ?></li>
           </ul>
         </div>
         <div>
             <p class="text-white font-sans mt-6">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris dui est, auctor non facilisis eget, venenatis et dui.<br> 
-                Suspendisse placerat efficitur risus, in scelerisque felis venenatis vel. Nulla maximus dapibus bibendum. Fusce sollicitudin ligula enim, id fermentum lectus tincidunt et.<br>
-                Mauris sed nulla sit amet dui ullamcorper tempor at et orci. Cras pretium vestibulum posuere. Nam consequat sapien in eros vestibulum, sit amet mattis odio molestie.<br> 
-                Quisque tincidunt, tellus nec pharetra commodo, urna odio finibus est, commodo mattis dolor sem eu neque. Nam luctus nulla et ante pretium, non vestibulum nulla malesuada.<br>
-                Integer condimentum enim ligula, id lobortis libero congue et. Cras commodo sapien eu orci aliquam viverra. Donec nec luctus nunc, id dapibus erat.
-
+                <?= nl2br($car['deskripsi']); ?>
             </p>
         </div>
       </div>
@@ -167,7 +188,7 @@
         <div class="w-[100%] max-w-[1400px] mx-auto px-10 py-10 bg-white/10 border border-white/10 rounded-[60px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] p-6">
 
           <h2 class="text-3xl font-bold text-white">
-            Rp1.250.000.000
+             Rp<?= number_format($car['harga'],0,',','.'); ?>
           </h2>
 
           <p class="text-white mt-2">
@@ -194,32 +215,32 @@
 
             <div>
               <p class="text-gray-400 text-sm">Bahan Bakar</p>
-              <h3 class="font-bold">Bensin</h3>
+              <h3 class="font-bold"><?= $car['bahan_bakar']; ?></h3>
             </div>
 
             <div>
               <p class="text-gray-400 text-sm">Transmisi</p>
-              <h3 class="font-bold">Automatic</h3>
+              <h3 class="font-bold"><?= $car['transmisi']; ?></h3>
             </div>
 
             <div>
               <p class="text-gray-400 text-sm">Tahun</p>
-              <h3 class="font-bold">2023</h3>
+              <h3 class="font-bold"><?= $car['tahun']; ?></h3>
             </div>
 
             <div>
               <p class="text-gray-400 text-sm">Kapasitas</p>
-              <h3 class="font-bold">2000cc</h3>
+              <h3 class="font-bold"><?= $car['kapasitas_mesin']; ?></h3>
             </div>
 
             <div>
               <p class="text-gray-400 text-sm">Warna</p>
-              <h3 class="font-bold">kuning</h3>
+              <h3 class="font-bold"><?= $car['warna']; ?></h3>
             </div>
 
             <div>
               <p class="text-gray-400 text-sm">Kilometer</p>
-              <h3 class="font-bold">15.000 KM</h3>
+              <h3 class="font-bold"><?= $car['kilometer']; ?></h3>
             </div>
 
           </div>
@@ -242,81 +263,37 @@
          ANOTHER PRODUCT
         </h1>
         <!-- Product Grid -->
-    <div class="grid grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 gap-6 overflow-hidden">
-        
-        <!-- CARD 1 -->
-        <div>
-            <div class="bg-white p-2 flex items-center justify-center h-35 w-50">
-     <img  
-        src="/Product-Detailed/img/mobil1.avif" 
-        alt="mobil1"  
-         class="h-44 object-contain block"" 
-     />
-    </div>
-    <div class="bg-gray-600 h-25 w-50">
-        <h2 class=" text-white text-1xl text-center font-sans font-semibold ">
-             Chevrolet Corvette E-Ray
-        </h2>
-        <p class="text-white text-center mt-3 text-lg">
-            $ 111,095
-        </p>
-    </div>
-  </div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
-  <!-- CARD 2 -->
-        <div>
-            <div class="bg-white p-2 flex items-center justify-center h-35 w-50">
-     <img 
-        src="/Product-Detailed/img/mobil2.avif" 
-        alt="mobil2"  
-         class="h-44 object-contain block"" 
-     />
+<?php while($car = mysqli_fetch_assoc($result)) : ?>
+
+<a href="detail_product.php?id=<?= $car['id']; ?>">
+
+    <div class="group cursor-pointer">
+
+        <div class="bg-white p-2 flex items-center justify-center h-48 rounded-lg overflow-hidden">
+
+            <img
+                src="../uploads/<?= $car['gambar']; ?>"
+                alt="<?= $car['nama_mobil']; ?>"
+                class="h-44 object-contain transition duration-300 group-hover:scale-105"
+            >
+
+        </div>
+
+        <div class="bg-white/10 backdrop-blur-md p-4 rounded-b-lg">
+
+            <h2 class="text-white text-center font-semibold">
+                <?= $car['nama_mobil']; ?>
+            </h2>
+
+        </div>
+
     </div>
-    <div class="bg-gray-600 h-25 w-50">
-        <h2 class=" text-white text-1xl text-center font-sans font-semibold ">
-             Chevrolet Corvette Z06
-        </h2>
-        <p class="text-white text-center mt-3 text-lg">
-            $ 119,695
-        </p>
-    </div>
-  </div>
-  <!-- CARD 3 -->
-        <div>
-            <div class="bg-white p-2 flex items-center justify-center h-35 w-50">
-     <img  
-        src="/Product-Detailed/img/mobil3.avif" 
-        alt="mobil3"  
-         class="h-44 object-contain block"" 
-     />
-    </div>
-    <div class="bg-gray-600 h-25 w-50">
-        <h2 class=" text-white text-1xl text-center font-sans font-semibold ">
-             Chevrolet Corvette ZR1 / ZR1X
-        </h2>
-        <p class="text-white text-center mt-3 text-lg">
-            $ 187,495
-        </p>
-    </div>
-  </div>
-  <!-- CARD 4 -->
-        <div>
-            <div class="bg-white p-2 flex items-center justify-center h-35 w-50">
-     <img
-        src="/Product-Detailed/img/mobil4.avif" 
-        alt="mobil4"  
-         class="h-44 object-contain block"" 
-     />
-    </div>
-    <div class="bg-gray-600 h-25 w-50">
-        <h2 class=" text-white text-1xl text-center font-sans font-semibold ">
-             Porsche 911
-        </h2>
-        <p class="text-white text-center mt-3 text-lg">
-            $ 137,850
-        </p>
-    </div>
-  </div>
+
+</a>
+
+<?php endwhile; ?>
 </div> 
     
  <!-- JAVASCRIPT -->
