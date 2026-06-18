@@ -196,7 +196,7 @@
                             class="w-full bg-transparent outline-none text-white placeholder-slate-400">
                         </div>
 
-                                                <div class="w-1/3 border-[3px] border-slate-400 bg-transparent p-4 focus-within:border-sky-400 transition-colors">
+                        <div class="w-1/3 border-[3px] border-slate-400 bg-transparent p-4 focus-within:border-sky-400 transition-colors">
                             <select
                                 name="bahan_bakar"
                                 class="w-full bg-transparent outline-none text-white">
