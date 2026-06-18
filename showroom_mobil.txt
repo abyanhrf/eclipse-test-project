@@ -21,7 +21,7 @@ CREATE TABLE cars (
     deskripsi TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP );
     
-CREATE TABLE car_img (
+CREATE TABLE cars_img (
     id INT AUTO_INCREMENT PRIMARY KEY,
     car_id INT NOT NULL,
     gambar VARCHAR(255) NOT NULL,
@@ -33,3 +33,5 @@ ALTER TABLE cars
     ADD kapasitas_mesin VARCHAR(20) AFTER transmisi,
     ADD warna VARCHAR(25) AFTER kapasitas_mesin,
     ADD kilometer INT AFTER warna;
+
+ALTER TABLE cars_img ADD gambar_utama TINYINT(1) DEFAULT 0
