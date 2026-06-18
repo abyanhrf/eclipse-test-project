@@ -27,11 +27,20 @@ CREATE TABLE cars_img (
     gambar VARCHAR(255) NOT NULL,
     FOREIGN KEY (car_id) REFERENCES cars(id) ON DELETE CASCADE );
 
+CREATE TABLE feedback (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    nama VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    pesan TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP );
+
 ALTER TABLE cars
     ADD bahan_bakar VARCHAR(15) AFTER stok,
     ADD transmisi VARCHAR(10) AFTER bahan_bakar,
     ADD kapasitas_mesin VARCHAR(20) AFTER transmisi,
     ADD warna VARCHAR(25) AFTER kapasitas_mesin,
     ADD kilometer INT AFTER warna;
+
+
 
 ALTER TABLE cars_img ADD gambar_utama TINYINT(1) DEFAULT 0
