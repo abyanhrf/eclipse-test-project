@@ -1,3 +1,16 @@
+<?php
+require_once "../config/database.php";
+
+    $sql = "SELECT cars.*, cars_img.gambar FROM cars
+            LEFT JOIN cars_img
+            ON cars.id = cars_img.car_id
+            AND cars_img.gambar_utama = 1
+            ORDER BY cars.id DESC
+            ";
+
+    $result = mysqli_query($conn, $sql);
+?>
+
 <!doctype html>
 <html>
 <head>
@@ -117,272 +130,36 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 justify-items-center overflow-hidden pb-10">
 
-            <!-- CARD 1 -->
-            <div class="bg-white-900 rounded-2xl transform hover:scale-105 transition duration-300">
+        <?php while($car = mysqli_fetch_assoc($result)) : ?>
 
+            <div class="bg-white-900 rounded-2xl transform hover:scale-105 transition duration-300">
+                <a href="detail_car.php?id=<?= $car['id']; ?>">
                 <div class="bg-white px-1 flex items-center justify-center h-35 w-50">
 
-                    <img  
-                        src="../Product-Detailed/img/mobil1.avif" 
-                        alt="mobil1"  
-                        class="h-44 object-contain block" 
-                    />
-
+                <img
+                    src="../uploads/<?= $car['gambar']; ?>" class="h-44 object-contain block"
+                    >
                 </div>
 
-                <div class="bg-gray-600 h-25 w-50">
+            <div class="bg-gray-600 h-25 w-50">
 
-                    <h2 class="text-white text-1xl text-center font-sans font-semibold">
-                        Chevrolet Corvette E-Ray
-                    </h2>
+                <h2 class="text-white text-1xl text-center font-semibold">
+                    <?= $car['nama_mobil']; ?>
+                </h2>
 
-                    <p class="text-white text-center mt-3 text-lg">
-                        $ 111,095
-                    </p>
+                <p class="text-gray-300 text-center text-sm">
+                    <?= $car['merek']; ?>
+                </p>
 
-                </div>
-
+                <p class="text-white text-center mt-3 text-lg">
+                    Rp <?= number_format($car['harga'],0,',','.'); ?>
+                </p>
             </div>
+            </a>
+        </div>
 
-            <!-- CARD 2 -->
-            <div class="bg-white-900 rounded-2xl transform hover:scale-105 transition duration-300">
+        <?php endwhile; ?>
 
-                <div  class="bg-white px-1 flex items-center justify-center h-35 w-50">
-
-                    <img  
-                        src="../Product-Detailed/img/mobil2.avif" 
-                        alt="mobil2"  
-                        class="h-44 object-contain block" 
-                    />
-
-                </div>
-
-                <div class="bg-gray-600 h-25 w-50">
-
-                    <h2 class="text-white text-1xl text-center font-sans font-semibold">
-                        Chevrolet Corvette Z06
-                    </h2>
-
-                    <p class="text-white text-center mt-3 text-lg">
-                        $ 119,695
-                    </p>
-
-                </div>
-
-            </div>
-
-            <!-- CARD 3 -->
-            <div class="bg-white-900 rounded-2xl transform hover:scale-105 transition duration-300">
-
-                <div class="bg-white px-1 flex items-center justify-center h-35 w-50">
-
-                    <img  
-                        src="../Product-Detailed/img/mobil3.avif" 
-                        alt="mobil3"  
-                        class="h-44 object-contain block" 
-                    />
-
-                </div>
-
-                <div class="bg-gray-600 h-25 w-50">
-
-                    <h2 class="text-white text-1xl text-center font-sans font-semibold">
-                        Chevrolet Corvette ZR1 / ZR1X
-                    </h2>
-
-                    <p class="text-white text-center mt-3 text-lg">
-                        $ 187,495
-                    </p>
-
-                </div>
-
-            </div>
-            <!-- CARD 4 -->
-            <div class="bg-white-900 rounded-2xl transform hover:scale-105 transition duration-300">
-
-                <div class="bg-white px-1 flex items-center justify-center h-35 w-50">
-
-                    <img  
-                        src="../Product-Detailed/img/mobil4.avif" 
-                        alt="mobil1"  
-                        class="h-44 object-contain block" 
-                    />
-
-                </div>
-
-                <div class="bg-gray-600 h-25 w-50">
-
-                    <h2 class="text-white text-1xl text-center font-sans font-semibold">
-                        Chevrolet Corvette E-Ray
-                    </h2>
-
-                    <p class="text-white text-center mt-3 text-lg">
-                        $ 111,095
-                    </p>
-
-                </div>
-
-            </div>
-
-            <!-- CARD 5 -->
-            <div class="bg-white-900 rounded-2xl transform hover:scale-105 transition duration-300">
-
-                <div class="bg-white px-1 flex items-center justify-center h-35 w-50">
-
-                    <img  
-                        src="../Product-Detailed/img/mobil5.avif" 
-                        alt="mobil2"  
-                        class="h-44 object-contain block" 
-                    />
-
-                </div>
-
-                <div class="bg-gray-600 h-25 w-50">
-
-                    <h2 class="text-white text-1xl text-center font-sans font-semibold">
-                        Chevrolet Corvette Z06
-                    </h2>
-
-                    <p class="text-white text-center mt-3 text-lg">
-                        $ 119,695
-                    </p>
-
-                </div>
-
-            </div>
-
-            <!-- CARD 6 -->
-            <div class="bg-white-900 rounded-2xl transform hover:scale-105 transition duration-300">
-
-                <div class="bg-white px-1 flex items-center justify-center h-35 w-50">
-
-                    <img  
-                        src="../Product-Detailed/img/mobil6.avif" 
-                        alt="mobil3"  
-                        class="h-44 object-contain block" 
-                    />
-
-                </div>
-
-                <div class="bg-gray-600 h-25 w-50">
-
-                    <h2 class="text-white text-1xl text-center font-sans font-semibold">
-                        Chevrolet Corvette ZR1 / ZR1X
-                    </h2>
-
-                    <p class="text-white text-center mt-3 text-lg">
-                        $ 187,495
-                    </p>
-
-                </div>
-
-            </div>
-            <!-- CARD 7 -->
-            <div class="bg-white-900 rounded-2xl transform hover:scale-105 transition duration-300">
-
-                <div class="bg-white px-1 flex items-center justify-center h-35 w-50">
-
-                    <img  
-                        src="../Product-Detailed/img/mobil7.avif" 
-                        alt="mobil1"  
-                        class="h-44 object-contain block" 
-                    />
-
-                </div>
-
-                <div class="bg-gray-600 h-25 w-50">
-
-                    <h2 class="text-white text-1xl text-center font-sans font-semibold">
-                        Chevrolet Corvette E-Ray
-                    </h2>
-
-                    <p class="text-white text-center mt-3 text-lg">
-                        $ 111,095
-                    </p>
-
-                </div>
-
-            </div>
-
-            <!-- CARD 8 -->
-            <div class="bg-white-900 rounded-2xl transform hover:scale-105 transition duration-300">
-
-                <div class="bg-white px-1 flex items-center justify-center h-35 w-50">
-
-                    <img  
-                        src="../Product-Detailed/img/mobil8.avif" 
-                        alt="mobil2"  
-                        class="h-44 object-contain block" 
-                    />
-
-                </div>
-
-                <div class="bg-gray-600 h-25 w-50">
-
-                    <h2 class="text-white text-1xl text-center font-sans font-semibold">
-                        Chevrolet Corvette Z06
-                    </h2>
-
-                    <p class="text-white text-center mt-3 text-lg">
-                        $ 119,695
-                    </p>
-
-                </div>
-
-            </div>
-
-            <!-- CARD 9 -->
-            <div class="bg-white-900 rounded-2xl transform hover:scale-105 transition duration-300">
-
-                <div class="bg-white px-1 flex items-center justify-center h-35 w-50">
-
-                    <img  
-                        src="../Product-Detailed/img/mobil9.avif" 
-                        alt="mobil3"  
-                        class="h-44 object-contain block" 
-                    />
-
-                </div>
-
-                <div class="bg-gray-600 h-25 w-50">
-
-                    <h2 class="text-white text-1xl text-center font-sans font-semibold">
-                        Chevrolet Corvette ZR1 / ZR1X
-                    </h2>
-
-                    <p class="text-white text-center mt-3 text-lg">
-                        $ 187,495
-                    </p>
-
-                </div>
-
-            </div>
-            <!-- CARD 10 -->
-            <div class="bg-white-900 rounded-2xl transform hover:scale-105 transition duration-300">
-
-                <div class="bg-white px-1 flex items-center justify-center h-35 w-50">
-
-                    <img 
-                        src="../Product-Detailed/img/mobil10.avif" 
-                        alt="mobil3"  
-                        class="h-44 object-contain block" 
-                    />
-
-                </div>
-
-                <div class="bg-gray-600 h-25 w-50">
-
-                    <h2 class="text-white text-1xl text-center font-sans font-semibold">
-                        Chevrolet Corvette ZR1 / ZR1X
-                    </h2>
-
-                    <p class="text-white text-center mt-3 text-lg">
-                        $ 187,495
-                    </p>
-
-                </div>
-
-            </div>
         </div>
     </div>
 
