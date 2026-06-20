@@ -10,6 +10,20 @@ session_start();
         header("Location: ../home/home.php");
         exit;
     }
+
+    $host     = "localhost";
+    $username = "root";     
+    $password = "";         
+    $database = "showroom_mobil"; 
+
+    $conn = mysqli_connect($host, $username, $password, $database);
+
+    if (!$conn) {
+        die("Koneksi gagal: " . mysqli_connect_error());
+    }
+
+    $query = "SELECT * FROM feedback ORDER BY id_feedback DESC";
+    $result = mysqli_query($conn, $query);
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +52,7 @@ session_start();
         <div class="px-6 py-2 text-[11px] font-semibold tracking-wider uppercase text-slate-500 mt-2">
             Layouts &amp; Pages
         </div>
-        <a href="#" class="bg-red-400 flex items-center gap-3 px-4 py-3 mx-3 mb-2 text-white transition-all duration-300 rounded-xl hover:bg-red-500 hover:shadow-[0_0_15px_#ef4444,0_0_30px_rgba(239,68,68,0.6)]">
+        <a href="dashboard.php" class="flex items-center gap-3 px-4 py-3 mx-3 mb-2 text-white transition-all duration-300 rounded-xl hover:bg-red-500 hover:shadow-[0_0_15px_#ef4444,0_0_30px_rgba(239,68,68,0.6)]">
             <i class="fas fa-home w-5 text-center"></i>
             <span class="font-medium">Dashboard</span>
         </a>
@@ -46,7 +60,7 @@ session_start();
             <i class="fas fa-box w-5 text-center"></i>
             <span class="font-medium">Atur Barang</span>
         </a>
-        <a href="lihatUlasan.php" class="flex items-center gap-3 px-4 py-3 mx-3 mb-2 text-white transition-all duration-300 rounded-xl hover:bg-red-500 hover:shadow-[0_0_15px_#ef4444,0_0_30px_rgba(239,68,68,0.6)]">
+        <a href="lihatUlasan.php" class="bg-red-400 flex items-center gap-3 px-4 py-3 mx-3 mb-2 text-white transition-all duration-300 rounded-xl hover:bg-red-500 hover:shadow-[0_0_15px_#ef4444,0_0_30px_rgba(239,68,68,0.6)]">
             <i class="fas fa-comment-alt w-5 text-center"></i>
             <span class="font-medium">Lihat Feedback</span>
         </a>
@@ -62,7 +76,7 @@ session_start();
         <div class="w-full pt-6 pb-2 sticky top-0 z-50">
             <nav class="w-[90%] max-w-[1200px] mx-auto px-10 py-4 flex items-center justify-between bg-white/10 border border-white/10 rounded-[60px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
                 <div>
-                    <img src="img/LogoProfile.png" alt="logo" class="rounded-full w-10 h-10 cursor-pointer transition duration-300 hover:scale-110">
+                    <img src="img/LogoProfile.png" alt="logo" class=" rounded-full w-10 h-10 cursor-pointer transition duration-300 hover:scale-110">
                 </div>
 
                 <div class="relative flex items-center gap-[18px]">
@@ -105,14 +119,50 @@ session_start();
             </nav>
         </div>
 
-        <!-- Ini isi konten -->
-        <div class="flex-1 flex items-center justify-center px-10 py-8 w-full">
-            <div class="text-center bg-[#212b36]/80 border border-slate-700/50 p-16 rounded-3xl shadow-2xl max-w-4xl w-full">
-                <h2 class="text-7xl font-bold text-white mb-6 tracking-tight leading-tight">
-                    Selamat Datang, <?php echo isset($_SESSION['nama']) ? htmlspecialchars($_SESSION['nama']) : 'Admin'; ?>!
-                </h2>
+        <div class="w-[90%] max-w-[1200px] mx-auto px-4 py-8">
+            <div class="bg-[#1e293b]/50 border border-slate-700/50 p-8 rounded-3xl shadow-2xl backdrop-blur-sm">
+                
+                <div class="border-b border-slate-700 pb-4 mb-6">
+                    <h2 class="text-3xl font-bold text-white tracking-wide">
+                        <i class="fas fa-comments text-red-500 mr-2"></i> Feedback & Saran Pengguna
+                    </h2>
+                </div>
+
+                <div class="space-y-4">
+                    <?php if (mysqli_num_rows($result) > 0): ?>
+                        <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                            
+                            <div class="bg-[#111827]/80 border border-slate-700 p-5 rounded-2xl flex items-start gap-5 transition duration-200 hover:border-red-500/50">
+                                
+                                <div class="w-12 h-12 bg-gradient-to-tr from-red-600 to-slate-700 rounded-full flex items-center justify-center text-white font-bold text-lg shrink-0 shadow-md">
+                                    <?php echo strtoupper(substr($row['nama'], 0, 1)); ?>
+                                </div>
+                                
+                                <div class="flex-1">
+                                    <div class="flex flex-wrap items-center gap-2 mb-2">
+                                        <span class="text-white font-bold text-lg"><?php echo htmlspecialchars($row['nama']); ?></span>
+                                        <span class="text-slate-500">|</span>
+                                        <span class="text-sm text-red-400 font-medium"><?php echo htmlspecialchars($row['email']); ?></span>
+                                    </div>
+                                    <p class="text-slate-300 text-base leading-relaxed bg-slate-900/40 p-3 rounded-xl border border-slate-800/60">
+                                        <?php echo nl2br(htmlspecialchars($row['pesan'])); ?>
+                                    </p>
+                                </div>
+                            </div>
+
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <div class="text-center py-12 text-slate-500">
+                            <i class="fas fa-comment-slash text-5xl mb-3"></i>
+                            <p class="text-lg">Belum ada kritik atau saran yang masuk.</p>
+                        </div>
+                    <?php endif; ?>
+                </div>
+
             </div>
         </div>
     </main>
 </body>
 </html>
+
+<?php mysqli_close($conn); ?>
