@@ -149,7 +149,7 @@
 
                 <!-- belumpunyakunlink -->
                 <div class="mt-8 text-center text-sm text-white">
-                    <p>Belum punya akun?</p> <a href="register.html" class="text-blue-200 font-bold hover:underline"> Daftar gratis</a>
+                    <p>Belum punya akun?</p> <a href="register.php" class="text-blue-200 font-bold hover:underline"> Daftar gratis</a>
                 </div>
             </div>
         </div>
