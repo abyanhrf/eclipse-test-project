@@ -1,7 +1,7 @@
 <?php
     require_once "../config/database.php";
 
-    $id = $_GET['id'];
+    $id = $_GET['id'] ?? 0;
 
     $sqlCar = "SELECT * FROM cars WHERE id = ?";
 
@@ -26,6 +26,9 @@
     mysqli_stmt_execute($stmtCar);
     $resultCar = mysqli_stmt_get_result($stmtCar);
     $car = mysqli_fetch_assoc($resultCar);
+    if (!$car) {
+    die("Produk tidak ditemukan");
+}
 
     mysqli_stmt_execute($stmtImg);
     $resultImg = mysqli_stmt_get_result($stmtImg);
@@ -180,12 +183,13 @@
                 <?= nl2br($car['deskripsi']); ?>
             </p>
         </div>
-      </div>
-            <!-- RIGHT -->
-      <div>
+    </div>
+ </div> <!-- tutup lg:col-span-2 -->
 
+    <!-- RIGHT -->
+    <div class="flex flex-col gap-6">
         <!-- PRICE -->
-        <div class="w-[100%] max-w-[1400px] mx-auto px-10 py-10 bg-white/10 border border-white/10 rounded-[60px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] p-6">
+        <div class="bg-white/10 border border-white/10 rounded-[40px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] p-8">
 
           <h2 class="text-3xl font-bold text-white">
              Rp<?= number_format($car['harga'],0,',','.'); ?>
@@ -195,8 +199,6 @@
             Harga dapat berubah sewaktu-waktu
           </p>
 
-          <div class="flex gap-3 mt-6">
-
             <button class="px-6 py-2 font-semibold hover:bg-amber-600 hover:text-white transition">
               Kredit
             </button>
@@ -204,13 +206,9 @@
             <button class="text-white px-6 py-2 font-semibold hover:bg-purple-800 transition">
               Tunai
             </button>
-
-          </div>
-
         </div>
         <!-- SPESIFIKASI -->
-        <div class="w-[100%] max-w-[1400px] mx-auto px-10 py-10 bg-white/10 border border-white/10 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] mt-8 p-6">
-
+        <div class="bg-white/10 border border-white/10 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] p-6">
           <div class="grid grid-cols-2 gap-5">
 
             <div>
@@ -243,20 +241,30 @@
               <h3 class="font-bold"><?= $car['kilometer']; ?></h3>
             </div>
 
-          </div>
-
         </div>
-        <!-- BUTTON -->
-        <div class="w-[90%] max-w-[1000px] mx-auto px-10 py-4 bg-white/10 border border-white/10 rounded-[60px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:bg-purple-800 transition mt-6 p-6">
 
-          <button class="w-full text-white py-3 font-bold ">
-            PESAN SEKARANG
-          </button>
-
-        </div>
     </div>
+        <!-- BUTTON -->
+        <div class="grid grid-cols-2 gap-3 mt-6">
+
+    <button
+        class="bg-white/10 border border-white/10 rounded-[20px]
+               backdrop-blur-md py-4 text-white font-bold
+               hover:bg-purple-800 transition">
+        PESAN SEKARANG
+    </button>
+
+    <button
+        class="bg-white/10 border border-white/10 rounded-[20px]
+               backdrop-blur-md py-4 text-white font-bold
+               hover:bg-amber-600 transition">
+        MASUKKAN KE CART
+    </button>
+
 </div>
-  <div>
+       </div> <!-- tombol -->
+    </div> <!-- kolom kanan -->
+</div> <!-- grid utama -->
 
       <!-- Other Title -->
         <h1 class="text-white text-2xl font-bold mt-8 mb-6">
@@ -265,26 +273,42 @@
         <!-- Product Grid -->
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
-<?php while($car = mysqli_fetch_assoc($result)) : ?>
+<?php
+    $sql = "
+    SELECT
+    cars.id,
+    cars.nama_mobil,
+    cars.harga,
+    cars.deskripsi,
+    cars_img.gambar
+    FROM cars
+    LEFT JOIN cars_img
+    ON cars.id = cars_img.car_id
+    WHERE cars_img.gambar_utama = 1
+    LIMIT 4";
+    $result = mysqli_query($conn, $sql);
+?>
+<?php while($otherCar = mysqli_fetch_assoc($result)) : ?>
 
-<a href="detail_product.php?id=<?= $car['id']; ?>">
+<a href="Product.php?id=<?= $otherCar['id']; ?>">
 
     <div class="group cursor-pointer">
 
         <div class="bg-white p-2 flex items-center justify-center h-48 rounded-lg overflow-hidden">
+           
 
             <img
-                src="../uploads/<?= $car['gambar']; ?>"
-                alt="<?= $car['nama_mobil']; ?>"
-                class="h-44 object-contain transition duration-300 group-hover:scale-105"
+                src="../uploads/<?= $otherCar['gambar']; ?>"
+                alt="<?= $otherCar['nama_mobil']; ?>"
+                class="w-full h-44 object-contain transition duration-300 group-hover:scale-105"
             >
-
+            
         </div>
 
         <div class="bg-white/10 backdrop-blur-md p-4 rounded-b-lg">
 
             <h2 class="text-white text-center font-semibold">
-                <?= $car['nama_mobil']; ?>
+                <?= $otherCar['nama_mobil']; ?>
             </h2>
 
         </div>
