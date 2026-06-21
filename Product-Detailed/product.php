@@ -237,98 +237,108 @@ require_once "../config/database.php";
     </nav>
 
     <!-- SEARCH -->
-    <form method="GET" class="flex justify-center">
+    <section class="mt-10 flex justify-center w-full">
     
-            <input
+    <form method="GET" class="relative w-[420px]">
+        
+        <img 
+            src="img/search.png" 
+            alt="search"
+            class="absolute w-[18px] h-[18px] left-[18px] top-1/2 -translate-y-1/2 opacity-70 brightness-0 invert pointer-events-none"
+        >
+
+        <input
             type="search"
             name="search"
             value="<?= $search; ?>"
             placeholder="Cari produk..."
-            class="px-4 py-2 rounded-l-lg text-black bg-gray-400 outline-none">
+            class="w-full py-[15px] pr-[20px] pl-[50px] rounded-[50px] border border-white/10 outline-none bg-white/[0.08] text-white text-[15px] transition duration-300 focus:bg-white/[0.12] focus:border-white/30 focus:shadow-[0_0_15px_rgba(255,255,255,0.1)]"
+        >
 
-            <input type="hidden" name="filter" value="<?= $filter; ?>">
-            <input type="hidden" name="sort" value="<?= $sort; ?>">
-            <input type="hidden" name="min_harga" value="<?= $min_harga; ?>">
-            <input type="hidden" name="max_harga" value="<?= $max_harga; ?>">
+        <input type="hidden" name="filter" value="<?= $filter; ?>">
+        <input type="hidden" name="sort" value="<?= $sort; ?>">
+        <input type="hidden" name="min_harga" value="<?= $min_harga; ?>">
+        <input type="hidden" name="max_harga" value="<?= $max_harga; ?>">
 
-            <button type="submit" class="bg-red-500 text-white px-5 rounded-r-lg hover:bg-red-600 transition">
-                Cari
-            </button>
-            
-        </form>
+        <button type="submit" class="hidden">Cari</button>
+        
+    </form>
+    
+    </section>
 
 
-    <div class="flex justify-center gap-3 mt-6">
-        <div class="flex justify-center gap-3 flex-wrap mt-6">
+    <div class="w-full max-w-[1200px] mx-auto bg-transparent border border-white/10 rounded-[30px] p-[30px] mt-10">
 
-            <a href="product.php"
-                class="px-5 py-2 rounded-full <?= $filter == '' ? 'bg-purple-600' : 'bg-gray-700 hover:bg-purple-500'; ?>">
-                Semua
-            </a>
+    <div class="flex flex-wrap justify-center gap-[15px] mb-[30px]">
 
-            <a href="product.php?search=<?= $search; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>&filter=SUV"
-                class="px-5 py-2 rounded-full <?= $filter == 'SUV' ? 'bg-purple-600' : 'bg-gray-700 hover:bg-purple-500'; ?>">
-                SUV
-            </a>
+        <a href="product.php"
+            class="py-[16px] px-[32px] rounded-full text-[18px] transition duration-300 hover:bg-[#334155] hover:-translate-y-[2px] <?= $filter == '' ? 'bg-gradient-to-br from-[#7e3cf0] to-[#5c1865] shadow-[0_0_25px_rgba(168,85,247,0.5)] text-white' : 'bg-[#1e293b] text-white'; ?>">
+            Semua
+        </a>
 
-            <a href="product.php?search=<?= $search; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>&filter=Sedan"
-                class="px-5 py-2 rounded-full <?= $filter == 'Sedan' ? 'bg-purple-600' : 'bg-gray-700 hover:bg-purple-500'; ?>">
-                Sedan
-            </a>
+        <a href="product.php?search=<?= $search; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>&filter=SUV"
+            class="py-[16px] px-[32px] rounded-full text-[18px] transition duration-300 hover:bg-[#334155] hover:-translate-y-[2px] <?= $filter == 'SUV' ? 'bg-gradient-to-br from-[#7e3cf0] to-[#5c1865] shadow-[0_0_25px_rgba(168,85,247,0.5)] text-white' : 'bg-[#1e293b] text-white'; ?>">
+            SUV
+        </a>
 
-            <a href="product.php?search=<?= $search; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>&filter=MPV"
-                class="px-5 py-2 rounded-full <?= $filter == 'MPV' ? 'bg-purple-600' : 'bg-gray-700 hover:bg-purple-500'; ?>">
-                MPV
-            </a>
+        <a href="product.php?search=<?= $search; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>&filter=Sedan"
+            class="py-[16px] px-[32px] rounded-full text-[18px] transition duration-300 hover:bg-[#334155] hover:-translate-y-[2px] <?= $filter == 'Sedan' ? 'bg-gradient-to-br from-[#7e3cf0] to-[#5c1865] shadow-[0_0_25px_rgba(168,85,247,0.5)] text-white' : 'bg-[#1e293b] text-white'; ?>">
+            Sedan
+        </a>
 
-            <a href="product.php?search=<?= $search; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>&filter=Pickup"
-                class="px-5 py-2 rounded-full <?= $filter == 'Pickup' ? 'bg-purple-600' : 'bg-gray-700 hover:bg-purple-500'; ?>">
-                Pickup
-            </a>
+        <a href="product.php?search=<?= $search; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>&filter=MPV"
+            class="py-[16px] px-[32px] rounded-full text-[18px] transition duration-300 hover:bg-[#334155] hover:-translate-y-[2px] <?= $filter == 'MPV' ? 'bg-gradient-to-br from-[#7e3cf0] to-[#5c1865] shadow-[0_0_25px_rgba(168,85,247,0.5)] text-white' : 'bg-[#1e293b] text-white'; ?>">
+            MPV
+        </a>
 
-            <a href="product.php?search=<?= $search; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>&filter=Sport"
-                class="px-5 py-2 rounded-full <?= $filter == 'Sport' ? 'bg-purple-600' : 'bg-gray-700 hover:bg-purple-500'; ?>">
-                Sport
-            </a>
+        <a href="product.php?search=<?= $search; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>&filter=Pickup"
+            class="py-[16px] px-[32px] rounded-full text-[18px] transition duration-300 hover:bg-[#334155] hover:-translate-y-[2px] <?= $filter == 'Pickup' ? 'bg-gradient-to-br from-[#7e3cf0] to-[#5c1865] shadow-[0_0_25px_rgba(168,85,247,0.5)] text-white' : 'bg-[#1e293b] text-white'; ?>">
+            Pickup
+        </a>
 
-            <a href="product.php?search=<?= $search; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>&filter=Supercar"
-                class="px-5 py-2 rounded-full <?= $filter == 'Supercar' ? 'bg-purple-600' : 'bg-gray-700 hover:bg-purple-500'; ?>">
-                Supercar
-            </a>
+        <a href="product.php?search=<?= $search; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>&filter=Sport"
+            class="py-[16px] px-[32px] rounded-full text-[18px] transition duration-300 hover:bg-[#334155] hover:-translate-y-[2px] <?= $filter == 'Sport' ? 'bg-gradient-to-br from-[#7e3cf0] to-[#5c1865] shadow-[0_0_25px_rgba(168,85,247,0.5)] text-white' : 'bg-[#1e293b] text-white'; ?>">
+            Sport
+        </a>
 
-        </div>
+        <a href="product.php?search=<?= $search; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>&filter=Supercar"
+            class="py-[16px] px-[32px] rounded-full text-[18px] transition duration-300 hover:bg-[#334155] hover:-translate-y-[2px] <?= $filter == 'Supercar' ? 'bg-gradient-to-br from-[#7e3cf0] to-[#5c1865] shadow-[0_0_25px_rgba(168,85,247,0.5)] text-white' : 'bg-[#1e293b] text-white'; ?>">
+            Supercar
+        </a>
+
     </div>
 
-    <form method="GET" class="flex justify-center gap-4 mt-6">
+    <form method="GET" class="flex flex-wrap justify-center items-center gap-[15px]">
 
         <input type="hidden" name="search" value="<?= $search; ?>">
         <input type="hidden" name="filter" value="<?= $filter; ?>">
 
-        <div class="flex items-center gap-2">
-            <input 
-                type="number" 
-                name="min_harga" 
-                value="<?= $min_harga; ?>" 
-                placeholder="Min Harga (Rp)" 
-                class="px-4 py-2 rounded-lg text-black bg-gray-300 w-40 outline-none focus:ring-2 focus:ring-red-500"
-            >
-            <span class="text-white font-bold">-</span>
-            <input 
-                type="number" 
-                name="max_harga" 
-                value="<?= $max_harga; ?>" 
-                placeholder="Max Harga (Rp)" 
-                class="px-4 py-2 rounded-lg text-black bg-gray-300 w-40 outline-none focus:ring-2 focus:ring-red-500"
-            >
-            <button type="submit" class="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition">
-                Terapkan
-            </button>
-        </div>
+        <input 
+            type="number" 
+            name="min_harga" 
+            value="<?= $min_harga; ?>" 
+            placeholder="Min Harga (Rp)" 
+            class="w-[250px] py-[18px] px-[20px] rounded-[20px] border border-[#334155] bg-[#111827] text-white text-[16px] outline-none transition duration-300 focus:border-[#8b28d2]"
+        >
+
+        <span class="text-white text-[24px]">-</span>
+
+        <input 
+            type="number" 
+            name="max_harga" 
+            value="<?= $max_harga; ?>" 
+            placeholder="Max Harga (Rp)" 
+            class="w-[250px] py-[18px] px-[20px] rounded-[20px] border border-[#334155] bg-[#111827] text-white text-[16px] outline-none transition duration-300 focus:border-[#8b28d2]"
+        >
+
+        <button type="submit" class="py-[18px] px-[40px] rounded-[20px] bg-[#ef4444] text-white text-[18px] font-semibold transition duration-300 hover:bg-[#dc2626] hover:-translate-y-[2px]">
+            Terapkan
+        </button>
 
         <select
             name="sort"
             onchange="this.form.submit()"
-            class="px-4 py-2 rounded-lg bg-red-500 text-white border border-white cursor-pointer outline-none">
+            class="py-[18px] px-[25px] rounded-[20px] border border-[#334155] bg-[#111827] text-white text-[16px] cursor-pointer outline-none transition duration-300 focus:border-[#8b28d2]">
 
             <option value="">Terbaru</option>
 
@@ -350,6 +360,8 @@ require_once "../config/database.php";
 
         </select>
     </form>
+
+    </div>
 
     
     <!-- TITLE -->
