@@ -16,6 +16,16 @@ require_once "../config/database.php";
         $sort = $_GET['sort'];
     }
 
+    $min_harga = "";
+    if (isset($_GET['min_harga']) && $_GET['min_harga'] != "") {
+        $min_harga = $_GET['min_harga'];
+    }
+
+    $max_harga = "";
+    if (isset($_GET['max_harga']) && $_GET['max_harga'] != "") {
+        $max_harga = $_GET['max_harga'];
+    }
+
     $limit = 15;
     $page = 1;
 
@@ -35,6 +45,16 @@ require_once "../config/database.php";
         $sql .= " AND tipe_mobil = ?";
     }
 
+    if ($min_harga != "") {
+        $min = (int)$min_harga; // Paksa jadi angka agar aman
+        $sql .= " AND harga >= $min";
+    }
+
+    if ($max_harga != "") {
+        $max = (int)$max_harga; // Paksa jadi angka agar aman
+        $sql .= " AND harga <= $max";
+    }
+
     if ($sort == "harga_asc") {
         $sql .= " ORDER BY harga ASC";
     }
@@ -50,6 +70,7 @@ require_once "../config/database.php";
     else {
         $sql .= " ORDER BY cars.id DESC";
     }
+
 
     $sql .= " LIMIT ?, ?";
 
@@ -87,6 +108,16 @@ require_once "../config/database.php";
 
     if ($filter != "") {
         $sqlCount .= " AND tipe_mobil = ?";
+    }
+
+    if ($min_harga != "") {
+        $min = (int)$min_harga;
+        $sqlCount .= " AND harga >= $min";
+    }
+
+    if ($max_harga != "") {
+        $max = (int)$max_harga;
+        $sqlCount .= " AND harga <= $max";
     }
 
     $stmtCount = mysqli_prepare($conn, $sqlCount);
@@ -206,35 +237,25 @@ require_once "../config/database.php";
     </nav>
 
     <!-- SEARCH -->
-    <div class="mt-4 mb-4 flex justify-center">
-
-        <div class="relative w-100">
-
-            <img 
-                src="img/search.png" 
-                alt="search"
-                class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 opacity-60"
-            >
-
-            <form method="GET" class="flex justify-center">
+    <form method="GET" class="flex justify-center">
     
             <input
             type="search"
             name="search"
             value="<?= $search; ?>"
             placeholder="Cari produk..."
-            class="px-4 py-2 rounded-l-lg text-black bg-gray-400">
+            class="px-4 py-2 rounded-l-lg text-black bg-gray-400 outline-none">
 
             <input type="hidden" name="filter" value="<?= $filter; ?>">
             <input type="hidden" name="sort" value="<?= $sort; ?>">
+            <input type="hidden" name="min_harga" value="<?= $min_harga; ?>">
+            <input type="hidden" name="max_harga" value="<?= $max_harga; ?>">
 
-            <button type="submit" class="bg-red-500 text-white px-5 rounded-r-lg">
+            <button type="submit" class="bg-red-500 text-white px-5 rounded-r-lg hover:bg-red-600 transition">
                 Cari
             </button>
             
         </form>
-        </div>
-        </div>
 
 
     <div class="flex justify-center gap-3 mt-6">
@@ -245,32 +266,32 @@ require_once "../config/database.php";
                 Semua
             </a>
 
-            <a href="product.php?search=<?= $search; ?> &sort=<?= $sort; ?>&filter=SUV"
+            <a href="product.php?search=<?= $search; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>&filter=SUV"
                 class="px-5 py-2 rounded-full <?= $filter == 'SUV' ? 'bg-purple-600' : 'bg-gray-700 hover:bg-purple-500'; ?>">
                 SUV
             </a>
 
-            <a href="product.php?search=<?= $search; ?> &sort=<?= $sort; ?>&filter=sedan"
+            <a href="product.php?search=<?= $search; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>&filter=Sedan"
                 class="px-5 py-2 rounded-full <?= $filter == 'Sedan' ? 'bg-purple-600' : 'bg-gray-700 hover:bg-purple-500'; ?>">
                 Sedan
             </a>
 
-            <a href="product.php?search=<?= $search; ?> &sort=<?= $sort; ?>&filter=MPV"
+            <a href="product.php?search=<?= $search; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>&filter=MPV"
                 class="px-5 py-2 rounded-full <?= $filter == 'MPV' ? 'bg-purple-600' : 'bg-gray-700 hover:bg-purple-500'; ?>">
                 MPV
             </a>
 
-            <a href="product.php?search=<?= $search; ?> &sort=<?= $sort; ?>&filter=Pickup"
+            <a href="product.php?search=<?= $search; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>&filter=Pickup"
                 class="px-5 py-2 rounded-full <?= $filter == 'Pickup' ? 'bg-purple-600' : 'bg-gray-700 hover:bg-purple-500'; ?>">
                 Pickup
             </a>
 
-            <a href="product.php?search=<?= $search; ?> &sort=<?= $sort; ?>&filter=Sport"
+            <a href="product.php?search=<?= $search; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>&filter=Sport"
                 class="px-5 py-2 rounded-full <?= $filter == 'Sport' ? 'bg-purple-600' : 'bg-gray-700 hover:bg-purple-500'; ?>">
                 Sport
             </a>
 
-            <a href="product.php?search=<?= $search; ?> &sort=<?= $sort; ?>&filter=Supercar"
+            <a href="product.php?search=<?= $search; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>&filter=Supercar"
                 class="px-5 py-2 rounded-full <?= $filter == 'Supercar' ? 'bg-purple-600' : 'bg-gray-700 hover:bg-purple-500'; ?>">
                 Supercar
             </a>
@@ -278,44 +299,59 @@ require_once "../config/database.php";
         </div>
     </div>
 
-    <form method="GET" class="mt-6 flex justify-center bg-amber-100">
+    <form method="GET" class="flex justify-center gap-4 mt-6">
 
-    <!-- mempertahankan search -->
-    <input type="hidden" name="search" value="<?= $search; ?>">
+        <input type="hidden" name="search" value="<?= $search; ?>">
+        <input type="hidden" name="filter" value="<?= $filter; ?>">
 
-    <!-- mempertahankan filter -->
-    <input type="hidden" name="filter" value="<?= $filter; ?>">
+        <div class="flex items-center gap-2">
+            <input 
+                type="number" 
+                name="min_harga" 
+                value="<?= $min_harga; ?>" 
+                placeholder="Min Harga (Rp)" 
+                class="px-4 py-2 rounded-lg text-black bg-gray-300 w-40 outline-none focus:ring-2 focus:ring-red-500"
+            >
+            <span class="text-white font-bold">-</span>
+            <input 
+                type="number" 
+                name="max_harga" 
+                value="<?= $max_harga; ?>" 
+                placeholder="Max Harga (Rp)" 
+                class="px-4 py-2 rounded-lg text-black bg-gray-300 w-40 outline-none focus:ring-2 focus:ring-red-500"
+            >
+            <button type="submit" class="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition">
+                Terapkan
+            </button>
+        </div>
 
         <select
-    name="sort"
-    onchange="this.form.submit()"
-    class="px-4 py-2 rounded-lg bg-red-500 text-white border border-white">
+            name="sort"
+            onchange="this.form.submit()"
+            class="px-4 py-2 rounded-lg bg-red-500 text-white border border-white cursor-pointer outline-none">
 
             <option value="">Terbaru</option>
 
-            <option value="harga_asc"
-            <?= $sort == "harga_asc" ? "selected" : ""; ?>>
+            <option value="harga_asc" <?= $sort == "harga_asc" ? "selected" : ""; ?>>
                 Harga Termurah
             </option>
 
-            <option value="harga_desc"
-            <?= $sort == "harga_desc" ? "selected" : ""; ?>>
+            <option value="harga_desc" <?= $sort == "harga_desc" ? "selected" : ""; ?>>
                 Harga Termahal
             </option>
 
-            <option value="tahun_desc"
-            <?= $sort == "tahun_desc" ? "selected" : ""; ?>>
+            <option value="tahun_desc" <?= $sort == "tahun_desc" ? "selected" : ""; ?>>
                 Tahun Terbaru
             </option>
 
-            <option value="tahun_asc"
-            <?= $sort == "tahun_asc" ? "selected" : ""; ?>>
+            <option value="tahun_asc" <?= $sort == "tahun_asc" ? "selected" : ""; ?>>
                 Tahun Terlama
             </option>
 
         </select>
     </form>
 
+    
     <!-- TITLE -->
     <h1 class="text-white text-2xl font-bold mb-8 px-40">
         ALL PRODUCT
@@ -331,7 +367,7 @@ require_once "../config/database.php";
         <?php while($car = mysqli_fetch_assoc($result)) : ?>
 
             <div class="bg-white-900 rounded-2xl transform hover:scale-105 transition duration-300">
-                <a href="detail_car.php?id=<?= $car['id']; ?>">
+                <a href="../ISI-Product/Product.php?id=<?= $car['id']; ?>">
 
                 <div class="relative bg-white px-1 flex items-center justify-center h-35 w-50">
 
@@ -342,45 +378,44 @@ require_once "../config/database.php";
 
                     <div class="bg-gray-600 h-25 w-50">
 
-    <h2 class="text-white text-1xl text-center font-semibold">
-        <?= $car['nama_mobil']; ?>
-    </h2>
+                        <h2 class="text-white text-1xl text-center font-semibold">
+                            <?= $car['nama_mobil']; ?>
+                        </h2>
 
-    <p class="text-gray-300 text-center text-sm">
-        <?= $car['merek']; ?>
-    </p>
+                        <p class="text-gray-300 text-center text-sm">
+                            <?= $car['merek']; ?>
+                        </p>
 
-    <p class="text-white text-center mt-3 text-lg">
-        Rp <?= number_format($car['harga'],0,',','.'); ?>
-    </p>
+                        <p class="text-white text-center mt-3 text-lg">
+                            Rp <?= number_format($car['harga'],0,',','.'); ?>
+                        </p>
 
-    <div class="flex justify-center mt-2">
-    <?php if ($car['stok'] == 0) : ?>
+                        <ddiv class="flex justify-center mt-2">
+                        <?php if ($car['stok'] == 0) : ?>
 
-        <span class="bg-red-500 text-white text-xs px-3 py-1 rounded-full">
-            Habis
-        </span>
+                        <span class="bg-red-500 text-white text-xs px-3 py-1 rounded-full">
+                            Habis
+                        </span>
 
-    <?php elseif ($car['stok'] <= 3) : ?>
+                        <?php elseif ($car['stok'] <= 3) : ?>
 
-        <span class="bg-yellow-500 text-white text-xs px-3 py-1 rounded-full">
-            Stok Terbatas
-        </span>
+                        <span class="bg-yellow-500 text-white text-xs px-3 py-1 rounded-full">
+                            Stok Terbatas
+                        </span>
 
-    <?php else : ?>
+                        <?php else : ?>
 
-        <span class="bg-green-500 text-white text-xs px-3 py-1 rounded-full">
-            Tersedia
-        </span>
+                        <span class="bg-green-500 text-white text-xs px-3 py-1 rounded-full">
+                            Tersedia
+                        </span>
 
-    <?php endif; ?>
-    </div>
-
-</div>
+                        <?php endif; ?>
+                    </ddiv>
+                </div>
                 </a>
             </div>
 
-        <?php endwhile; ?>
+            <?php endwhile; ?>
 
         <?php else : ?>
 
@@ -396,8 +431,9 @@ require_once "../config/database.php";
     <div class="flex justify-center gap-2 mt-10">
         
         <?php for ($i = 1; $i <= $totalPage; $i++) : ?>
-        <a href="?page=<?= $i; ?>&search=<?= $search; ?>&filter=<?= $filter; ?>&sort=<?= $sort; ?>"
-        class="px-4 py-2 bg-gray-700 rounded hover:bg-purple-600"> <?= $i; ?>
+        <a href="?page=<?= $i; ?>&search=<?= $search; ?>&filter=<?= $filter; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>"
+        class="px-4 py-2 <?= $page == $i ? 'bg-purple-600' : 'bg-gray-700 hover:bg-purple-500'; ?> rounded text-white transition duration-300"> 
+            <?= $i; ?>
         </a>
 
         <?php endfor; ?>
