@@ -20,6 +20,82 @@ if (!$conn) {
     die("Koneksi database gagal: " . mysqli_connect_error());
 }
 
+// ========================================================
+// 1. LOGIKA MENAMBAH KE KERANJANG (Dipicu dari product.php)
+// ========================================================
+if (isset($_GET['add_car_id'])) {
+    $car_id = mysqli_real_escape_string($conn, $_GET['add_car_id']);
+    
+    $cek_cart = mysqli_query($conn, "SELECT * FROM cart WHERE user_id = '$user_id' AND car_id = '$car_id'");
+    
+    if (mysqli_num_rows($cek_cart) > 0) {
+        // Pop-up jika mobil sudah ada di keranjang
+        echo "
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+        <body style='background-color: #0b0b0b;'></body>
+        <script>
+            Swal.fire({
+                icon: 'info',
+                title: 'Sudah Ada!',
+                text: 'Mobil ini sudah ada di dalam keranjang Anda.',
+                background: '#1e293b',
+                color: '#ffffff',
+                confirmButtonColor: '#38bdf8'
+            }).then(() => {
+                window.location.href='cart.php';
+            });
+        </script>";
+    } else {
+        mysqli_query($conn, "INSERT INTO cart (user_id, car_id) VALUES ('$user_id', '$car_id')");
+        // Pop-up jika berhasil dimasukkan
+        echo "
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+        <body style='background-color: #0b0b0b;'></body>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: 'Mobil berhasil dimasukkan ke keranjang!',
+                background: '#1e293b',
+                color: '#ffffff',
+                confirmButtonColor: '#38bdf8'
+            }).then(() => {
+                window.location.href='cart.php';
+            });
+        </script>";
+    }
+    exit;
+}
+
+// ========================================================
+// 2. LOGIKA MENGHAPUS DARI KERANJANG
+// ========================================================
+if (isset($_GET['remove_cart_id'])) {
+    $remove_id = mysqli_real_escape_string($conn, $_GET['remove_cart_id']);
+    
+    mysqli_query($conn, "DELETE FROM cart WHERE id = '$remove_id' AND user_id = '$user_id'");
+    // Pop-up jika berhasil dihapus
+    echo "
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+    <body style='background-color: #0b0b0b;'></body>
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Terhapus!',
+            text: 'Mobil berhasil dihapus dari keranjang.',
+            background: '#1e293b',
+            color: '#ffffff',
+            confirmButtonColor: '#ef4444'
+        }).then(() => {
+            window.location.href='cart.php';
+        });
+    </script>";
+    exit;
+}
+
+// ========================================================
+// 3. MENGAMBIL DATA UNTUK DITAMPILKAN DI HALAMAN
+// ========================================================
 $query = "SELECT 
             cart.id AS cart_id, 
             cars.nama_mobil, 
@@ -50,10 +126,35 @@ $jumlah_item = mysqli_num_rows($result);
     <title>Shopping Cart</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
+
+<script>
+function hapusKeranjang(event, id) {
+    event.preventDefault(); // Mencegah link langsung berpindah
+    
+    Swal.fire({
+        title: 'Yakin ingin menghapus?',
+        text: "Mobil ini akan dikeluarkan dari keranjang belanja Anda.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#ef4444',
+        cancelButtonColor: '#475569',
+        confirmButtonText: 'Ya, hapus!',
+        cancelButtonText: 'Batal',
+        background: '#1e293b',
+        color: '#ffffff'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Jika user klik Ya, arahkan ke link penghapusan
+            window.location.href = 'cart.php?remove_cart_id=' + id;
+        }
+    })
+}
+</script>
 
 <body class="min-h-screen text-white overflow-x-hidden bg-[radial-gradient(circle_at_top_left,rgba(255,0,0,0.25),transparent_25%),radial-gradient(circle_at_bottom_right,rgba(255,0,0,0.2),transparent_20%),linear-gradient(135deg,#050505,#0b0b0b,#111111)]">
 
@@ -149,9 +250,11 @@ $jumlah_item = mysqli_num_rows($result);
                         </p>
                         
                         <div class="mt-8">
-                            <button class="text-red-400 text-sm font-semibold hover:text-red-300 transition-colors bg-red-500/10 px-4 py-2 rounded-lg hover:bg-red-500/20">
+                            <a href="#" 
+                                onclick="hapusKeranjang(event, <?php echo $row['cart_id']; ?>)" 
+                                class="text-red-400 text-sm font-semibold hover:text-red-300 transition-colors bg-red-500/10 px-4 py-2 rounded-lg hover:bg-red-500/20 text-center inline-block">
                                 Hapus dari Keranjang
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
