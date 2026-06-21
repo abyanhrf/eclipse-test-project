@@ -46,38 +46,29 @@
 
 <body class="font-[Poppins] min-h-screen text-white overflow-x-hidden bg-[radial-gradient(circle_at_top_left,rgba(255,0,0,0.25),transparent_25%),radial-gradient(circle_at_bottom_right,rgba(255,0,0,0.2),transparent_20%),linear-gradient(135deg,#050505,#0b0b0b,#111111)]">
     
-  <!-- Product -->
-    <!-- NAVBAR -->
-    <nav class="w-[90%] max-w-[1200px] mx-auto px-10 py-4 flex items-center justify-between bg-white/10 border border-white/10 rounded-[60px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+  <nav class="w-[90%] max-w-[1200px] mx-auto px-10 py-4 flex items-center justify-between bg-white/10 border border-white/10 rounded-[60px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
     
-        <!-- LOGO -->
         <div>
             <img src="img/LogoProfile.png" alt="logo"
             class="w-10 h-10 cursor-pointer transition duration-300 hover:scale-110">
         </div>
 
-        <!-- MENU -->
         <div class="relative flex items-center gap-[18px]">
-            <!-- INDICATOR -->
-            <!-- HOME -->
             <a href="../home/home.html"
                 class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
             Home
             </a>
 
-            <!-- PRODUCT -->
             <a href="../Product-Detailed/product.html"
                 class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
                 Product
             </a>
 
-            <!-- CONTACT -->
             <a  href="../contact/Contact.html"
                 class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
                 Contact
             </a>
 
-            <!-- ABOUT -->
             <a href="../aboutus/AboutUs.html"
                 class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
                 About us
@@ -85,25 +76,20 @@
 
         </div>
 
-        <!-- ICON -->
         <div class="flex gap-5">
 
-            <!-- USER -->
             <a href="../login/login.html">
                 <img src="img/user2.png" alt="user"
                     class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
             </a>
 
-            <!-- CART -->
-            <a href="../cart/cart.html">
+            <a href="../cart/cart.php">
                 <img src="img/shopping-bag.png" alt="cart"
                 class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
             </a>
         </div>
     </nav>
 
-    <!--search-->
-    
     <form method="GET" class="mt-4 mb-4 flex justify-center">
 
   <div class="relative w-100">
@@ -120,22 +106,18 @@
 
 </form>
     
-    <section class="max-w-5xl mx-auto py-10"><!-- TITLE -->
-  <section class="bg-black py-10">
+    <section class="max-w-5xl mx-auto py-10"><section class="bg-black py-10">
 
     <h1 class="text-white text-3xl font-sans font-bold text-center">
       <?= $car['nama_mobil'];?>
     </h1>
 
   </section>
-  <!-- CONTENT -->
   <section class="max-w-6xl mx-auto py-10 px-6">
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-         <!-- LEFT -->
-      <div class="lg:col-span-2">
+         <div class="lg:col-span-2">
 
-        <!-- MAIN IMAGE -->
         <div class="bg-black p-4">
 
         <?php
@@ -148,8 +130,7 @@
         src="../uploads/<?= $gambarUtama['gambar']; ?>"
         class="w-full h-[450px] object-cover">
             
-          <!-- THUMBNAIL -->
-        <div class="flex gap-3 mt-4">
+          <div class="flex gap-3 mt-4">
             <?php
             mysqli_data_seek($resultImg,0);
             while($img = mysqli_fetch_assoc($resultImg)) :
@@ -162,8 +143,7 @@
             <?php $index++; endwhile; ?>
         </div>    
 
-    <!-- DESCRIPTION -->
-        <div class=" mt-6 p-6">
+    <div class=" mt-6 p-6">
 
           <h2 class="text-2xl text-white font-sans font-bold mb-4">
             <?= $car['nama_mobil']; ?>
@@ -184,11 +164,7 @@
             </p>
         </div>
     </div>
- </div> <!-- tutup lg:col-span-2 -->
-
-    <!-- RIGHT -->
-    <div class="flex flex-col gap-6">
-        <!-- PRICE -->
+ </div> <div class="flex flex-col gap-6">
         <div class="bg-white/10 border border-white/10 rounded-[40px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] p-8">
 
           <h2 class="text-3xl font-bold text-white">
@@ -207,7 +183,6 @@
               Tunai
             </button>
         </div>
-        <!-- SPESIFIKASI -->
         <div class="bg-white/10 border border-white/10 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] p-6">
           <div class="grid grid-cols-2 gap-5">
 
@@ -244,7 +219,6 @@
         </div>
 
     </div>
-        <!-- BUTTON -->
         <div class="grid grid-cols-2 gap-3 mt-6">
 
     <button
@@ -254,24 +228,18 @@
         PESAN SEKARANG
     </button>
 
-    <button
+    <a href="../cart/cart.php?add_car_id=<?= $car['id']; ?>"
         class="bg-white/10 border border-white/10 rounded-[20px]
-               backdrop-blur-md py-4 text-white font-bold
+               backdrop-blur-md py-4 text-white font-bold flex items-center justify-center
                hover:bg-amber-600 transition">
         MASUKKAN KE CART
-    </button>
+    </a>
 
 </div>
-       </div> <!-- tombol -->
-    </div> <!-- kolom kanan -->
-</div> <!-- grid utama -->
-
-      <!-- Other Title -->
-        <h1 class="text-white text-2xl font-bold mt-8 mb-6">
+       </div> </div> </div> <h1 class="text-white text-2xl font-bold mt-8 mb-6">
          ANOTHER PRODUCT
         </h1>
-        <!-- Product Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
 <?php
     $sql = "
@@ -320,8 +288,7 @@
 <?php endwhile; ?>
 </div> 
     
- <!-- JAVASCRIPT -->
-  <script>
+ <script>
 
     // ambil gambar utama
     const mainImage = document.getElementById("mainImage");
@@ -358,7 +325,6 @@
 
         <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
 
-            <!-- BRAND -->
             <div>
                 <h2 class="text-2xl font-bold text-white">
                     ECLIPSE
@@ -371,7 +337,6 @@
                 </p>
             </div>
 
-            <!-- MENU -->
             <div>
                 <h3 class="text-white font-semibold text-lg mb-4">
                     Navigation
@@ -404,7 +369,6 @@
                 </ul>
             </div>
 
-            <!-- CONTACT -->
             <div>
                 <h3 class="text-white font-semibold text-lg mb-4">
                     Contact
@@ -417,7 +381,6 @@
                 </ul>
             </div>
 
-            <!-- SOCIAL -->
             <div>
                 <h3 class="text-white font-semibold text-lg mb-4">
                     Follow Us
@@ -445,9 +408,8 @@
 
         </div>
 
-        <!-- COPYRIGHT -->
         <div class="border-t border-white/10 mt-10 pt-6 text-center text-gray-500 text-sm">
-            Â© 2026 ECLIPSE. All Rights Reserved.
+            © 2026 ECLIPSE. All Rights Reserved.
         </div>
 
     </div>
