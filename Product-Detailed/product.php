@@ -1,14 +1,119 @@
 <?php
 require_once "../config/database.php";
 
-    $sql = "SELECT cars.*, cars_img.gambar FROM cars
-            LEFT JOIN cars_img
-            ON cars.id = cars_img.car_id
-            AND cars_img.gambar_utama = 1
-            ORDER BY cars.id DESC
-            ";
+    $search = "";
+    if (isset($_GET['search'])) {
+        $search = $_GET['search'];
+    }
 
-    $result = mysqli_query($conn, $sql);
+    $filter = "";
+    if (isset($_GET['filter'])) {
+        $filter = $_GET['filter'];
+    }
+
+    $sort = "";
+    if (isset($_GET['sort'])) {
+        $sort = $_GET['sort'];
+    }
+
+    $limit = 15;
+    $page = 1;
+
+    if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+    }
+    $offset = ($page - 1) * $limit;
+
+    $sql = " SELECT cars.*, cars_img.gambar FROM cars
+    LEFT JOIN cars_img
+    ON cars.id = cars_img.car_id
+    AND cars_img.gambar_utama = 1
+    WHERE (nama_mobil LIKE ? OR merek LIKE ?)
+    ";
+
+    if ($filter != "") {
+        $sql .= " AND tipe_mobil = ?";
+    }
+
+    if ($sort == "harga_asc") {
+        $sql .= " ORDER BY harga ASC";
+    }
+    elseif ($sort == "harga_desc") {
+        $sql .= " ORDER BY harga DESC";
+    }
+    elseif ($sort == "tahun_desc") {
+        $sql .= " ORDER BY tahun DESC";
+    }
+    elseif ($sort == "tahun_asc") {
+        $sql .= " ORDER BY tahun ASC";
+    }
+    else {
+        $sql .= " ORDER BY cars.id DESC";
+    }
+
+    $sql .= " LIMIT ?, ?";
+
+    $stmt = mysqli_prepare($conn, $sql);
+
+    $keyword = "%" . $search . "%";
+
+    if ($filter != "") {
+        mysqli_stmt_bind_param(
+        $stmt,
+        "sssii",
+        $keyword,
+        $keyword,
+        $filter,
+        $offset,
+        $limit
+    );
+    } else {
+        mysqli_stmt_bind_param(
+        $stmt,
+        "ssii",
+        $keyword,
+        $keyword,
+        $offset,
+        $limit
+    );
+    }
+
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    
+    $sqlCount = "SELECT COUNT(*) as total FROM cars
+    WHERE (nama_mobil LIKE ? OR merek LIKE ?)
+    ";
+
+    if ($filter != "") {
+        $sqlCount .= " AND tipe_mobil = ?";
+    }
+
+    $stmtCount = mysqli_prepare($conn, $sqlCount);
+    if ($filter != "") {
+    mysqli_stmt_bind_param(
+        $stmtCount,
+        "sss",
+        $keyword,
+        $keyword,
+        $filter
+    );
+
+    } else {
+    mysqli_stmt_bind_param(
+        $stmtCount,
+        "ss",
+        $keyword,
+        $keyword
+    );
+
+    }
+
+    mysqli_stmt_execute($stmtCount);
+    $resultCount = mysqli_stmt_get_result($stmtCount);
+    $dataCount = mysqli_fetch_assoc($resultCount);
+    $totalData = $dataCount['total'];
+    $totalPage = ceil($totalData / $limit);
 ?>
 
 <!doctype html>
@@ -111,14 +216,105 @@ require_once "../config/database.php";
                 class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 opacity-60"
             >
 
-            <input 
-                type="text" 
-                placeholder="Cari produk..."
-                class="w-full pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            >
+            <form method="GET" class="flex justify-center">
+    
+            <input
+            type="search"
+            name="search"
+            value="<?= $search; ?>"
+            placeholder="Cari produk..."
+            class="px-4 py-2 rounded-l-lg text-black bg-gray-400">
+
+            <input type="hidden" name="filter" value="<?= $filter; ?>">
+            <input type="hidden" name="sort" value="<?= $sort; ?>">
+
+            <button type="submit" class="bg-red-500 text-white px-5 rounded-r-lg">
+                Cari
+            </button>
+            
+        </form>
+        </div>
+        </div>
+
+
+    <div class="flex justify-center gap-3 mt-6">
+        <div class="flex justify-center gap-3 flex-wrap mt-6">
+
+            <a href="product.php"
+                class="px-5 py-2 rounded-full <?= $filter == '' ? 'bg-purple-600' : 'bg-gray-700 hover:bg-purple-500'; ?>">
+                Semua
+            </a>
+
+            <a href="product.php?search=<?= $search; ?> &sort=<?= $sort; ?>&filter=SUV"
+                class="px-5 py-2 rounded-full <?= $filter == 'SUV' ? 'bg-purple-600' : 'bg-gray-700 hover:bg-purple-500'; ?>">
+                SUV
+            </a>
+
+            <a href="product.php?search=<?= $search; ?> &sort=<?= $sort; ?>&filter=sedan"
+                class="px-5 py-2 rounded-full <?= $filter == 'Sedan' ? 'bg-purple-600' : 'bg-gray-700 hover:bg-purple-500'; ?>">
+                Sedan
+            </a>
+
+            <a href="product.php?search=<?= $search; ?> &sort=<?= $sort; ?>&filter=MPV"
+                class="px-5 py-2 rounded-full <?= $filter == 'MPV' ? 'bg-purple-600' : 'bg-gray-700 hover:bg-purple-500'; ?>">
+                MPV
+            </a>
+
+            <a href="product.php?search=<?= $search; ?> &sort=<?= $sort; ?>&filter=Pickup"
+                class="px-5 py-2 rounded-full <?= $filter == 'Pickup' ? 'bg-purple-600' : 'bg-gray-700 hover:bg-purple-500'; ?>">
+                Pickup
+            </a>
+
+            <a href="product.php?search=<?= $search; ?> &sort=<?= $sort; ?>&filter=Sport"
+                class="px-5 py-2 rounded-full <?= $filter == 'Sport' ? 'bg-purple-600' : 'bg-gray-700 hover:bg-purple-500'; ?>">
+                Sport
+            </a>
+
+            <a href="product.php?search=<?= $search; ?> &sort=<?= $sort; ?>&filter=Supercar"
+                class="px-5 py-2 rounded-full <?= $filter == 'Supercar' ? 'bg-purple-600' : 'bg-gray-700 hover:bg-purple-500'; ?>">
+                Supercar
+            </a>
 
         </div>
     </div>
+
+    <form method="GET" class="mt-6 flex justify-center bg-amber-100">
+
+    <!-- mempertahankan search -->
+    <input type="hidden" name="search" value="<?= $search; ?>">
+
+    <!-- mempertahankan filter -->
+    <input type="hidden" name="filter" value="<?= $filter; ?>">
+
+        <select
+    name="sort"
+    onchange="this.form.submit()"
+    class="px-4 py-2 rounded-lg bg-red-500 text-white border border-white">
+
+            <option value="">Terbaru</option>
+
+            <option value="harga_asc"
+            <?= $sort == "harga_asc" ? "selected" : ""; ?>>
+                Harga Termurah
+            </option>
+
+            <option value="harga_desc"
+            <?= $sort == "harga_desc" ? "selected" : ""; ?>>
+                Harga Termahal
+            </option>
+
+            <option value="tahun_desc"
+            <?= $sort == "tahun_desc" ? "selected" : ""; ?>>
+                Tahun Terbaru
+            </option>
+
+            <option value="tahun_asc"
+            <?= $sort == "tahun_asc" ? "selected" : ""; ?>>
+                Tahun Terlama
+            </option>
+
+        </select>
+    </form>
 
     <!-- TITLE -->
     <h1 class="text-white text-2xl font-bold mb-8 px-40">
@@ -130,39 +326,83 @@ require_once "../config/database.php";
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 justify-items-center overflow-hidden pb-10">
 
+        <?php if($totalData > 0) : ?>
+
         <?php while($car = mysqli_fetch_assoc($result)) : ?>
 
             <div class="bg-white-900 rounded-2xl transform hover:scale-105 transition duration-300">
                 <a href="detail_car.php?id=<?= $car['id']; ?>">
-                <div class="bg-white px-1 flex items-center justify-center h-35 w-50">
 
-                <img
-                    src="../uploads/<?= $car['gambar']; ?>" class="h-44 object-contain block"
-                    >
-                </div>
+                <div class="relative bg-white px-1 flex items-center justify-center h-35 w-50">
 
-            <div class="bg-gray-600 h-25 w-50">
+                    <img
+                    src="../uploads/<?= $car['gambar']; ?>"
+                    class="h-44 object-contain block">
+                    </div>
 
-                <h2 class="text-white text-1xl text-center font-semibold">
-                    <?= $car['nama_mobil']; ?>
-                </h2>
+                    <div class="bg-gray-600 h-25 w-50">
 
-                <p class="text-gray-300 text-center text-sm">
-                    <?= $car['merek']; ?>
-                </p>
+    <h2 class="text-white text-1xl text-center font-semibold">
+        <?= $car['nama_mobil']; ?>
+    </h2>
 
-                <p class="text-white text-center mt-3 text-lg">
-                    Rp <?= number_format($car['harga'],0,',','.'); ?>
-                </p>
+    <p class="text-gray-300 text-center text-sm">
+        <?= $car['merek']; ?>
+    </p>
+
+    <p class="text-white text-center mt-3 text-lg">
+        Rp <?= number_format($car['harga'],0,',','.'); ?>
+    </p>
+
+    <div class="flex justify-center mt-2">
+    <?php if ($car['stok'] == 0) : ?>
+
+        <span class="bg-red-500 text-white text-xs px-3 py-1 rounded-full">
+            Habis
+        </span>
+
+    <?php elseif ($car['stok'] <= 3) : ?>
+
+        <span class="bg-yellow-500 text-white text-xs px-3 py-1 rounded-full">
+            Stok Terbatas
+        </span>
+
+    <?php else : ?>
+
+        <span class="bg-green-500 text-white text-xs px-3 py-1 rounded-full">
+            Tersedia
+        </span>
+
+    <?php endif; ?>
+    </div>
+
+</div>
+                </a>
             </div>
-            </a>
-        </div>
 
         <?php endwhile; ?>
+
+        <?php else : ?>
+
+        <div class="col-span-full text-center text-white text-xl">
+            Produk tidak ditemukan
+        </div>
+
+        <?php endif; ?>
 
         </div>
     </div>
 
+    <div class="flex justify-center gap-2 mt-10">
+        
+        <?php for ($i = 1; $i <= $totalPage; $i++) : ?>
+        <a href="?page=<?= $i; ?>&search=<?= $search; ?>&filter=<?= $filter; ?>&sort=<?= $sort; ?>"
+        class="px-4 py-2 bg-gray-700 rounded hover:bg-purple-600"> <?= $i; ?>
+        </a>
+
+        <?php endfor; ?>
+    </div>
+    
     <!-- FOOTER -->
     <footer class="bg-black/40 border-t border-white/10 mt-20">
 
