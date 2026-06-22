@@ -23,17 +23,17 @@ session_start();
         </div>
 
         <div class="relative flex items-center gap-[18px]">
-            <a href="home.php"
+            <a href="../home/home.php"
                 class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
                 Home
             </a>
 
-            <a href="../Product-Detailed/product.html"
+            <a href="../Product-Detailed/product.php"
                 class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
                 Product
             </a>
 
-            <a href="../contact/Contact.html"
+            <a href="../contact/Contact.php"
                 class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
                 Contact
             </a>
@@ -160,13 +160,13 @@ session_start();
                     <h3 class="text-white font-semibold text-lg mb-4">Follow Us</h3>
                     <div class="flex gap-4">
                         <a href="#" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
-                            <img src="img/ig.svg" class="w-5 invert">
+                            <img src="../home/img/ig.svg" class="w-5 invert">
                         </a>
                         <a href="#" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
-                            <img src="img/fb.svg" class="w-5 invert">
+                            <img src="../home/img/fb.svg" class="w-5 invert">
                         </a>
                         <a href="#" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
-                            <img src="img/tiktok.svg" class="w-5 invert">
+                            <img src="../home/img/tiktok.svg" class="w-5 invert">
                         </a>
                     </div>
                 </div>

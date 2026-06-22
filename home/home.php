@@ -25,7 +25,7 @@ session_start();
 
         <!-- Logo -->
         <div class="logo">
-            <img src="img/LogoProfile.png" alt="logo">
+            <img src="img/LogoProfile.png" alt="logo" class="rounded-full">
         </div>
 
         <!-- MENU -->
@@ -34,13 +34,13 @@ session_start();
     <a href="home.html" class="nav-link active">
         Home
     </a>
-    <a href="../Product-Detailed/product.html" class="nav-link">
+    <a href="../Product-Detailed/product.php" class="nav-link">
         Product
     </a>
-    <a href="../contact/Contact.html" class="nav-link">
+    <a href="../contact/Contact.php" class="nav-link">
         Contact
     </a>
-    <a href="../aboutus/AboutUs.html" class="nav-link">
+    <a href="../aboutus/AboutUs.php" class="nav-link">
         About us
     </a>
     </div>
