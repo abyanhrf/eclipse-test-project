@@ -8,23 +8,46 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
-    <!-- Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link class="styles-css" rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <title>Home</title>
+    <title>Home - Eclipse</title>
+
+    <style>
+        .anti-putih-banner {
+            /* Durasi diubah dari 0.7s menjadi 0.3s agar lebih responsif dan gesit */
+            transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        }
+        .anti-putih-banner:hover {
+            background-image: none !important;
+            background-color: #272c35 !important;
+        }
+    </style>
 </head>
 
-<body>
+<body class="font-[Poppins] min-h-screen text-white overflow-x-hidden bg-[radial-gradient(circle_at_top_left,rgba(255,0,0,0.25),transparent_25%),radial-gradient(circle_at_bottom_right,rgba(255,0,0,0.2),transparent_20%),linear-gradient(135deg,#050505,#0b0b0b,#111111)]">
 
-    <!-- NAVBAR -->
-    <nav class="navbar">
-
-        <!-- Logo -->
+    <nav class="navbar relative z-50">
         <div class="logo">
+            <img src="img/LogoProfile.png" alt="logo" class="w-10 h-10 cursor-pointer transition duration-300 hover:scale-110">
+        </div>
+
+        <div class="nav-menu flex items-center gap-[18px]">
+            <a href="home.php" class="nav-link active relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)]">
+                Home
+            </a>
+            <a href="../Product-Detailed/product.php" class="nav-link relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)]">
+                Product
+            </a>
+            <a href="../contact/Contact.html" class="nav-link relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)]">
+                Contact
+            </a>
+            <a href="../aboutus/AboutUs.html" class="nav-link relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)]">
+                About us
+            </a>
+        </div>
             <img src="img/LogoProfile.png" alt="logo" class="rounded-full">
         </div>
 
@@ -45,98 +68,62 @@ session_start();
     </a>
     </div>
 
-        <!-- ICON -->
-        <div class="nav-icons">
+        <div class="nav-icons flex items-center gap-5">
             <?php if (isset($_SESSION['user_id'])) : ?>
-
                 <div class="relative group">
-
-                    <button
-                        class="flex items-center gap-2 mr-5 text-white font-semibold hover:text-sky-400 transition duration-300">
-
+                    <button class="flex items-center gap-2 mr-5 text-white font-semibold hover:text-sky-400 transition duration-300">
                         <img src="img/user2.png" alt="user" class="w-6 h-6 invert">
-
-                        <?= $_SESSION['nama']; ?>
-
+                        <?= htmlspecialchars($_SESSION['nama']); ?>
                     </button>
 
-            <div
-                class="absolute right-0 top-full w-40 bg-white rounded-lg shadow-lg hidden group-hover:block overflow-hidden z-50">
-
-                <a href="../profile/profile.php"
-                        class="block px-4 py-1.5 text-white hover:text-blue-300 hover:bg-gray-100 transition">
-                        Profil Saya
-                    </a>
-
-                    <a href="../process/logout.php"
-                        class="block px-4 py-1.5 text-red-600 hover:bg-red-50 transition">
-                        Logout
-                    </a>
-
+                    <div class="absolute right-0 top-full w-40 bg-white rounded-lg shadow-lg hidden group-hover:block overflow-hidden z-50">
+                        <a href="../profile/profile.php" class="block px-4 py-1.5 text-gray-700 hover:text-blue-500 hover:bg-gray-100 transition">
+                            Profil Saya
+                        </a>
+                        <a href="../process/logout.php" class="block px-4 py-1.5 text-red-600 hover:bg-red-50 transition">
+                            Logout
+                        </a>
+                    </div>
                 </div>
-
-            </div>
-            
             <?php else : ?>
-
-            <a href="../login/login.php">
-                <img src="img/user2.png" alt="user">
-            </a>
-            
+                <a href="../login/login.php">
+                    <img src="img/user2.png" alt="user" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110">
+                </a>
             <?php endif; ?>
 
             <?php if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'admin') : ?>
-
-                <a href="../dashboard/dashboard.php"
-                    class="px-3 py-2 rounded-lg bg-sky-500 text-white text-sm font-semibold hover:bg-sky-400 transition">
+                <a href="../dashboard/dashboard.php" class="px-3 py-2 rounded-lg bg-sky-500 text-white text-sm font-semibold hover:bg-sky-400 transition">
                     Dashboard
                 </a>
-
             <?php else : ?>
-
                 <a href="../cart/cart.php">
-                    <img src="img/shopping-bag.png" alt="cart">
+                    <img src="img/shopping-bag.png" alt="cart" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110">
                 </a>
-
             <?php endif; ?>
         </div>
     </nav>
 
-    <!-- SEARCH -->
-    <section class="search-section">
-        <div class="search-box">
-            <img src="img/search.png" alt="search">
-            <input
-            type="text"
-            placeholder="Cari produk...">
+    <div class="mt-8 mb-4 flex justify-center px-4 relative z-10">
+        <div class="relative w-full max-w-md">
+            <img src="img/search.png" alt="search" class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 opacity-60">
+            <input type="text" placeholder="Cari produk..." class="w-full pl-10 pr-4 py-2 rounded-full border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-sky-400">
         </div>
-    </section>
-    <div class="bg-gray-500">
-        </div>
+    </div>
 
-    <div class="mt-4 mb-4 flex justify-center px-4">
-        </div>
-
-    <div class="relative w-full max-w-7xl mx-auto">
-        
-        <div id="slider" class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-smooth">
-            
+    <div class="relative w-full max-w-7xl mx-auto mt-6">
+        <div id="slider" class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-smooth rounded-xl shadow-lg">
             <div class="min-w-full snap-center relative">
                 <img src="img/mclaren.jpg" alt="Iklan 1" class="w-full h-[300px] md:h-[450px] object-cover">
             </div>
-
             <div class="min-w-full snap-center relative">
                 <img src="img/Mobil.jpeg" alt="Iklan 2" class="w-full h-[300px] md:h-[450px] object-cover">
             </div>
-
             <div class="min-w-full snap-center relative">
                 <img src="img/mclaren.jpg" alt="Iklan 3" class="w-full h-[300px] md:h-[450px] object-cover">
             </div>
-            
             <div class="min-w-full snap-center relative">
                 <img src="img/Mobil.jpeg" alt="Iklan 4" class="w-full h-[300px] md:h-[450px] object-cover">
             </div>
-
         </div>
 
         <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-4 bg-white/80 backdrop-blur-sm px-5 py-2 rounded-full shadow-lg">
@@ -148,364 +135,161 @@ session_start();
         </div>
     </div>
 
+    <section class="max-w-7xl mx-auto px-6 mt-16 mb-8">
+        <div class="anti-putih-banner bg-gradient-to-br from-[#1e222b] to-[#12151c] border border-white/10 rounded-3xl p-8 lg:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.8)] relative overflow-hidden group/banner">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                
+                <div class="lg:col-span-5 space-y-6 text-left">
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                        WELCOME TO <br> 
+                        <span class="text-gray-400 group-hover/banner:text-white transition-colors duration-300">ECLIPSE CARS</span>
+                    </h1>
+                    
+                    <p class="text-gray-400 group-hover/banner:text-gray-200 text-xs sm:text-sm leading-relaxed transition-colors duration-300">
+                        Explore our exclusive high-performance catalog! Rent a luxury vehicle or schedule a private test drive on the track. Experience the pinnacle of automotive engineering with fully certified, world-class hypercars.
+                    </p>
 
-    <!--daftar produk-->
-    <div class="max-w-7xl mx-auto px-4 mt-8 mb-12">
+                    <div class="pt-2">
+                        <a href="#product-list" class="inline-block bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold px-8 py-3.5 shadow-[0_0_25px_rgba(220,38,38,0.5)] transition duration-300 hover:scale-105 -skew-x-12 cursor-pointer">
+                            <span class="block skew-x-12 uppercase tracking-wider text-xs sm:text-sm">Explore Collection!</span>
+                        </a>
+                    </div>
+                </div>
 
-      <h2 class="text-xl font-bold text-gray-800 mb-6">Koleksi</h2>
+                <div class="lg:col-span-7 flex flex-col justify-between h-full mt-8 lg:mt-0">
+                    
+                    <div class="text-left lg:text-right space-y-2 mb-4">
+                        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-widest text-white uppercase">
+                            PORSCHE <span class="text-red-500">911 GT</span>
+                        </h2>
+                        <p class="text-gray-400 group-hover/banner:text-gray-200 text-xs sm:text-sm max-w-md lg:ml-auto leading-relaxed transition-colors duration-300">
+                            The definitive track-ready flagship. Uncompromising aerodynamic design paired with lightweight carbon bucket seats and an authentic analog tachometer.
+                        </p>
+                    </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <div class="bg-gray-500 p-3 shadow-md hover:shadow-lg transition-shadow duration-300">
-          <img src="img/Mobil.jpeg" alt="lambo">
-          <h3 class="text-2xl font-bold text-gray-900 mt-3">Lamborgini</h3>
-          <div text-right mt-2>
-            <span class="text-xl font-bold text-white">$1000000</span>
-          </div>
+                    <div class="relative my-6 flex justify-center">
+                        <img src="img/mclaren.jpg" alt="Porsche 911 GT" class="w-full max-w-lg object-contain rounded-lg drop-shadow-[0_15px_15px_rgba(0,0,0,0.9)] hover:scale-105 transition duration-500 cursor-pointer">
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 pt-6 border-t border-white/10 text-center">
+                        <div>
+                            <span class="block text-[10px] sm:text-[11px] text-gray-400 group-hover/banner:text-gray-300 uppercase tracking-wider">Production</span>
+                            <span class="block text-sm sm:text-base font-bold text-white mt-0.5">2026</span>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] sm:text-[11px] text-gray-400 group-hover/banner:text-gray-300 uppercase tracking-wider">Segment</span>
+                            <span class="block text-sm sm:text-base font-bold text-white mt-0.5">Supercar</span>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] sm:text-[11px] text-gray-400 group-hover/banner:text-gray-300 uppercase tracking-wider">Engine</span>
+                            <span class="block text-sm sm:text-base font-bold text-white mt-0.5">4.0L Flat-6</span>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] sm:text-[11px] text-gray-400 group-hover/banner:text-gray-300 uppercase tracking-wider">Max Speed</span>
+                            <span class="block text-sm sm:text-base font-bold text-white mt-0.5">318 km/h</span>
+                        </div>
+                        <div>
+                            <span class="block text-[10px] sm:text-[11px] text-gray-400 group-hover/banner:text-gray-300 uppercase tracking-wider">0-100 km/h</span>
+                            <span class="block text-sm sm:text-base font-bold text-red-500 mt-0.5">3.2 s</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
+    </section>
 
-        <div class="bg-gray-500 p-3 shadow-md hover:shadow-lg transition-shadow duration-300">
-          <img src="img/mclaren.jpg" alt="lambo">
-          <h3 class="text-2xl font-bold text-gray-900 mt-3">Ferrari</h3>
-          <div text-right mt-2>
-            <span class="text-xl font-bold text-white">$1100000</span>  
-          </div>
-        </div>
-
-        <div class="bg-gray-500 p-3 shadow-md hover:shadow-lg transition-shadow duration-300">
-          <img src="img/Mobil.jpeg" alt="lambo">
-          <h3 class="text-2xl font-bold text-gray-900 mt-3">McLaren</h3>
-          <div text-right mt-2>
-            <span class="text-xl font-bold text-white">$1200000</span>
-          </div>
-        </div>
-
-        <div class="bg-gray-500 p-3 shadow-md hover:shadow-lg transition-shadow duration-300">
-          <img src="img/mclaren.jpg" alt="lambo">
-          <h3 class="text-2xl font-bold text-gray-900 mt-3">Porsche</h3>
-          <div text-right mt-2>
-            <span class="text-xl font-bold text-white">$1300000</span>
-          </div>
+    <div id="product-list" class="max-w-7xl mx-auto px-6 mt-16 mb-20 scroll-mt-24">
+        <div class="flex items-center justify-center mb-12 mt-6">
+            <div class="flex-1 h-px bg-gradient-to-r from-transparent to-red-500/40 shadow-[0_0_8px_rgba(239,68,68,0.4)]"></div>
+            <h2 class="mx-6 text-2xl font-black text-white tracking-widest uppercase relative">
+                PRODUCT
+                <span class="absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-red-500 rounded-full shadow-[0_0_8px_#ef4444]"></span>
+            </h2>
+            <div class="flex-1 h-px bg-gradient-to-l from-transparent to-red-500/40 shadow-[0_0_8px_rgba(239,68,68,0.4)]"></div>
         </div>
         
-      </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <a href="#" class="bg-slate-500 rounded-xl shadow-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition duration-300 hover:-translate-y-2 block group overflow-hidden">
+                <img src="img/Mobil.jpeg" alt="Lamborgini" class="w-full h-40 md:h-48 object-cover group-hover:opacity-90 transition-opacity">
+                <div class="p-4">
+                    <h3 class="text-xl font-bold text-gray-900">Lamborgini</h3>
+                    <p class="text-lg font-bold text-white mt-1">$1000000</p>
+                </div>
+            </a>
+            <a href="#" class="bg-slate-500 rounded-xl shadow-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition duration-300 hover:-translate-y-2 block group overflow-hidden">
+                <img src="img/mclaren.jpg" alt="Ferrari" class="w-full h-40 md:h-48 object-cover group-hover:opacity-90 transition-opacity">
+                <div class="p-4">
+                    <h3 class="text-xl font-bold text-gray-900">Ferrari</h3>
+                    <p class="text-lg font-bold text-white mt-1">$1100000</p>
+                </div>
+            </a>
+            <a href="#" class="bg-slate-500 rounded-xl shadow-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition duration-300 hover:-translate-y-2 block group overflow-hidden">
+                <img src="img/Mobil.jpeg" alt="McLaren" class="w-full h-40 md:h-48 object-cover group-hover:opacity-90 transition-opacity">
+                <div class="p-4">
+                    <h3 class="text-xl font-bold text-gray-900">McLaren</h3>
+                    <p class="text-lg font-bold text-white mt-1">$1200000</p>
+                </div>
+            </a>
+            <a href="#" class="bg-slate-500 rounded-xl shadow-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition duration-300 hover:-translate-y-2 block group overflow-hidden">
+                <img src="img/mclaren.jpg" alt="Porsche" class="w-full h-40 md:h-48 object-cover group-hover:opacity-90 transition-opacity">
+                <div class="p-4">
+                    <h3 class="text-xl font-bold text-gray-900">Porsche</h3>
+                    <p class="text-lg font-bold text-white mt-1">$1300000</p>
+                </div>
+            </a>
+        </div>
     </div>
 
-<!-- PRODUCT SECTION -->
-        <section id="projects" class="section">
-            <div class="container">
-                <h2 class="section-title">PRODUCT</h2>
-                <div class="projects-grid slide-in-up">
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="img/Mobil.jpeg" alt="Project 1">
-                        </div>
-                        <div class="project-content">
-                            <h3>Lamborgini</h3>
-                            <p>vehicles specifically designed to prioritize dynamic performance, such as speed, acceleration, and responsive handling.</p>
-                            <div class="project-tech">
-                                <!-- <span>React</span>
-                                <span>Node.js</span>
-                                <span>MongoDB</span> -->
-                            </div>
-                            <div class="project-links">
-                                <a href="#" class="project-link">BUY</a>
-                                <a href="#" class="project-link">$10000000 USD</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="img/mclaren.jpg" alt="Project 2">
-                        </div>
-                        <div class="project-content">
-                            <h3>McLaren</h3>
-                            <p>vehicles specifically designed to prioritize dynamic performance, such as speed, acceleration, and responsive handling.</p>
-                            <div class="project-tech">
-                                <!-- <span>HTML</span>
-                                <span>CSS</span>
-                                <span>JavaScript</span> -->
-                            </div>
-                            <div class="project-links">
-                                <a href="#" class="project-link">BUY</a>
-                                <a href="#" class="project-link">$10000000 USD</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <div class="project-image">
-                            <img src="img/lamborghini.jpg" alt="Project 3">
-                        </div>
-                        <div class="project-content">
-                            <h3>Porsche</h3>
-                            <p>vehicles specifically designed to prioritize dynamic performance, such as speed, acceleration, and responsive handling.</p>
-                            <div class="project-tech">
-                                <!-- <span>Vue.js</span>
-                                <span>Firebase</span>
-                                <span>Tailwind CSS</span> -->
-                            </div>
-                            <div class="project-links">
-                                <a href="#" class="project-link">BUY</a>
-                                <a href="#" class="project-link">$10000000 USD</a>
-                            </div>
-                        </div>
+    <footer class="bg-black/40 border-t border-white/10 mt-20">
+        <div class="max-w-7xl mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+                <div>
+                    <h2 class="text-2xl font-bold text-white">ECLIPSE</h2>
+                    <p class="text-gray-400 mt-4 leading-relaxed">
+                        Eclipse is a company that operates in the field of selling expensive cars that have original and trusted certification for all brands of cars sold.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold text-lg mb-4">Navigation</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="home.php" class="hover:text-sky-400 transition">Home</a></li>
+                        <li><a href="../Product-Detailed/product.php" class="hover:text-sky-400 transition">Product</a></li>
+                        <li><a href="../contact/Contact.html" class="hover:text-sky-400 transition">Contact</a></li>
+                        <li><a href="../aboutus/AboutUs.html" class="hover:text-sky-400 transition">About us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold text-lg mb-4">Contact</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li>Email : eclipse@email.com</li>
+                        <li>Phone : +62 1234 5678 90</li>
+                        <li>Indonesia</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold text-lg mb-4">Follow Us</h3>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
+                            <img src="img/ig.svg" class="w-5 invert">
+                        </a>
+                        <a href="#" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
+                            <img src="img/fb.svg" class="w-5 invert">
+                        </a>
+                        <a href="#" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
+                            <img src="img/tiktok.svg" class="w-5 invert">
+                        </a>
                     </div>
                 </div>
             </div>
-        </section>
-
-    <h1 class="text-white text-3xl font-bold text-center">
-      SESUAIKAN DENGAN MOBIL
-    </h1>
-
-  </section>
-  <!-- CONTENT -->
-  <section class="max-w-6xl mx-auto py-10 px-6">
-
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-         <!-- LEFT -->
-      <div class="lg:col-span-2">
-
-        <!-- MAIN IMAGE -->
-        <div class="bg-white p-4">
-
-            <img 
-            id="mainImage"
-            src="img/Mobil.jpeg" alt="Image1"
-            class="thumbnail class="w-full h-[450px] object-cover">
-            
-          <!-- THUMBNAIL -->
-          <div class="flex gap-3 mt-4">
-
-            <img
-              src="img/Mobil.jpeg" alt="Image1"
-              class="thumbnail w-28 h-20 object-cover cursor-pointer"
-            >
-            <img
-              src="img/Mobil.jpeg" alt="Image2"
-              class="thumbnail w-28 h-20 object-cover cursor-pointer"
-            >
-            <img
-              src="img/Mobil.jpeg" alt="Image3"
-              class="thumbnail w-28 h-20 object-cover cursor-pointer"
-            >
-            <img
-              src="img/Mobil.jpeg" alt="Image4"
-              class="thumbnail w-28 h-20 object-cover cursor-pointer"
-            >
-            <img
-              src="img/lamborghini.jpg" alt="Image5"
-              class="thumbnail w-28 h-20 object-cover cursor-pointer"
-            >
-        </div>    
-    </div>
-
-    <!-- DESCRIPTION -->
-        <div class="bg-white mt-6 p-6">
-
-          <h2 class="text-2xl font-bold mb-4">
-            Mercedes-Benz GLC 300 4MATIC AMG Line
-          </h2>
-
-          <ul class="space-y-2 text-gray-700">
-
-            <li>• Tahun 2023</li>
-            <li>• Kilometer 15.000 KM</li>
-            <li>• Automatic Transmission</li>
-            <li>• Warna Hitam</li>
-            <li>• Mesin 2000cc Turbo</li>
-            <li>• Full Original</li>
-            <li>• Pajak Panjang</li>
-            <li>• Interior Premium</li>
-            <li>• Sunroof</li>
-          </ul>
+            <div class="border-t border-white/10 mt-10 pt-6 text-center text-gray-500 text-sm">
+                © 2026 ECLIPSE. All Rights Reserved.
+            </div>
         </div>
-        <div>
-            <p>
-                vehicles specifically designed to prioritize dynamic performance, such as speed, acceleration, and responsive handling
-                vehicles specifically designed to prioritize dynamic performance, such as speed, acceleration, and responsive handling
-                vehicles specifically designed to prioritize dynamic performance, such as speed, acceleration, and responsive handling
+    </footer>
 
-            </p>
-        </div>
-      </div>
-            <!-- RIGHT -->
-      <div>
-
-        <!-- PRICE -->
-        <div class="bg-white p-6">
-
-          <h2 class="text-3xl font-bold text-purple-700">
-            $10000000 USD
-          </h2>
-
-          <p class="text-gray-500 mt-2">
-            Harga dapat berubah sewaktu-waktu
-          </p>
-
-          <div class="flex gap-3 mt-6">
-
-            <button class="border border-black px-6 py-2 font-semibold hover:bg-black hover:text-white transition">
-              Kredit
-            </button>
-
-            <button class="bg-purple-700 text-white px-6 py-2 font-semibold hover:bg-purple-800 transition">
-              Tunai
-            </button>
-
-          </div>
-
-        </div>
-        <!-- SPESIFIKASI -->
-        <div class="bg-white mt-6 p-6">
-
-          <div class="grid grid-cols-2 gap-5">
-
-            <div>
-              <p class="text-gray-400 text-sm">Bahan Bakar</p>
-              <h3 class="font-bold">ya Bensin</h3>
-            </div>
-
-            <div>
-              <p class="text-gray-400 text-sm">Transmisi</p>
-              <h3 class="font-bold">Automatic</h3>
-            </div>
-
-            <div>
-              <p class="text-gray-400 text-sm">Tahun</p>
-              <h3 class="font-bold">2023 mungkin</h3>
-            </div>
-
-            <div>
-              <p class="text-gray-400 text-sm">Kapasitas</p>
-              <h3 class="font-bold">entahlah (2000)cc</h3>
-            </div>
-
-            <div>
-              <p class="text-gray-400 text-sm">Warna</p>
-              <h3 class="font-bold">kuning</h3>
-            </div>
-
-            <div>
-              <p class="text-gray-400 text-sm">Kilometer</p>
-              <h3 class="font-bold">15.000 KM</h3>
-            </div>
-
-          </div>
-
-        </div>
-        <!-- BUTTON -->
-        <div class="bg-white mt-6 p-6">
-
-          <button class="w-full bg-purple-700 text-white py-3 font-bold hover:bg-purple-800 transition">
-            PESAN SEKARANG
-          </button>
-
-        </div>
-    </div>
-</div>
-</section>
-<footer class="bg-black/40 border-t border-white/10 mt-20">
-
-    <div class="max-w-7xl mx-auto px-6 py-12">
-
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
-
-            <!-- BRAND -->
-            <div>
-                <h2 class="text-2xl font-bold text-white">
-                    ECLIPSE
-                </h2>
-
-                <p class="text-gray-400 mt-4 leading-relaxed">
-                    Eclipse is a company that 
-                    operates in the field of selling expensive cars that have original 
-                    and trusted certification for all brands of cars sold.
-                </p>
-            </div>
-
-            <!-- MENU -->
-            <div>
-                <h3 class="text-white font-semibold text-lg mb-4">
-                    Navigation
-                </h3>
-
-                <ul class="space-y-3 text-gray-400">
-                    <li>
-                        <a href="../home/home.html" class="hover:text-sky-400 transition">
-                            Home
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="../Product-Detailed/product.html" class="hover:text-sky-400 transition">
-                            Product
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="../contact/Contact.html" class="hover:text-sky-400 transition">
-                            Contact
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="../aboutus/AboutUs.html" class="hover:text-sky-400 transition">
-                            About us
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- CONTACT -->
-            <div>
-                <h3 class="text-white font-semibold text-lg mb-4">
-                    Contact
-                </h3>
-
-                <ul class="space-y-3 text-gray-400">
-                    <li>Email : eclipse@email.com</li>
-                    <li>Phone : +62 1234 5678 90</li>
-                    <li>Indonesia</li>
-                </ul>
-            </div>
-
-            <!-- SOCIAL -->
-            <div>
-                <h3 class="text-white font-semibold text-lg mb-4">
-                    Follow Us
-                </h3>
-
-                <div class="flex gap-4">
-
-                    <a href="#"
-                    class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
-                        <img src="img/ig.svg" class="w-5 invert">
-                    </a>
-
-                    <a href="#"
-                    class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
-                        <img src="img/fb.svg" class="w-5 invert">
-                    </a>
-
-                    <a href="#"
-                    class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
-                        <img src="img/tiktok.svg" class="w-5 invert">
-                    </a>
-
-                </div>
-            </div>
-
-        </div>
-
-        <!-- COPYRIGHT -->
-        <div class="border-t border-white/10 mt-10 pt-6 text-center text-gray-500 text-sm">
-            Â© 2026 ECLIPSE. All Rights Reserved.
-        </div>
-
-    </div>
-
-</footer>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
