@@ -21,6 +21,7 @@ if ($user) {
         session_start();
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['nama'] = $user['nama'];
+        $_SESSION['email'] = $user['email'];
         $_SESSION['role'] = $user['role'];
 
         if ($user['role'] == 'admin') {
