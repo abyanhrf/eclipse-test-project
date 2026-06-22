@@ -48,6 +48,25 @@ session_start();
                 About us
             </a>
         </div>
+            <img src="img/LogoProfile.png" alt="logo" class="rounded-full">
+        </div>
+
+        <!-- MENU -->
+    <div class="nav-menu">
+    <div class="indicator"></div>
+    <a href="home.html" class="nav-link active">
+        Home
+    </a>
+    <a href="../Product-Detailed/product.php" class="nav-link">
+        Product
+    </a>
+    <a href="../contact/Contact.php" class="nav-link">
+        Contact
+    </a>
+    <a href="../aboutus/AboutUs.php" class="nav-link">
+        About us
+    </a>
+    </div>
 
         <div class="nav-icons flex items-center gap-5">
             <?php if (isset($_SESSION['user_id'])) : ?>

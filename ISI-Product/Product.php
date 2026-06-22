@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once "../config/database.php";
 
     $id = $_GET['id'] ?? 0;
@@ -221,11 +222,11 @@
     </div>
         <div class="grid grid-cols-2 gap-3 mt-6">
 
-    <button
-        class="bg-white/10 border border-white/10 rounded-[20px]
-               backdrop-blur-md py-4 text-white font-bold
-               hover:bg-purple-800 transition">
-        PESAN SEKARANG
+    <button type="button" onclick="openModal()"
+            class="bg-white/10 border border-white/10 rounded-[20px] w-full
+            backdrop-blur-md py-4 text-white font-bold cursor-pointer
+            hover:bg-purple-800 transition">
+            PESAN SEKARANG
     </button>
 
     <a href="../cart/cart.php?add_car_id=<?= $car['id']; ?>"
@@ -288,37 +289,11 @@
 <?php endwhile; ?>
 </div> 
     
- <script>
-
-    // ambil gambar utama
-    const mainImage = document.getElementById("mainImage");
-
-    // ambil semua thumbnail
-    const thumbnails = document.querySelectorAll(".thumbnail");
-
-    // looping thumbnail
-    thumbnails.forEach((thumb) => {
-
-      thumb.addEventListener("click", function () {
-
-        // ganti gambar utama
-        mainImage.src = this.src;
-
-        // hapus border semua thumbnail
-        thumbnails.forEach((item) => {
-          item.classList.remove("border-4", "border-purple-600");
-        });
-
-        // tambahkan border thumbnail aktif
-        this.classList.add("border-4", "border-purple-600");
-
-      });
-
-    });
-
-  </script>
   </section>
   </section>
+    
+    <?php include '../components/checkout-modal.php'; ?>
+
   <footer class="bg-black/40 border-t border-white/10 mt-20">
 
     <div class="max-w-7xl mx-auto px-6 py-12">
@@ -414,6 +389,42 @@
 
     </div>
 
-</footer> 
+</footer>
+
+ <script>
+
+    // ambil gambar utama
+    const mainImage = document.getElementById("mainImage");
+
+    // ambil semua thumbnail
+    const thumbnails = document.querySelectorAll(".thumbnail");
+
+    // looping thumbnail
+    thumbnails.forEach((thumb) => {
+
+      thumb.addEventListener("click", function () {
+
+        // ganti gambar utama
+        mainImage.src = this.src;
+
+        // hapus border semua thumbnail
+        thumbnails.forEach((item) => {
+          item.classList.remove("border-4", "border-purple-600");
+        });
+
+        // tambahkan border thumbnail aktif
+        this.classList.add("border-4", "border-purple-600");
+
+        });
+    });
+
+    function openModal() {
+        document.getElementById('checkoutModal').classList.remove('hidden');
+    }
+    function closeModal() {
+        document.getElementById('checkoutModal').classList.add('hidden');
+    }
+
+  </script>
 </body>
 </html>
