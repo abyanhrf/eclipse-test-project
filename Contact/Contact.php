@@ -18,17 +18,17 @@ session_start();
     <nav class="w-[90%] max-w-[1200px] mx-auto px-10 py-4 flex items-center justify-between bg-white/10 border border-white/10 rounded-[60px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] mt-6">
     
         <div>
-            <img src="img/LogoProfile.png" alt="logo"
+            <img src="../AboutUS/img/LogoProfile.png" alt="logo"
             class="w-10 h-10 rounded-full overflow-hidden cursor-pointer transition duration-300 hover:scale-110">
         </div>
 
         <div class="relative flex items-center gap-[18px]">
-            <a href="home.php"
+            <a href="../home/home.php"
                 class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
                 Home
             </a>
 
-            <a href="../Product-Detailed/product.html"
+            <a href="../Product-Detailed/product.php"
                 class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
                 Product
             </a>
@@ -38,7 +38,7 @@ session_start();
                 Contact
             </a>
 
-            <a href="aboutus.php"
+            <a href="../AboutUS/AboutUs.php"
                 class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
                 About us
             </a>
@@ -48,7 +48,7 @@ session_start();
             <?php if (isset($_SESSION['user_id'])) : ?>
                 <div class="relative group">
                     <button class="flex items-center gap-2 text-white font-semibold hover:text-sky-400 transition duration-300">
-                        <img src="img/user2.png" alt="user" class="w-8 h-8 invert">
+                        <img src="../AboutUS/img/user2.png" alt="user" class="w-8 h-8 invert">
                         <span class="text-sm hidden md:inline"><?= $_SESSION['nama']; ?></span>
                     </button>
 
@@ -63,7 +63,7 @@ session_start();
                 </div>
             <?php else : ?>
                 <a href="../login/login.php">
-                    <img src="/img/user2.png" alt="user" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
+                    <img src="../AboutUS/img/user2.png" alt="user" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
                 </a>
             <?php endif; ?>
 
@@ -73,7 +73,7 @@ session_start();
                 </a>
             <?php else : ?>
                 <a href="../cart/cart.php">
-                    <img src="img/shopping-bag.png" alt="cart" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
+                    <img src="../AboutUS/img/shopping-bag.png" alt="cart" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
                 </a>
             <?php endif; ?>
         </div>
@@ -89,7 +89,7 @@ session_start();
                         <div class="flex flex-col">
                             <label for="nama" class="text-lg font-semibold mb-2 ml-2">Nama Anda:</label>
                             <input type="text" id="nama" name="nama" required
-                                class="border-4 border-black rounded-full p-3 px-6 bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Mas Bahlil Ganteng">
+                                class="border-4 border-black rounded-full p-3 px-6 bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Mas Arsan Gtg">
                         </div>
                         <div class="flex flex-col">
                             <label for="email" class="text-lg font-semibold mb-2 ml-2">Email Anda:</label>
@@ -166,13 +166,13 @@ session_start();
                     <h3 class="text-white font-semibold text-lg mb-4">Follow Us</h3>
                     <div class="flex gap-4">
                         <a href="#" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
-                            <img src="img/ig.svg" class="w-5 invert">
+                            <img src="../home/img/ig.svg" class="w-5 invert">
                         </a>
                         <a href="#" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
-                            <img src="img/fb.svg" class="w-5 invert">
+                            <img src="../home/img/fb.svg" class="w-5 invert">
                         </a>
                         <a href="#" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
-                            <img src="img/tiktok.svg" class="w-5 invert">
+                            <img src="../home/img/tiktok.svg" class="w-5 invert">
                         </a>
                     </div>
                 </div>

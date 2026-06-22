@@ -46,12 +46,12 @@ require_once "../config/database.php";
     }
 
     if ($min_harga != "") {
-        $min = (int)$min_harga; // Paksa jadi angka agar aman
+        $min = (int)$min_harga; 
         $sql .= " AND harga >= $min";
     }
 
     if ($max_harga != "") {
-        $max = (int)$max_harga; // Paksa jadi angka agar aman
+        $max = (int)$max_harga; 
         $sql .= " AND harga <= $max";
     }
 
@@ -71,50 +71,28 @@ require_once "../config/database.php";
         $sql .= " ORDER BY cars.id DESC";
     }
 
-
     $sql .= " LIMIT ?, ?";
 
     $stmt = mysqli_prepare($conn, $sql);
-
     $keyword = "%" . $search . "%";
 
     if ($filter != "") {
-        mysqli_stmt_bind_param(
-        $stmt,
-        "sssii",
-        $keyword,
-        $keyword,
-        $filter,
-        $offset,
-        $limit
-    );
+        mysqli_stmt_bind_param($stmt, "sssii", $keyword, $keyword, $filter, $offset, $limit);
     } else {
-        mysqli_stmt_bind_param(
-        $stmt,
-        "ssii",
-        $keyword,
-        $keyword,
-        $offset,
-        $limit
-    );
+        mysqli_stmt_bind_param($stmt, "ssii", $keyword, $keyword, $offset, $limit);
     }
 
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
     
-    $sqlCount = "SELECT COUNT(*) as total FROM cars
-    WHERE (nama_mobil LIKE ? OR merek LIKE ?)
-    ";
-
+    $sqlCount = "SELECT COUNT(*) as total FROM cars WHERE (nama_mobil LIKE ? OR merek LIKE ?)";
     if ($filter != "") {
         $sqlCount .= " AND tipe_mobil = ?";
     }
-
     if ($min_harga != "") {
         $min = (int)$min_harga;
         $sqlCount .= " AND harga >= $min";
     }
-
     if ($max_harga != "") {
         $max = (int)$max_harga;
         $sqlCount .= " AND harga <= $max";
@@ -122,22 +100,9 @@ require_once "../config/database.php";
 
     $stmtCount = mysqli_prepare($conn, $sqlCount);
     if ($filter != "") {
-    mysqli_stmt_bind_param(
-        $stmtCount,
-        "sss",
-        $keyword,
-        $keyword,
-        $filter
-    );
-
+        mysqli_stmt_bind_param($stmtCount, "sss", $keyword, $keyword, $filter);
     } else {
-    mysqli_stmt_bind_param(
-        $stmtCount,
-        "ss",
-        $keyword,
-        $keyword
-    );
-
+        mysqli_stmt_bind_param($stmtCount, "ss", $keyword, $keyword);
     }
 
     mysqli_stmt_execute($stmtCount);
@@ -148,424 +113,166 @@ require_once "../config/database.php";
 ?>
 
 <!doctype html>
-<html>
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../src/output.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Katalog Produk - ECLIPSE</title>
 </head>
 
-<body class="font-[sans] min-h-screen text-white overflow-x-hidden bg-[radial-gradient(circle_at_top_left,rgba(255,0,0,0.25),transparent_25%),radial-gradient(circle_at_bottom_right,rgba(255,0,0,0.2),transparent_20%),linear-gradient(135deg,#050505,#0b0b0b,#111111)]">
+<body class="font-['Poppins',sans-serif] min-h-screen text-white overflow-x-hidden bg-[radial-gradient(circle_at_top_left,rgba(255,0,0,0.25),transparent_25%),radial-gradient(circle_at_bottom_right,rgba(255,0,0,0.2),transparent_20%),linear-gradient(135deg,#050505,#0b0b0b,#111111)]">
 
-    <!-- NAVBAR -->
-    <nav class="w-[90%] max-w-[1200px] mx-auto px-10 py-4 flex items-center justify-between bg-white/10 border border-white/10 rounded-[60px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
-
-        <!-- LOGO -->
+    <nav class="w-[90%] max-w-[1200px] mx-auto mt-6 px-10 py-4 flex items-center justify-between bg-white/10 border border-white/10 rounded-[60px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
         <div>
-            <img 
-                src="img/LogoProfile.png" 
-                alt="logo"
-                class="w-10 h-10 cursor-pointer transition duration-300 hover:scale-110"
-            >
+            <img src="img/LogoProfile.png" alt="logo" class="w-10 h-10 rounded-full cursor-pointer transition duration-300 hover:scale-110">
         </div>
 
-        <!-- MENU -->
         <div class="relative flex items-center gap-[18px]">
+            <div class="absolute left-[124px] w-[105px] h-[45px] bg-sky-400 rounded-[14px] shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] transition-all duration-300 z-0"></div>
 
-            <!-- INDICATOR -->
-            <div class="absolute left-31 w-[105px] h-[45px] bg-sky-400 rounded-[14px] shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] transition-all duration-300 z-0"></div>
-
-            <!-- HOME -->
-            <a 
-                href="../home/home.html"
-                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]"
-            >
-                Home
-            </a>
-
-            <!-- PRODUCT -->
-            <a 
-                href="../Product-Detailed/product.html"
-                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]"
-            >
-                Product
-            </a>
-
-            <!-- CONTACT -->
-            <a 
-                href="../contact/Contact.html"
-                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]"
-            >
-                Contact
-            </a>
-
-            <!-- ABOUT -->
-            <a 
-                href="../aboutus/AboutUs.html"
-                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]"
-            >
-                About us
-            </a>
-
+            <a href="../home/home.php" class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400">Home</a>
+            <a href="../Product-Detailed/product.html" class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400">Product</a>
+            <a href="../contact/Contact.php" class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400">Contact</a>
+            <a href="../aboutus/AboutUs.php" class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400">About us</a>
         </div>
 
-        <!-- ICON -->
         <div class="flex gap-5">
-
-            <!-- USER -->
-            <a href="../login/login.html">
-                <img 
-                    src="img/user2.png" 
-                    alt="user"
-                    class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]"
-                >
+            <a href="../login/login2.php">
+                <img src="img/user2.png" alt="user" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110">
             </a>
-
-            <!-- CART -->
             <a href="../cart/cart.html">
-                <img 
-                    src="img/shopping-bag.png" 
-                    alt="cart"
-                    class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]"
-                >
+                <img src="img/shopping-bag.png" alt="cart" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110">
             </a>
-
         </div>
     </nav>
 
-    <!-- SEARCH -->
     <section class="mt-10 flex justify-center w-full">
-    
-    <form method="GET" class="relative w-[420px]">
-        
-        <img 
-            src="img/search.png" 
-            alt="search"
-            class="absolute w-[18px] h-[18px] left-[18px] top-1/2 -translate-y-1/2 opacity-70 brightness-0 invert pointer-events-none"
-        >
-
-        <input
-            type="search"
-            name="search"
-            value="<?= $search; ?>"
-            placeholder="Cari produk..."
-            class="w-full py-[15px] pr-[20px] pl-[50px] rounded-[50px] border border-white/10 outline-none bg-white/[0.08] text-white text-[15px] transition duration-300 focus:bg-white/[0.12] focus:border-white/30 focus:shadow-[0_0_15px_rgba(255,255,255,0.1)]"
-        >
-
-        <input type="hidden" name="filter" value="<?= $filter; ?>">
-        <input type="hidden" name="sort" value="<?= $sort; ?>">
-        <input type="hidden" name="min_harga" value="<?= $min_harga; ?>">
-        <input type="hidden" name="max_harga" value="<?= $max_harga; ?>">
-
-        <button type="submit" class="hidden">Cari</button>
-        
-    </form>
-    
+        <form method="GET" class="relative w-[420px]">
+            <img src="img/search.png" alt="search" class="absolute w-[18px] h-[18px] left-[18px] top-1/2 -translate-y-1/2 opacity-70 brightness-0 invert pointer-events-none">
+            <input type="search" name="search" value="<?= htmlspecialchars($search); ?>" placeholder="Cari produk..." class="w-full py-[15px] pr-[20px] pl-[50px] rounded-[50px] border border-white/10 outline-none bg-white/[0.08] text-white text-[15px] transition duration-300 focus:bg-white/[0.12] focus:border-white/30">
+            <input type="hidden" name="filter" value="<?= $filter; ?>">
+            <input type="hidden" name="sort" value="<?= $sort; ?>">
+            <input type="hidden" name="min_harga" value="<?= $min_harga; ?>">
+            <input type="hidden" name="max_harga" value="<?= $max_harga; ?>">
+            <button type="submit" class="hidden">Cari</button>
+        </form>
     </section>
 
+    <div class="w-[90%] max-w-[1200px] mx-auto bg-transparent border border-white/10 rounded-[30px] p-[30px] mt-10">
+        <div class="flex flex-wrap justify-center gap-[15px] mb-[30px]">
+            <a href="product.php" class="py-[12px] px-[24px] rounded-full text-[16px] transition duration-300 <?= $filter == '' ? 'bg-gradient-to-br from-[#7e3cf0] to-[#5c1865] shadow-lg text-white' : 'bg-[#1e293b] text-white'; ?>">Semua</a>
+            <a href="product.php?filter=SUV" class="py-[12px] px-[24px] rounded-full text-[16px] transition duration-300 <?= $filter == 'SUV' ? 'bg-gradient-to-br from-[#7e3cf0] to-[#5c1865] shadow-lg text-white' : 'bg-[#1e293b] text-white'; ?>">SUV</a>
+            <a href="product.php?filter=Sedan" class="py-[12px] px-[24px] rounded-full text-[16px] transition duration-300 <?= $filter == 'Sedan' ? 'bg-gradient-to-br from-[#7e3cf0] to-[#5c1865] shadow-lg text-white' : 'bg-[#1e293b] text-white'; ?>">Sedan</a>
+            <a href="product.php?filter=MPV" class="py-[12px] px-[24px] rounded-full text-[16px] transition duration-300 <?= $filter == 'MPV' ? 'bg-gradient-to-br from-[#7e3cf0] to-[#5c1865] shadow-lg text-white' : 'bg-[#1e293b] text-white'; ?>">MPV</a>
+            <a href="product.php?filter=Pickup" class="py-[12px] px-[24px] rounded-full text-[16px] transition duration-300 <?= $filter == 'Pickup' ? 'bg-gradient-to-br from-[#7e3cf0] to-[#5c1865] shadow-lg text-white' : 'bg-[#1e293b] text-white'; ?>">Pickup</a>
+            <a href="product.php?filter=Sport" class="py-[12px] px-[24px] rounded-full text-[16px] transition duration-300 <?= $filter == 'Sport' ? 'bg-gradient-to-br from-[#7e3cf0] to-[#5c1865] shadow-lg text-white' : 'bg-[#1e293b] text-white'; ?>">Sport</a>
+            <a href="product.php?filter=Supercar" class="py-[12px] px-[24px] rounded-full text-[16px] transition duration-300 <?= $filter == 'Supercar' ? 'bg-gradient-to-br from-[#7e3cf0] to-[#5c1865] shadow-lg text-white' : 'bg-[#1e293b] text-white'; ?>">Supercar</a>
+        </div>
 
-    <div class="w-full max-w-[1200px] mx-auto bg-transparent border border-white/10 rounded-[30px] p-[30px] mt-10">
+        <form method="GET" class="flex flex-wrap justify-center items-center gap-[15px]">
+            <input type="hidden" name="search" value="<?= $search; ?>">
+            <input type="hidden" name="filter" value="<?= $filter; ?>">
+            <input type="number" name="min_harga" value="<?= $min_harga; ?>" placeholder="Min Harga" class="w-[200px] py-[12px] px-[15px] rounded-[15px] border border-[#334155] bg-[#111827] text-white text-[15px] outline-none">
+            <span class="text-white text-[20px]">-</span>
+            <input type="number" name="max_harga" value="<?= $max_harga; ?>" placeholder="Max Harga" class="w-[200px] py-[12px] px-[15px] rounded-[15px] border border-[#334155] bg-[#111827] text-white text-[15px] outline-none">
+            <button type="submit" class="py-[12px] px-[30px] rounded-[15px] bg-[#ef4444] hover:bg-[#dc2626] text-white font-semibold transition">Terapkan</button>
 
-    <div class="flex flex-wrap justify-center gap-[15px] mb-[30px]">
-
-        <a href="product.php"
-            class="py-[16px] px-[32px] rounded-full text-[18px] transition duration-300 hover:bg-[#334155] hover:-translate-y-[2px] <?= $filter == '' ? 'bg-gradient-to-br from-[#7e3cf0] to-[#5c1865] shadow-[0_0_25px_rgba(168,85,247,0.5)] text-white' : 'bg-[#1e293b] text-white'; ?>">
-            Semua
-        </a>
-
-        <a href="product.php?search=<?= $search; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>&filter=SUV"
-            class="py-[16px] px-[32px] rounded-full text-[18px] transition duration-300 hover:bg-[#334155] hover:-translate-y-[2px] <?= $filter == 'SUV' ? 'bg-gradient-to-br from-[#7e3cf0] to-[#5c1865] shadow-[0_0_25px_rgba(168,85,247,0.5)] text-white' : 'bg-[#1e293b] text-white'; ?>">
-            SUV
-        </a>
-
-        <a href="product.php?search=<?= $search; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>&filter=Sedan"
-            class="py-[16px] px-[32px] rounded-full text-[18px] transition duration-300 hover:bg-[#334155] hover:-translate-y-[2px] <?= $filter == 'Sedan' ? 'bg-gradient-to-br from-[#7e3cf0] to-[#5c1865] shadow-[0_0_25px_rgba(168,85,247,0.5)] text-white' : 'bg-[#1e293b] text-white'; ?>">
-            Sedan
-        </a>
-
-        <a href="product.php?search=<?= $search; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>&filter=MPV"
-            class="py-[16px] px-[32px] rounded-full text-[18px] transition duration-300 hover:bg-[#334155] hover:-translate-y-[2px] <?= $filter == 'MPV' ? 'bg-gradient-to-br from-[#7e3cf0] to-[#5c1865] shadow-[0_0_25px_rgba(168,85,247,0.5)] text-white' : 'bg-[#1e293b] text-white'; ?>">
-            MPV
-        </a>
-
-        <a href="product.php?search=<?= $search; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>&filter=Pickup"
-            class="py-[16px] px-[32px] rounded-full text-[18px] transition duration-300 hover:bg-[#334155] hover:-translate-y-[2px] <?= $filter == 'Pickup' ? 'bg-gradient-to-br from-[#7e3cf0] to-[#5c1865] shadow-[0_0_25px_rgba(168,85,247,0.5)] text-white' : 'bg-[#1e293b] text-white'; ?>">
-            Pickup
-        </a>
-
-        <a href="product.php?search=<?= $search; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>&filter=Sport"
-            class="py-[16px] px-[32px] rounded-full text-[18px] transition duration-300 hover:bg-[#334155] hover:-translate-y-[2px] <?= $filter == 'Sport' ? 'bg-gradient-to-br from-[#7e3cf0] to-[#5c1865] shadow-[0_0_25px_rgba(168,85,247,0.5)] text-white' : 'bg-[#1e293b] text-white'; ?>">
-            Sport
-        </a>
-
-        <a href="product.php?search=<?= $search; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>&filter=Supercar"
-            class="py-[16px] px-[32px] rounded-full text-[18px] transition duration-300 hover:bg-[#334155] hover:-translate-y-[2px] <?= $filter == 'Supercar' ? 'bg-gradient-to-br from-[#7e3cf0] to-[#5c1865] shadow-[0_0_25px_rgba(168,85,247,0.5)] text-white' : 'bg-[#1e293b] text-white'; ?>">
-            Supercar
-        </a>
-
+            <select name="sort" onchange="this.form.submit()" class="py-[12px] px-[20px] rounded-[15px] border border-[#334155] bg-[#111827] text-white cursor-pointer outline-none">
+                <option value="">Terbaru</option>
+                <option value="harga_asc" <?= $sort == "harga_asc" ? "selected" : ""; ?>>Harga Termurah</option>
+                <option value="harga_desc" <?= $sort == "harga_desc" ? "selected" : ""; ?>>Harga Termahal</option>
+                <option value="tahun_desc" <?= $sort == "tahun_desc" ? "selected" : ""; ?>>Tahun Terbaru</option>
+                <option value="tahun_asc" <?= $sort == "tahun_asc" ? "selected" : ""; ?>>Tahun Terlama</option>
+            </select>
+        </form>
     </div>
 
-    <form method="GET" class="flex flex-wrap justify-center items-center gap-[15px]">
-
-        <input type="hidden" name="search" value="<?= $search; ?>">
-        <input type="hidden" name="filter" value="<?= $filter; ?>">
-
-        <input 
-            type="number" 
-            name="min_harga" 
-            value="<?= $min_harga; ?>" 
-            placeholder="Min Harga (Rp)" 
-            class="w-[250px] py-[18px] px-[20px] rounded-[20px] border border-[#334155] bg-[#111827] text-white text-[16px] outline-none transition duration-300 focus:border-[#8b28d2]"
-        >
-
-        <span class="text-white text-[24px]">-</span>
-
-        <input 
-            type="number" 
-            name="max_harga" 
-            value="<?= $max_harga; ?>" 
-            placeholder="Max Harga (Rp)" 
-            class="w-[250px] py-[18px] px-[20px] rounded-[20px] border border-[#334155] bg-[#111827] text-white text-[16px] outline-none transition duration-300 focus:border-[#8b28d2]"
-        >
-
-        <button type="submit" class="py-[18px] px-[40px] rounded-[20px] bg-[#ef4444] text-white text-[18px] font-semibold transition duration-300 hover:bg-[#dc2626] hover:-translate-y-[2px]">
-            Terapkan
-        </button>
-
-        <select
-            name="sort"
-            onchange="this.form.submit()"
-            class="py-[18px] px-[25px] rounded-[20px] border border-[#334155] bg-[#111827] text-white text-[16px] cursor-pointer outline-none transition duration-300 focus:border-[#8b28d2]">
-
-            <option value="">Terbaru</option>
-
-            <option value="harga_asc" <?= $sort == "harga_asc" ? "selected" : ""; ?>>
-                Harga Termurah
-            </option>
-
-            <option value="harga_desc" <?= $sort == "harga_desc" ? "selected" : ""; ?>>
-                Harga Termahal
-            </option>
-
-            <option value="tahun_desc" <?= $sort == "tahun_desc" ? "selected" : ""; ?>>
-                Tahun Terbaru
-            </option>
-
-            <option value="tahun_asc" <?= $sort == "tahun_asc" ? "selected" : ""; ?>>
-                Tahun Terlama
-            </option>
-
-        </select>
-    </form>
-
+    <div class="max-w-7xl mx-auto px-10 mt-12">
+        <h1 class="text-white text-2xl font-bold mb-8">ALL PRODUCT</h1>
     </div>
 
-    
-    <!-- TITLE -->
-    <h1 class="text-white text-2xl font-bold mb-8 px-40">
-        ALL PRODUCT
-    </h1>
-
-    <!-- PRODUCT GRID -->
     <div class="max-w-7xl mx-auto px-10">
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 justify-items-center overflow-hidden pb-10">
-
-        <?php if($totalData > 0) : ?>
-
-        <?php while($car = mysqli_fetch_assoc($result)) : ?>
-
-            <div class="bg-white-900 rounded-2xl transform hover:scale-105 transition duration-300">
-                <a href="../ISI-Product/Product.php?id=<?= $car['id']; ?>">
-
-                <div class="relative bg-white px-1 flex items-center justify-center h-35 w-50">
-
-                    <img
-                    src="../uploads/<?= $car['gambar']; ?>"
-                    class="h-44 object-contain block">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 pb-10">
+            <?php if($totalData > 0) : ?>
+                <?php while($car = mysqli_fetch_assoc($result)) : ?>
+                    <div class="bg-[#1e293b]/50 border border-slate-700/50 rounded-2xl overflow-hidden transform hover:scale-105 transition duration-300 flex flex-col justify-between">
+                        <a href="../ISI-Product/Product.php?id=<?= $car['id']; ?>" class="block">
+                            <div class="bg-white p-4 flex items-center justify-center h-44">
+                                <img src="../uploads/<?= $car['gambar']; ?>" alt="Mobil" class="h-full object-contain">
+                            </div>
+                            <div class="p-4 flex flex-col items-center">
+                                <h2 class="text-white text-base text-center font-semibold line-clamp-1"><?= $car['nama_mobil']; ?></h2>
+                                <p class="text-gray-400 text-center text-xs mt-1"><?= $car['merek']; ?></p>
+                                <p class="text-red-400 text-center mt-3 text-base font-bold">Rp <?= number_format($car['harga'],0,',','.'); ?></p>
+                                
+                                <div class="flex justify-center mt-3">
+                                    <?php if ($car['stok'] == 0) : ?>
+                                        <span class="bg-red-500/20 text-red-400 text-[11px] px-3 py-1 rounded-full font-medium border border-red-500/30">Habis</span>
+                                    <?php elseif ($car['stok'] <= 3) : ?>
+                                        <span class="bg-yellow-500/20 text-yellow-400 text-[11px] px-3 py-1 rounded-full font-medium border border-yellow-500/30">Stok Terbatas</span>
+                                    <?php else : ?>
+                                        <span class="bg-green-500/20 text-green-400 text-[11px] px-3 py-1 rounded-full font-medium border border-green-500/30">Tersedia</span>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-
-                    <div class="bg-gray-600 h-25 w-50">
-
-                        <h2 class="text-white text-1xl text-center font-semibold">
-                            <?= $car['nama_mobil']; ?>
-                        </h2>
-
-                        <p class="text-gray-300 text-center text-sm">
-                            <?= $car['merek']; ?>
-                        </p>
-
-                        <p class="text-white text-center mt-3 text-lg">
-                            Rp <?= number_format($car['harga'],0,',','.'); ?>
-                        </p>
-
-                        <ddiv class="flex justify-center mt-2">
-                        <?php if ($car['stok'] == 0) : ?>
-
-                        <span class="bg-red-500 text-white text-xs px-3 py-1 rounded-full">
-                            Habis
-                        </span>
-
-                        <?php elseif ($car['stok'] <= 3) : ?>
-
-                        <span class="bg-yellow-500 text-white text-xs px-3 py-1 rounded-full">
-                            Stok Terbatas
-                        </span>
-
-                        <?php else : ?>
-
-                        <span class="bg-green-500 text-white text-xs px-3 py-1 rounded-full">
-                            Tersedia
-                        </span>
-
-                        <?php endif; ?>
-                    </ddiv>
-                </div>
-                </a>
-            </div>
-
-            <?php endwhile; ?>
-
-        <?php else : ?>
-
-        <div class="col-span-full text-center text-white text-xl">
-            Produk tidak ditemukan
-        </div>
-
-        <?php endif; ?>
-
+                <?php endwhile; ?>
+            <?php else : ?>
+                <div class="col-span-full text-center text-gray-400 text-lg py-12">Produk tidak ditemukan</div>
+            <?php endif; ?>
         </div>
     </div>
 
-    <div class="flex justify-center gap-2 mt-10">
-        
+    <div class="flex justify-center gap-2 mt-6">
         <?php for ($i = 1; $i <= $totalPage; $i++) : ?>
-        <a href="?page=<?= $i; ?>&search=<?= $search; ?>&filter=<?= $filter; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>"
-        class="px-4 py-2 <?= $page == $i ? 'bg-purple-600' : 'bg-gray-700 hover:bg-purple-500'; ?> rounded text-white transition duration-300"> 
-            <?= $i; ?>
-        </a>
-
+            <a href="?page=<?= $i; ?>&search=<?= $search; ?>&filter=<?= $filter; ?>&sort=<?= $sort; ?>&min_harga=<?= $min_harga; ?>&max_harga=<?= $max_harga; ?>" class="px-4 py-2 <?= $page == $i ? 'bg-purple-600' : 'bg-gray-700 hover:bg-purple-500'; ?> rounded text-white transition"> 
+                <?= $i; ?>
+            </a>
         <?php endfor; ?>
     </div>
-    
-    <!-- FOOTER -->
+
     <footer class="bg-black/40 border-t border-white/10 mt-20">
-
         <div class="max-w-7xl mx-auto px-6 py-12">
-
             <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
-
-                <!-- BRAND -->
                 <div>
-
-                    <h2 class="text-2xl font-bold text-white">
-                        ECLIPSE
-                    </h2>
-
-                    <p class="text-gray-400 mt-4 leading-relaxed">
-                        Eclipse is a company that operates in the field of selling expensive cars that have original and trusted certification for all brands of cars sold.
-                    </p>
-
+                    <h2 class="text-2xl font-bold text-white">ECLIPSE</h2>
+                    <p class="text-gray-400 mt-4 text-sm leading-relaxed">Eclipse is a company that operates in the field of selling expensive cars that have original and trusted certification.</p>
                 </div>
-
-                <!-- MENU -->
                 <div>
-
-                    <h3 class="text-white font-semibold text-lg mb-4">
-                        Navigation
-                    </h3>
-
-                    <ul class="space-y-3 text-gray-400">
-
-                        <li>
-                            <a href="../home/home.html" class="hover:text-sky-400 transition">
-                                Home
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="../Product-Detailed/product.html" class="hover:text-sky-400 transition">
-                                Product
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="../contact/Contact.html" class="hover:text-sky-400 transition">
-                                Contact
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="../aboutus/AboutUs.html" class="hover:text-sky-400 transition">
-                                About us
-                            </a>
-                        </li>
-
+                    <h3 class="text-white font-semibold text-lg mb-4">Navigation</h3>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="../home/home.php" class="hover:text-sky-400 transition">Home</a></li>
+                        <li><a href="../Product-Detailed/product.html" class="hover:text-sky-400 transition">Product</a></li>
+                        <li><a href="../contact/Contact.php" class="hover:text-sky-400 transition">Contact</a></li>
+                        <li><a href="../aboutus/AboutUs.php" class="hover:text-sky-400 transition">About us</a></li>
                     </ul>
-
                 </div>
-
-                <!-- CONTACT -->
                 <div>
-
-                    <h3 class="text-white font-semibold text-lg mb-4">
-                        Contact
-                    </h3>
-
-                    <ul class="space-y-3 text-gray-400">
+                    <h3 class="text-white font-semibold text-lg mb-4">Contact</h3>
+                    <ul class="space-y-3 text-sm text-gray-400">
                         <li>Email : eclipse@email.com</li>
                         <li>Phone : +62 1234 5678 90</li>
                         <li>Indonesia</li>
                     </ul>
-
                 </div>
-
-                <!-- SOCIAL -->
                 <div>
-
-                    <h3 class="text-white font-semibold text-lg mb-4">
-                        Follow Us
-                    </h3>
-
+                    <h3 class="text-white font-semibold text-lg mb-4">Follow Us</h3>
                     <div class="flex gap-4">
-
-                        <a 
-                            href="#"
-                            class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]"
-                        >
-                            <img src="img/ig.svg" class="w-5 invert">
-                        </a>
-
-                        <a 
-                            href="#"
-                            class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]"
-                        >
-                            <img src="img/fb.svg" class="w-5 invert">
-                        </a>
-
-                        <a 
-                            href="#"
-                            class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]"
-                        >
-                            <img src="img/tiktok.svg" class="w-5 invert">
-                        </a>
-
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition"><img src="img/ig.svg" alt="ig" class="w-5 invert"></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition"><img src="img/fb.svg" alt="fb" class="w-5 invert"></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition"><img src="img/tiktok.svg" alt="tiktok" class="w-5 invert"></a>
                     </div>
-
                 </div>
-
             </div>
-
-            <!-- COPYRIGHT -->
             <div class="border-t border-white/10 mt-10 pt-6 text-center text-gray-500 text-sm">
-                Â© 2026 ECLIPSE. All Rights Reserved.
+                &copy; 2026 ECLIPSE. All Rights Reserved.
             </div>
-
         </div>
-
     </footer>
 
 </body>
