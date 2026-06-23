@@ -89,12 +89,12 @@ session_start();
                         <div class="flex flex-col">
                             <label for="nama" class="text-lg font-semibold mb-2 ml-2">Nama Anda:</label>
                             <input type="text" id="nama" name="nama" required
-                                class="border-4 border-black rounded-full p-3 px-6 bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Mas Arsan Gtg">
+                                class="border-4 border-black rounded-full p-3 px-6 bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Nama">
                         </div>
                         <div class="flex flex-col">
                             <label for="email" class="text-lg font-semibold mb-2 ml-2">Email Anda:</label>
                             <input type="email" id="email" name="email" required
-                                class="border-4 border-black rounded-full p-3 px-6 bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Mybinigweh@gmail.com">
+                                class="border-4 border-black rounded-full p-3 px-6 bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Email">
                         </div>
                     </div>
                     <div class="flex flex-col">
@@ -116,7 +116,7 @@ session_start();
                     <div class="w-20 h-20 rounded-full bg-white mb-3 p-4 flex items-center justify-center shadow-lg">
                         <img src="img/mails-logo.png" alt="GambarEmail" class="w-full h-full object-contain">
                     </div>
-                    <p class="text-sm font-bold text-gray-300">Email: <br><span class="text-white">boboiboy@kuasa3.com</span></p>
+                    <p class="text-sm font-bold text-gray-300">Email: <br><span class="text-white">eclipse@email.com</span></p>
                 </div>
                 <div class="flex flex-col items-center">
                     <div class="w-20 h-20 rounded-full bg-white mb-3 p-4 flex items-center justify-center shadow-lg">
@@ -148,10 +148,10 @@ session_start();
                 <div>
                     <h3 class="text-white font-semibold text-lg mb-4">Navigation</h3>
                     <ul class="space-y-3 text-gray-400">
-                        <li><a href="home.php" class="hover:text-sky-400 transition">Home</a></li>
-                        <li><a href="../Product-Detailed/product.html" class="hover:text-sky-400 transition">Product</a></li>
-                        <li><a href="contact.php" class="hover:text-sky-400 transition">Contact</a></li>
-                        <li><a href="aboutus.php" class="hover:text-sky-400 transition">About us</a></li>
+                        <li><a href="../home/home.php" class="hover:text-sky-400 transition">Home</a></li>
+                        <li><a href="../Product-Detailed/product.php" class="hover:text-sky-400 transition">Product</a></li>
+                        <li><a href="../contact/contact.php" class="hover:text-sky-400 transition">Contact</a></li>
+                        <li><a href="../aboutus/aboutus.php" class="hover:text-sky-400 transition">About us</a></li>
                     </ul>
                 </div>
                 <div>

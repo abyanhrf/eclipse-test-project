@@ -247,7 +247,7 @@ require_once "../config/database.php";
                     <h3 class="text-white font-semibold text-lg mb-4">Navigation</h3>
                     <ul class="space-y-3 text-sm text-gray-400">
                         <li><a href="../home/home.php" class="hover:text-sky-400 transition">Home</a></li>
-                        <li><a href="../Product-Detailed/product.html" class="hover:text-sky-400 transition">Product</a></li>
+                        <li><a href="../Product-Detailed/product.php" class="hover:text-sky-400 transition">Product</a></li>
                         <li><a href="../contact/Contact.php" class="hover:text-sky-400 transition">Contact</a></li>
                         <li><a href="../aboutus/AboutUs.php" class="hover:text-sky-400 transition">About us</a></li>
                     </ul>

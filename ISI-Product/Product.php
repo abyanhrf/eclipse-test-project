@@ -55,22 +55,22 @@
         </div>
 
         <div class="relative flex items-center gap-[18px]">
-            <a href="../home/home.html"
+            <a href="../home/home.php"
                 class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
             Home
             </a>
 
-            <a href="../Product-Detailed/product.html"
+            <a href="../Product-Detailed/product.php"
                 class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
                 Product
             </a>
 
-            <a  href="../contact/Contact.html"
+            <a  href="../contact/Contact.php"
                 class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
                 Contact
             </a>
 
-            <a href="../aboutus/AboutUs.html"
+            <a href="../aboutus/AboutUs.php"
                 class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
                 About us
             </a>
@@ -79,7 +79,7 @@
 
         <div class="flex gap-5">
 
-            <a href="../login/login.html">
+            <a href="../login/login.php">
                 <img src="img/user2.png" alt="user"
                     class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
             </a>
@@ -175,14 +175,7 @@
           <p class="text-white mt-2">
             Harga dapat berubah sewaktu-waktu
           </p>
-
-            <button class="px-6 py-2 font-semibold hover:bg-amber-600 hover:text-white transition">
-              Kredit
-            </button>
-
-            <button class="text-white px-6 py-2 font-semibold hover:bg-purple-800 transition">
-              Tunai
-            </button>
+          
         </div>
         <div class="bg-white/10 border border-white/10 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] p-6">
           <div class="grid grid-cols-2 gap-5">
@@ -319,25 +312,25 @@
 
                 <ul class="space-y-3 text-gray-400">
                     <li>
-                        <a href="../home/home.html" class="hover:text-sky-400 transition">
+                        <a href="../home/home.php" class="hover:text-sky-400 transition">
                             Home
                         </a>
                     </li>
 
                     <li>
-                        <a href="../Product-Detailed/product.html" class="hover:text-sky-400 transition">
+                        <a href="../Product-Detailed/product.php" class="hover:text-sky-400 transition">
                             Product
                         </a>
                     </li>
 
                     <li>
-                        <a href="../contact/Contact.html" class="hover:text-sky-400 transition">
+                        <a href="../contact/Contact.php" class="hover:text-sky-400 transition">
                             Contact
                         </a>
                     </li>
 
                     <li>
-                        <a href="../aboutus/AboutUs.html" class="hover:text-sky-400 transition">
+                        <a href="../aboutus/AboutUs.php " class="hover:text-sky-400 transition">
                             About us
                         </a>
                     </li>
