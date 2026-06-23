@@ -8,12 +8,14 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link class="styles-css" rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <title>Home - Eclipse</title>
+    <title>Home</title>
 
     <style>
         .anti-putih-banner {
@@ -27,27 +29,13 @@ session_start();
     </style>
 </head>
 
-<body class="font-[Poppins] min-h-screen text-white overflow-x-hidden bg-[radial-gradient(circle_at_top_left,rgba(255,0,0,0.25),transparent_25%),radial-gradient(circle_at_bottom_right,rgba(255,0,0,0.2),transparent_20%),linear-gradient(135deg,#050505,#0b0b0b,#111111)]">
+<body>
 
-    <nav class="navbar relative z-50">
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <!-- Logo -->
         <div class="logo">
-            <img src="img/LogoProfile.png" alt="logo" class="w-10 h-10 cursor-pointer transition duration-300 hover:scale-110">
-        </div>
-
-        <div class="nav-menu flex items-center gap-[18px]">
-            <a href="home.php" class="nav-link active relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)]">
-                Home
-            </a>
-            <a href="../Product-Detailed/product.php" class="nav-link relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)]">
-                Product
-            </a>
-            <a href="../contact/Contact.html" class="nav-link relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)]">
-                Contact
-            </a>
-            <a href="../aboutus/AboutUs.html" class="nav-link relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)]">
-                About us
-            </a>
-        </div>
             <img src="img/LogoProfile.png" alt="logo" class="rounded-full">
         </div>
 
@@ -68,63 +56,101 @@ session_start();
     </a>
     </div>
 
-        <div class="nav-icons flex items-center gap-5">
+        <!-- ICON -->
+        <div class="nav-icons">
             <?php if (isset($_SESSION['user_id'])) : ?>
+
                 <div class="relative group">
-                    <button class="flex items-center gap-2 mr-5 text-white font-semibold hover:text-sky-400 transition duration-300">
+
+                    <button
+                        class="flex items-center gap-2 mr-5 text-white font-semibold hover:text-sky-400 transition duration-300">
+
                         <img src="img/user2.png" alt="user" class="w-6 h-6 invert">
-                        <?= htmlspecialchars($_SESSION['nama']); ?>
+
+                        <?= $_SESSION['nama']; ?>
+
                     </button>
 
-                    <div class="absolute right-0 top-full w-40 bg-white rounded-lg shadow-lg hidden group-hover:block overflow-hidden z-50">
-                        <a href="../profile/profile.php" class="block px-4 py-1.5 text-gray-700 hover:text-blue-500 hover:bg-gray-100 transition">
-                            Profil Saya
-                        </a>
-                        <a href="../process/logout.php" class="block px-4 py-1.5 text-red-600 hover:bg-red-50 transition">
-                            Logout
-                        </a>
-                    </div>
+            <div
+                class="absolute right-0 top-full w-40 bg-white rounded-lg shadow-lg hidden group-hover:block overflow-hidden z-50">
+
+                <a href="../profile/profile.php"
+                        class="block px-4 py-1.5 text-white hover:text-blue-300 hover:bg-gray-100 transition">
+                        Profil Saya
+                    </a>
+
+                    <a href="../process/logout.php"
+                        class="block px-4 py-1.5 text-red-600 hover:bg-red-50 transition">
+                        Logout
+                    </a>
+
                 </div>
+
+            </div>
+            
             <?php else : ?>
-                <a href="../login/login.php">
-                    <img src="img/user2.png" alt="user" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110">
-                </a>
+
+            <a href="../login/login.php">
+                <img src="img/user2.png" alt="user">
+            </a>
+            
             <?php endif; ?>
 
             <?php if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'admin') : ?>
-                <a href="../dashboard/dashboard.php" class="px-3 py-2 rounded-lg bg-sky-500 text-white text-sm font-semibold hover:bg-sky-400 transition">
+
+                <a href="../dashboard/dashboard.php"
+                    class="px-3 py-2 rounded-lg bg-sky-500 text-white text-sm font-semibold hover:bg-sky-400 transition">
                     Dashboard
                 </a>
+
             <?php else : ?>
+
                 <a href="../cart/cart.php">
-                    <img src="img/shopping-bag.png" alt="cart" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110">
+                    <img src="img/shopping-bag.png" alt="cart">
                 </a>
+
             <?php endif; ?>
         </div>
     </nav>
 
-    <div class="mt-8 mb-4 flex justify-center px-4 relative z-10">
-        <div class="relative w-full max-w-md">
-            <img src="img/search.png" alt="search" class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 opacity-60">
-            <input type="text" placeholder="Cari produk..." class="w-full pl-10 pr-4 py-2 rounded-full border border-gray-300 text-gray-800 focus:outline-none focus:ring-2 focus:ring-sky-400">
+    <!-- SEARCH -->
+    <section class="search-section">
+        <div class="search-box">
+            <img src="img/search.png" alt="search">
+            <input
+            type="text"
+            placeholder="Cari produk...">
         </div>
-    </div>
+    </section>
+    <div class="bg-gray-500">
+        </div>
 
-    <div class="relative w-full max-w-7xl mx-auto mt-6">
-        <div id="slider" class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-smooth rounded-xl shadow-lg">
+    <div class="mt-4 mb-4 flex justify-center px-4">
+        </div>
+
+    <div class="relative w-full max-w-7xl mx-auto">
+        
+        <div id="slider" class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-smooth">
+            
             <div class="min-w-full snap-center relative">
                 <img src="img/mclaren.jpg" alt="Iklan 1" class="w-full h-[300px] md:h-[450px] object-cover">
             </div>
+
             <div class="min-w-full snap-center relative">
                 <img src="img/Mobil.jpeg" alt="Iklan 2" class="w-full h-[300px] md:h-[450px] object-cover">
             </div>
+
             <div class="min-w-full snap-center relative">
                 <img src="img/mclaren.jpg" alt="Iklan 3" class="w-full h-[300px] md:h-[450px] object-cover">
             </div>
+            
             <div class="min-w-full snap-center relative">
                 <img src="img/Mobil.jpeg" alt="Iklan 4" class="w-full h-[300px] md:h-[450px] object-cover">
             </div>
+
         </div>
+
+        
 
         <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-4 bg-white/80 backdrop-blur-sm px-5 py-2 rounded-full shadow-lg">
             <button id="prevBtn" class="text-gray-700 hover:text-black font-bold focus:outline-none">&lt;</button>
@@ -134,6 +160,7 @@ session_start();
             <button id="pauseBtn" class="text-gray-700 hover:text-black font-bold text-xs focus:outline-none">||</button>
         </div>
     </div>
+
 
     <section class="max-w-7xl mx-auto px-6 mt-16 mb-8">
         <div class="anti-putih-banner bg-gradient-to-br from-[#1e222b] to-[#12151c] border border-white/10 rounded-3xl p-8 lg:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.8)] relative overflow-hidden group/banner">
