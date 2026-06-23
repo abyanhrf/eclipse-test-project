@@ -98,6 +98,7 @@ if (isset($_GET['remove_cart_id'])) {
 // ========================================================
 $query = "SELECT 
             cart.id AS cart_id, 
+            cart.car_id,
             cars.nama_mobil, 
             cars.merek, 
             cars.tipe_mobil,
@@ -189,12 +190,18 @@ function hapusKeranjang(event, id) {
 
         <?php
         if ($jumlah_item > 0) {
+            
+            $total_harga_semua = 0; 
+            $array_car_id = [];
+            
             while($row = mysqli_fetch_assoc($result)) {
                 $gambar_mobil = $row['gambar'] ? $row['gambar'] : 'default_car.jpg';
                 $nama_mobil   = $row['nama_mobil']; 
                 $merek_mobil  = $row['merek'];      
                 $desk_mobil   = $row['deskripsi'];  
                 $harga_mobil  = $row['harga'];
+                $total_harga_semua += $harga_mobil;
+                $array_car_id[] = $row['car_id'];
                 
                 $tipe   = $row['tipe_mobil'];
                 $tahun  = $row['tahun'];
@@ -272,13 +279,23 @@ function hapusKeranjang(event, id) {
 
     </div>
 
-    <div class="px-10 mt-8 flex justify-end max-w-[1200px] mx-auto">
+    <div class="px-10 mt-8 flex flex-col items-end max-w-[1200px] mx-auto">
         <?php if($jumlah_item > 0): ?>
-            <button class="px-10 py-4 rounded-xl bg-sky-500 text-white font-bold text-xl transition duration-300 hover:bg-sky-400 hover:scale-105 hover:shadow-[0_0_20px_rgba(56,189,248,0.7)] flex items-center gap-3">
-                Checkout Sekarang
+            <p class="text-gray-400 mb-2">Total Pembayaran Keseluruhan:</p>
+            <p class="text-4xl font-bold text-sky-400 mb-6">Rp <?php echo number_format($total_harga_semua, 0, ',', '.'); ?></p>
+
+            <button onclick="openModal()" class="px-10 py-4 rounded-xl bg-sky-500 text-white font-bold text-xl transition duration-300 hover:bg-sky-400 hover:scale-105 hover:shadow-[0_0_20px_rgba(56,189,248,0.7)] flex items-center gap-3">
+                Checkout Semua Items
             </button>
         <?php endif; ?>
     </div>
+
+    <?php 
+    if($jumlah_item > 0) {
+        $is_cart_mode = true; 
+        include '../components/checkout-modal.php'; 
+    }
+    ?>
 
     <footer class="bg-black/40 border-t border-white/10 mt-20">
         <div class="max-w-7xl mx-auto px-6 py-12 text-center md:text-left">
