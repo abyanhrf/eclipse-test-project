@@ -1,5 +1,15 @@
 <?php
 session_start();
+
+require_once "../config/database.php";
+
+$sql = "SELECT cars.*, cars_img.gambar
+        FROM cars
+        LEFT JOIN cars_img
+        ON cars.id = cars_img.car_id
+        AND cars_img.gambar_utama = 1
+        ORDER BY cars.id DESC LIMIT 4";
+$result = mysqli_query($conn, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -8,9 +18,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
-    <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,7 +27,6 @@ session_start();
 
     <style>
         .anti-putih-banner {
-            /* Durasi diubah dari 0.7s menjadi 0.3s agar lebih responsif dan gesit */
             transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
         }
         .anti-putih-banner:hover {
@@ -31,16 +38,13 @@ session_start();
 
 <body>
 
-    <!-- NAVBAR -->
     <nav class="navbar">
 
-        <!-- Logo -->
         <div class="logo">
             <img src="img/LogoProfile.png" alt="logo" class="rounded-full">
         </div>
 
-        <!-- MENU -->
-    <div class="nav-menu">
+        <div class="nav-menu">
     <div class="indicator"></div>
     <a href="home.html" class="nav-link active">
         Home
@@ -56,7 +60,6 @@ session_start();
     </a>
     </div>
 
-        <!-- ICON -->
         <div class="nav-icons">
             <?php if (isset($_SESSION['user_id'])) : ?>
 
@@ -113,7 +116,6 @@ session_start();
         </div>
     </nav>
 
-    <!-- SEARCH -->
     <section class="search-section">
         <div class="search-box">
             <img src="img/search.png" alt="search">
@@ -239,34 +241,37 @@ session_start();
         </div>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <a href="#" class="bg-slate-500 rounded-xl shadow-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition duration-300 hover:-translate-y-2 block group overflow-hidden">
-                <img src="img/Mobil.jpeg" alt="Lamborgini" class="w-full h-40 md:h-48 object-cover group-hover:opacity-90 transition-opacity">
-                <div class="p-4">
-                    <h3 class="text-xl font-bold text-gray-900">Lamborgini</h3>
-                    <p class="text-lg font-bold text-white mt-1">$1000000</p>
-                </div>
-            </a>
-            <a href="#" class="bg-slate-500 rounded-xl shadow-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition duration-300 hover:-translate-y-2 block group overflow-hidden">
-                <img src="img/mclaren.jpg" alt="Ferrari" class="w-full h-40 md:h-48 object-cover group-hover:opacity-90 transition-opacity">
-                <div class="p-4">
-                    <h3 class="text-xl font-bold text-gray-900">Ferrari</h3>
-                    <p class="text-lg font-bold text-white mt-1">$1100000</p>
-                </div>
-            </a>
-            <a href="#" class="bg-slate-500 rounded-xl shadow-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition duration-300 hover:-translate-y-2 block group overflow-hidden">
-                <img src="img/Mobil.jpeg" alt="McLaren" class="w-full h-40 md:h-48 object-cover group-hover:opacity-90 transition-opacity">
-                <div class="p-4">
-                    <h3 class="text-xl font-bold text-gray-900">McLaren</h3>
-                    <p class="text-lg font-bold text-white mt-1">$1200000</p>
-                </div>
-            </a>
-            <a href="#" class="bg-slate-500 rounded-xl shadow-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition duration-300 hover:-translate-y-2 block group overflow-hidden">
-                <img src="img/mclaren.jpg" alt="Porsche" class="w-full h-40 md:h-48 object-cover group-hover:opacity-90 transition-opacity">
-                <div class="p-4">
-                    <h3 class="text-xl font-bold text-gray-900">Porsche</h3>
-                    <p class="text-lg font-bold text-white mt-1">$1300000</p>
-                </div>
-            </a>
+            <?php
+            // Pastikan variabel $result sudah dipanggil di bagian atas file
+            if (mysqli_num_rows($result) > 0) {
+                $counter = 0; // Inisialisasi hitungan produk
+                
+                while ($data = mysqli_fetch_array($result)) {
+                    // Batasi maksimal hanya 8 produk yang tampil
+                    if ($counter >= 8) {
+                        break; 
+                    }
+                    
+                    // Validasi gambar
+                    $gambarProduk = !empty($data['gambar']) ? $data['gambar'] : 'default.jpg';
+            ?>
+                <a href="../ISI-Product/Product.php?id=<?= $data['id'] ?>" class="bg-slate-500 rounded-xl shadow-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] transition duration-300 hover:-translate-y-2 block group overflow-hidden">
+                    
+                    <img src="../uploads/<?= htmlspecialchars($gambarProduk) ?>" alt="Gambar Mobil" class="w-full h-40 md:h-48 object-cover group-hover:opacity-90 transition-opacity">
+                    
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold text-gray-900"><?= htmlspecialchars($data['nama_mobil']) ?></h3>
+                        
+                        <p class="text-lg font-bold text-white mt-1">Rp.<?= number_format($data['harga'], 0, ',', '.') ?></p>
+                    </div>
+                </a>
+            <?php
+                    $counter++; // Naikkan angka hitungan setiap kali 1 card produk selesai dibuat
+                }
+            } else {
+                echo '<p class="text-gray-400 col-span-full text-center text-lg mt-8">Belum ada produk mobil yang tersedia.</p>';
+            }
+            ?>
         </div>
     </div>
 
