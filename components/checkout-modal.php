@@ -1,5 +1,11 @@
+<?php 
+// Cek apakah modal ini dipanggil dari keranjang (cart) atau beli langsung (direct)
+$is_cart = isset($is_cart_mode) && $is_cart_mode === true;
+$form_action = $is_cart ? 'checkout_cart.php' : 'checkout.php';
+?>
+
 <div id="checkoutModal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-black/80 backdrop-blur-sm">
-    <div class="bg-[#0b1220] border border-[#1e293b] rounded-[30px] p-8 w-[90%] max-w-md shadow-[0_10px_40px_rgba(0,0,0,0.8)] relative transform transition-all">
+    <div class="bg-[#0b1220] border border-[#1e293b] rounded-[30px] p-8 w-[90%] max-w-md shadow-[0_10px_40px_rgba(0,0,0,0.8)] relative transform transition-all" id="modalContent">
 
         <button onclick="closeModal()" class="absolute top-4 right-6 text-gray-400 hover:text-white text-3xl font-bold outline-none cursor-pointer">
             &times;
@@ -7,12 +13,18 @@
 
         <h2 class="text-2xl font-bold text-white mb-6 text-center tracking-wide">Data Pengiriman</h2>
 
-        <form action="checkout.php" method="POST" class="flex flex-col gap-4">
+        <form action="<?= $form_action; ?>" method="POST" class="flex flex-col gap-4">
             
-            <input type="hidden" name="car_id" value="<?= $car['id']; ?>">
-            <input type="hidden" name="harga" value="<?= $car['harga']; ?>">
-            <input type="hidden" name="nama_mobil" value="<?= $car['nama_mobil']; ?>">
-            <input type="hidden" name="tipe_checkout" value="direct">
+            <?php if($is_cart): ?>
+                <input type="hidden" name="total_harga" value="<?= $total_harga_semua; ?>">
+                <input type="hidden" name="kumpulan_car_id" value="<?= implode(',', $array_car_id); ?>">
+                <input type="hidden" name="tipe_checkout" value="cart">
+            <?php else: ?>
+                <input type="hidden" name="car_id" value="<?= $car['id']; ?>">
+                <input type="hidden" name="harga" value="<?= $car['harga']; ?>">
+                <input type="hidden" name="nama_mobil" value="<?= $car['nama_mobil']; ?>">
+                <input type="hidden" name="tipe_checkout" value="direct">
+            <?php endif; ?>
 
             <div>
                 <label class="text-sm text-gray-400 ml-2 font-semibold">Nama Lengkap</label>
@@ -44,4 +56,16 @@
             
         </form>
     </div>
-</div>
+</div> 
+
+<script>
+    function openModal() {
+        const modal = document.getElementById('checkoutModal');
+        modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('checkoutModal');
+        modal.classList.add('hidden');
+    }
+</script>
