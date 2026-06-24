@@ -1,5 +1,6 @@
 <?php
 require_once "../config/database.php";
+session_start();
 
     $search = "";
     if (isset($_GET['search'])) {
@@ -126,27 +127,71 @@ require_once "../config/database.php";
 
 <body class="font-['Poppins',sans-serif] min-h-screen text-white overflow-x-hidden bg-[radial-gradient(circle_at_top_left,rgba(255,0,0,0.25),transparent_25%),radial-gradient(circle_at_bottom_right,rgba(255,0,0,0.2),transparent_20%),linear-gradient(135deg,#050505,#0b0b0b,#111111)]">
 
-    <nav class="w-[90%] max-w-[1200px] mx-auto mt-6 px-10 py-4 flex items-center justify-between bg-white/10 border border-white/10 rounded-[60px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+    <nav class="w-[90%] max-w-[1200px] mx-auto px-10 py-4 flex items-center justify-between bg-white/10 border border-white/10 rounded-[60px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] mt-4">
+    
         <div>
-            <img src="img/LogoProfile.png" alt="logo" class="w-10 h-10 rounded-full cursor-pointer transition duration-300 hover:scale-110">
+            <img src="img/LogoProfile.png" alt="logo"
+            class="w-10 h-10 rounded-full overflow-hidden cursor-pointer transition duration-300 hover:scale-110">
         </div>
 
         <div class="relative flex items-center gap-[18px]">
-            <div class="absolute left-[124px] w-[105px] h-[45px] bg-sky-400 rounded-[14px] shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] transition-all duration-300 z-0"></div>
+            <a href="../home/home.php"
+                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
+                Home
+            </a>
 
-            <a href="../home/home.php" class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400">Home</a>
-            <a href="../Product-Detailed/product.html" class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400">Product</a>
-            <a href="../contact/Contact.php" class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400">Contact</a>
-            <a href="../aboutus/AboutUs.php" class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400">About us</a>
+            <a href="../Product-Detailed/product.php"
+                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 bg-sky-400 text-white shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] [text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
+                Product
+            </a>
+
+            <a href="../contact/Contact.php"
+                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
+                Contact
+            </a>
+
+            <a href="../AboutUS/AboutUs.php"
+                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
+                About us
+            </a>
         </div>
 
-        <div class="flex gap-5">
-            <a href="../login/login.php">
-                <img src="img/user2.png" alt="user" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110">
-            </a>
-            <a href="../cart/cart.html">
-                <img src="img/shopping-bag.png" alt="cart" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110">
-            </a>
+        <div class="flex items-center gap-5">
+            <?php if (isset($_SESSION['user_id'])) : ?>
+                <div class="relative group">
+                    <button class="flex items-center gap-2 mr-5 text-white font-semibold hover:text-sky-400 transition duration-300">
+                        <img src="../home/img/user2.png" alt="user" class="w-6 h-6 invert">
+                        <?= $_SESSION['nama']; ?>
+                    </button>
+
+                    <div class="absolute right-0 top-[95%] pt-2 w-40 hidden group-hover:block z-50">
+                        <div class="bg-neutral-900 border border-white/10 rounded-lg shadow-lg overflow-hidden">
+                            <a href="../profile/profile.php"
+                            class="block px-4 py-2 text-sm text-gray-200 hover:text-white hover:bg-sky-500 transition">
+                            Profil Saya
+                            </a>
+                            <a href="../process/logout.php"
+                            class="block px-4 py-2 text-sm text-red-400 hover:bg-red-950/40 transition border-t border-white/5">
+                            Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <?php else : ?>
+                <a href="../login/login.php">
+                    <img src="img/user2.png" alt="user" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
+                </a>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'admin') : ?>
+                <a href="../dashboard/dashboard.php" class="px-4 py-1.5 rounded-full bg-sky-500 text-white text-sm font-semibold hover:bg-sky-400 transition shadow-[0_0_10px_rgba(56,189,248,0.4)]">
+                    Admin
+                </a>
+            <?php else : ?>
+                <a href="../cart/cart.php">
+                    <img src="img/shopping-bag.png" alt="cart" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
+                </a>
+            <?php endif; ?>
         </div>
     </nav>
 
