@@ -90,22 +90,6 @@
             </a>
         </div>
     </nav>
-
-    <form method="GET" class="mt-4 mb-4 flex justify-center">
-
-  <div class="relative w-100">
-
-    <input
-      type="text"
-      name="keyword"
-      placeholder="Cari produk..."
-      value="<?= $_GET['keyword'] ?? '' ?>"
-      class="w-full pl-10 pr-4 py-2 rounded-full border border-gray-300 text-white"
-    >
-
-  </div>
-
-</form>
     
     <section class="max-w-5xl mx-auto py-10"><section class="bg-black py-10">
 
