@@ -35,5 +35,5 @@ if ($transaction_status == 'settlement' || $transaction_status == 'capture') {
     }
 }
 
-echo "OK"; 
+echo "Updated"; 
 ?>
