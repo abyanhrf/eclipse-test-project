@@ -165,13 +165,13 @@ session_start();
                 <div>
                     <h3 class="text-white font-semibold text-lg mb-4">Follow Us</h3>
                     <div class="flex gap-4">
-                        <a href="#" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
+                        <a href="https://www.instagram.com/" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
                             <img src="../home/img/ig.svg" class="w-5 invert">
                         </a>
-                        <a href="#" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
+                        <a href="https://www.facebook.com/" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
                             <img src="../home/img/fb.svg" class="w-5 invert">
                         </a>
-                        <a href="#" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
+                        <a href="https://www.tiktok.com/" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
                             <img src="../home/img/tiktok.svg" class="w-5 invert">
                         </a>
                     </div>

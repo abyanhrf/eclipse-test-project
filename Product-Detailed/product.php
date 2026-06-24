@@ -141,7 +141,7 @@ require_once "../config/database.php";
         </div>
 
         <div class="flex gap-5">
-            <a href="../login/login2.php">
+            <a href="../login/login.php">
                 <img src="img/user2.png" alt="user" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110">
             </a>
             <a href="../cart/cart.html">
@@ -263,9 +263,9 @@ require_once "../config/database.php";
                 <div>
                     <h3 class="text-white font-semibold text-lg mb-4">Follow Us</h3>
                     <div class="flex gap-4">
-                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition"><img src="img/ig.svg" alt="ig" class="w-5 invert"></a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition"><img src="img/fb.svg" alt="fb" class="w-5 invert"></a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition"><img src="img/tiktok.svg" alt="tiktok" class="w-5 invert"></a>
+                        <a href="https://www.instagram.com/" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition"><img src="img/ig.svg" alt="ig" class="w-5 invert"></a>
+                        <a href="https://www.facebook.com/" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition"><img src="img/fb.svg" alt="fb" class="w-5 invert"></a>
+                        <a href="https://www.tiktok.com/" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition"><img src="img/tiktok.svg" alt="tiktok" class="w-5 invert"></a>
                     </div>
                 </div>
             </div>
