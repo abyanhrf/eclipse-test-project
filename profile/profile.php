@@ -54,7 +54,7 @@ $user = mysqli_fetch_assoc($result);
 
             <!-- HOME -->
             <a 
-                href="../home/home.html"
+                href="../home/home.php"
                 class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]"
             >
                 Home
@@ -62,7 +62,7 @@ $user = mysqli_fetch_assoc($result);
 
             <!-- PRODUCT -->
             <a 
-                href="../Product-Detailed/product.html"
+                href="../Product-Detailed/product.php"
                 class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]"
             >
                 Product
@@ -70,7 +70,7 @@ $user = mysqli_fetch_assoc($result);
 
             <!-- CONTACT -->
             <a 
-                href="../contact/Contact.html"
+                href="../contact/Contact.php"
                 class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]"
             >
                 Contact
@@ -78,7 +78,7 @@ $user = mysqli_fetch_assoc($result);
 
             <!-- ABOUT -->
             <a 
-                href="../aboutus/AboutUs.html"
+                href="../aboutus/AboutUs.php"
                 class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]"
             >
                 About us
@@ -90,7 +90,7 @@ $user = mysqli_fetch_assoc($result);
         <div class="flex gap-5">
 
             <!-- USER -->
-            <a href="../login/login.html">
+            <a href="../login/login.php">
                 <img 
                     src="img/user2.png" 
                     alt="user"
@@ -99,7 +99,7 @@ $user = mysqli_fetch_assoc($result);
             </a>
 
             <!-- CART -->
-            <a href="../cart/cart.html">
+            <a href="../cart/cart.php">
                 <img 
                     src="img/shopping-bag.png" 
                     alt="cart"
