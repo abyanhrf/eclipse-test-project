@@ -41,30 +41,127 @@
     
     <nav class="w-[90%] max-w-[1200px] mx-auto mt-6 px-10 py-4 flex items-center justify-between bg-white/5 border border-white/10 rounded-[60px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
         <div>
-            <img src="img/LogoProfile.png" alt="logo" class="w-10 h-10 cursor-pointer transition duration-300 hover:scale-110">
+            <img src="img/LogoProfile.png" alt="logo"
+            class="w-10 h-10 rounded-full overflow-hidden cursor-pointer transition duration-300 hover:scale-110">
         </div>
 
-        <div class="hidden md:flex items-center gap-[18px]">
-            <a href="../home/home.php" class="w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[16px] transition duration-300 hover:bg-purple-600 hover:shadow-[0_0_15px_#a855f7]">Home</a>
-            <a href="../Product-Detailed/product.php" class="w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[16px] transition duration-300 hover:bg-purple-600 hover:shadow-[0_0_15px_#a855f7]">Product</a>
-            <a href="../contact/Contact.php" class="w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[16px] transition duration-300 hover:bg-purple-600 hover:shadow-[0_0_15px_#a855f7]">Contact</a>
-            <a href="../aboutus/AboutUs.php" class="w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[16px] transition duration-300 hover:bg-purple-600 hover:shadow-[0_0_15px_#a855f7]">About us</a>
+        <div class="relative flex items-center gap-[18px]">
+            <a href="../home/home.php"
+                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
+                Home
+            </a>
+
+            <a href="../Product-Detailed/product.php"
+                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 bg-sky-400 text-white shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] [text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
+                Product
+            </a>
+
+            <a href="../contact/Contact.php"
+                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
+                Contact
+            </a>
+
+            <a href="aboutus.php"
+                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
+                About us
+            </a>
         </div>
 
-        <div class="flex gap-5">
-            <a href="../login/login.php">
-                <img src="img/user2.png" alt="user" class="w-7 h-7 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#a855f7]">
-            </a>
-            <a href="../cart/cart.php">
-                <img src="img/shopping-bag.png" alt="cart" class="w-7 h-7 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#a855f7]">
-            </a>
+        <div class="flex items-center gap-5">
+            <?php if (isset($_SESSION['user_id'])) : ?>
+                <div class="relative group">
+                    <button class="flex items-center gap-2 mr-5 text-white font-semibold hover:text-sky-400 transition duration-300">
+                        <img src="../home/img/user2.png" alt="user" class="w-6 h-6 invert">
+                        <?= $_SESSION['nama']; ?>
+                    </button>
+
+                    <div class="absolute right-0 top-[95%] pt-2 w-40 hidden group-hover:block z-50">
+                        <div class="bg-neutral-900 border border-white/10 rounded-lg shadow-lg overflow-hidden">
+                            <a href="../profile/profile.php"
+                            class="block px-4 py-2 text-sm text-gray-200 hover:text-white hover:bg-sky-500 transition">
+                            Profil Saya
+                            </a>
+                            <a href="../process/logout.php"
+                            class="block px-4 py-2 text-sm text-red-400 hover:bg-red-950/40 transition border-t border-white/5">
+                            Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <?php else : ?>
+                <a href="../login/login.php">
+                    <img src="img/user2.png" alt="user" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
+                </a>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'admin') : ?>
+                <a href="../dashboard/dashboard.php" class="px-4 py-1.5 rounded-full bg-sky-500 text-white text-sm font-semibold hover:bg-sky-400 transition shadow-[0_0_10px_rgba(56,189,248,0.4)]">
+                    Admin
+                </a>
+            <?php else : ?>
+                <a href="../cart/cart.php">
+                    <img src="img/shopping-bag.png" alt="cart" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
+                </a>
+            <?php endif; ?>
         </div>
     </nav>
+    
+    <section class="max-w-5xl mx-auto py-10"><section class="bg-black py-10">
 
-    <main class="max-w-6xl mx-auto my-12 px-4">
-        
-        <div class="text-center mb-8">
-            <h1 class="text-xl md:text-2xl font-bold tracking-widest text-gray-300 uppercase">Exclusive Supercar Showcase</h1>
+    <h1 class="text-white text-3xl font-sans font-bold text-center">
+      <?= $car['nama_mobil'];?>
+    </h1>
+
+  </section>
+  <section class="max-w-6xl mx-auto py-10 px-6">
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+         <div class="lg:col-span-2">
+
+        <div class="bg-black p-4">
+
+        <?php
+        $index = 0;
+        $gambarUtama = mysqli_fetch_assoc($resultImg);
+        ?>
+
+        <img
+        id="mainImage"
+        src="../uploads/<?= $gambarUtama['gambar']; ?>"
+        class="w-full h-[450px] object-cover">
+            
+          <div class="flex gap-3 mt-4">
+            <?php
+            mysqli_data_seek($resultImg,0);
+            while($img = mysqli_fetch_assoc($resultImg)) :
+            ?>
+
+            <img src="../uploads/<?= $img['gambar']; ?>"
+            class="thumbnail w-28 h-20 object-cover cursor-pointer
+            <?= $index==0 ? 'border-4 border-purple-600' : ''; ?>">
+
+            <?php $index++; endwhile; ?>
+        </div>    
+
+    <div class=" mt-6 p-6">
+
+          <h2 class="text-2xl text-white font-sans font-bold mb-4">
+            <?= $car['nama_mobil']; ?>
+          </h2>
+
+          <ul class="space-y-2 font-sans text-white">
+
+            <li>• <?= $car['tahun']; ?></li>
+            <li>• Kilometer <?= $car['kilometer']; ?></li>
+            <li>• <?= $car['transmisi']; ?> Transmission</li>
+            <li>• Warna <?= $car['warna']; ?></li>
+            <li>• Mesin <?= $car['kapasitas_mesin'] ?></li>
+          </ul>
+        </div>
+        <div>
+            <p class="text-white font-sans mt-6">
+                <?= nl2br($car['deskripsi']); ?>
+            </p>
         </div>
 
         <div class="bg-zinc-900/60 border border-white/10 rounded-3xl p-6 md:p-8 backdrop-blur-xl shadow-[0_12px_40px_rgba(0,0,0,0.7)]">
