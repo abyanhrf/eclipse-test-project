@@ -66,7 +66,7 @@
         </a>
         <!---->
         <div class="mt-auto mb-4 px-6">
-            <a href="../process/logout_process.php" class="flex items-center gap-3 px-4 py-3 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white rounded-lg transition-colors group">
+            <a href="../process/logout.php" class="flex items-center gap-3 px-4 py-3 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white rounded-lg transition-colors group">
                 <i class="fas fa-sign-out-alt"></i>
                 <span class="font-medium">Logout</span>
             </a>
