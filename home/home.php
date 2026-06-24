@@ -46,16 +46,16 @@ $result = mysqli_query($conn, $sql);
 
         <div class="nav-menu">
     <div class="indicator"></div>
-    <a href="home.html" class="nav-link active">
+    <a href="../home/home.php" class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
         Home
     </a>
-    <a href="../Product-Detailed/product.php" class="nav-link">
+    <a href="../Product-Detailed/product.php" class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
         Product
     </a>
-    <a href="../contact/Contact.php" class="nav-link">
+    <a href="../contact/Contact.php" class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
         Contact
     </a>
-    <a href="../aboutus/AboutUs.php" class="nav-link">
+    <a href="../aboutus/AboutUs.php" class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
         About us
     </a>
     </div>
@@ -117,12 +117,34 @@ $result = mysqli_query($conn, $sql);
     </nav>
 
     <section class="search-section">
-        <div class="search-box">
-            <img src="img/search.png" alt="search">
-            <input
-            type="text"
-            placeholder="Cari produk...">
-        </div>
+        <form method="GET"
+      action="../Product-Detailed/product.php"
+      class="relative w-[420px]">
+
+    <img src="img/search.png"
+         alt="search"
+         class="absolute w-[18px] h-[18px]
+                left-[18px] top-1/2
+                -translate-y-1/2
+                opacity-70 brightness-0 invert
+                pointer-events-none">
+
+    <input
+        type="search"
+        name="search"
+        placeholder="Cari produk..."
+        class="w-full py-[15px] pr-[20px] pl-[50px]
+               rounded-[50px]
+               border border-white/10
+               outline-none
+               bg-white/[0.08]
+               text-white text-[15px]
+               transition duration-300
+               focus:bg-white/[0.12]
+               focus:border-white/30">
+
+    <button type="submit" class="hidden">Cari</button>
+</form>
     </section>
     <div class="bg-gray-500">
         </div>
