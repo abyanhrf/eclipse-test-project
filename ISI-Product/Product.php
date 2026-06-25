@@ -47,7 +47,7 @@
 
 <body class="font-[Poppins] min-h-screen text-white overflow-x-hidden bg-[radial-gradient(circle_at_top_left,rgba(255,0,0,0.25),transparent_25%),radial-gradient(circle_at_bottom_right,rgba(255,0,0,0.2),transparent_20%),linear-gradient(135deg,#050505,#0b0b0b,#111111)]">
     
-    <nav class="w-[90%] max-w-[1200px] mx-auto px-10 py-4 flex items-center justify-between bg-white/10 border border-white/10 rounded-[60px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] mt-4">
+  <nav class="w-[90%] max-w-[1200px] mx-auto px-10 py-4 flex items-center justify-between bg-white/10 border border-white/10 rounded-[60px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] mt-4">
     
         <div>
             <img src="img/LogoProfile.png" alt="logo"
@@ -70,7 +70,7 @@
                 Contact
             </a>
 
-            <a href="aboutus.php"
+            <a href="../AboutUS/AboutUs.php"
                 class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
                 About us
             </a>
@@ -427,5 +427,56 @@
     }
 
   </script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // 1. Cari tombol / link Tambah ke Keranjang yang mengarah ke cart.php
+    const tombolCart = document.querySelector('a[href*="add_car_id="]');
+    
+    if (tombolCart) {
+        tombolCart.addEventListener("click", function(event) {
+            event.preventDefault(); // Mencegah halaman berpindah atau refresh!
+            
+            const urlTujuan = this.href; // Mengambil link asli (contoh: ../cart/cart.php?add_car_id=28)
+            
+            // 2. Kirim data ke cart.php di balik layar
+            fetch(urlTujuan)
+                .then(response => response.json())
+                .then(data => {
+                    // 3. Tampilkan SweetAlert langsung di halaman produk tanpa loading ulang
+                    if (data.status === 'success') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil!',
+                            text: 'Mobil berhasil dimasukkan ke keranjang!',
+                            background: '#1e293b',
+                            color: '#ffffff',
+                            confirmButtonColor: '#38bdf8'
+                        });
+                    } else if (data.status === 'already_exists') {
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Sudah Ada!',
+                            text: 'Mobil ini sudah ada di dalam keranjang Anda.',
+                            background: '#1e293b',
+                            color: '#ffffff',
+                            confirmButtonColor: '#38bdf8'
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Terjadi kesalahan saat memproses data.',
+                    });
+                });
+        });
+    }
+});
+</script>
+
 </body>
 </html>

@@ -21,50 +21,24 @@ if (!$conn) {
 }
 
 // ========================================================
-// 1. LOGIKA MENAMBAH KE KERANJANG (Dipicu dari product.php)
+// 1. LOGIKA MENAMBAH KE KERANJANG (Menggunakan AJAX JSON)
 // ========================================================
 if (isset($_GET['add_car_id'])) {
+    header('Content-Type: application/json'); // Deklarasikan bahwa respons berupa JSON
+    
     $car_id = mysqli_real_escape_string($conn, $_GET['add_car_id']);
     
     $cek_cart = mysqli_query($conn, "SELECT * FROM cart WHERE user_id = '$user_id' AND car_id = '$car_id'");
     
     if (mysqli_num_rows($cek_cart) > 0) {
-        // Pop-up jika mobil sudah ada di keranjang
-        echo "
-        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
-        <body style='background-color: #0b0b0b;'></body>
-        <script>
-            Swal.fire({
-                icon: 'info',
-                title: 'Sudah Ada!',
-                text: 'Mobil ini sudah ada di dalam keranjang Anda.',
-                background: '#1e293b',
-                color: '#ffffff',
-                confirmButtonColor: '#38bdf8'
-            }).then(() => {
-                window.location.href='cart.php';
-            });
-        </script>";
+        // Kirim status 'already_exists' ke JavaScript
+        echo json_encode(['status' => 'already_exists']);
     } else {
         mysqli_query($conn, "INSERT INTO cart (user_id, car_id) VALUES ('$user_id', '$car_id')");
-        // Pop-up jika berhasil dimasukkan
-        echo "
-        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
-        <body style='background-color: #0b0b0b;'></body>
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: 'Berhasil!',
-                text: 'Mobil berhasil dimasukkan ke keranjang!',
-                background: '#1e293b',
-                color: '#ffffff',
-                confirmButtonColor: '#38bdf8'
-            }).then(() => {
-                window.location.href='cart.php';
-            });
-        </script>";
+        // Kirim status 'success' ke JavaScript
+        echo json_encode(['status' => 'success']);
     }
-    exit;
+    exit; // Langsung hentikan baris kode setelah mengirim data
 }
 
 // ========================================================
