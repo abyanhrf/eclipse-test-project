@@ -40,9 +40,10 @@ if (mysqli_stmt_execute($stmt)) {
 
     $car_id = mysqli_insert_id($conn);
 
-    $x=count($_FILES['gambar']['name']);
+    $x = count($_FILES['gambar']['name']);
+    $batas_maksimal = min($x, 5); // Ambil angka terkecil antara jumlah file atau 5
 
-    for ($i = 0; $i < $x; $i++) {
+    for ($i = 0; $i < $batas_maksimal; $i++) { 
         $namaFile = time() . "_" . $i . "_" . basename($_FILES['gambar']['name'][$i]);
 
     $target = "../uploads/" . $namaFile;

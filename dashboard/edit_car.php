@@ -179,17 +179,29 @@
                         </div>
                         <?php endwhile; ?>
 
+                        <?php 
+                        // Menghitung berapa gambar yang sudah ada di database
+                        $jumlah_gambar_sekarang = mysqli_num_rows($resultImg); 
+                        $sisa_slot = 5 - $jumlah_gambar_sekarang;
+                        ?>
+
                         <div class="mt-4 border-[3px] border-slate-400 p-4">
-                            <label class="block mb-2">
-                                Tambah Gambar Baru
+                            <label class="block mb-2 font-bold <?= $sisa_slot <= 0 ? 'text-red-500' : 'text-white' ?>">
+                                Tambah Gambar Baru (Sisa Slot: <?= $sisa_slot; ?>)
                             </label>
+
                             <input
                                 type="file"
                                 name="gambar_baru[]"
                                 multiple
                                 accept="image/*"
-                                class="w-full text-white"
+                                class="w-full text-white <?= $sisa_slot <= 0 ? 'opacity-50 cursor-not-allowed' : '' ?>"
+                                onchange="cekBatasUpload(this, <?= $sisa_slot; ?>)"
+                                <?= $sisa_slot <= 0 ? 'disabled' : ''; ?>
                             >
+                            <?php if($sisa_slot <= 0): ?>
+                                <p class="text-xs text-red-400 mt-2">Batas maksimal 5 gambar telah tercapai. Hapus gambar lama untuk menambah baru.</p>
+                            <?php endif; ?>
                         </div>
                     </div>
 

@@ -130,6 +130,7 @@ session_start();
                                 id="gambar"
                                 accept="image/*"
                                 multiple
+                                onchange="cekBatasUpload(this, 5)"
                                 class="w-full text-white">
                             </div>
                     </div>
@@ -285,5 +286,14 @@ session_start();
             </form>
         </div>
     </main>
+
+    <script>
+    function cekBatasUpload(input, maxFiles) {
+        if (input.files.length > maxFiles) {
+            alert("Maksimal hanya diperbolehkan upload " + maxFiles + " gambar sekaligus!");
+            input.value = ""; // Reset inputan jika melebihi batas
+        }
+    }
+    </script>
 </body>
 </html>
