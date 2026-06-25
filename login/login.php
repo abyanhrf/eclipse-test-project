@@ -1,3 +1,36 @@
+<?php
+session_start();
+
+$conn = mysqli_connect("localhost", "root", "", "showroom_mobil");
+
+$error = false;
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $query = mysqli_query($conn, "SELECT * FROM users WHERE email='$email'");
+
+    if(mysqli_num_rows($query) > 0){
+
+        $user = mysqli_fetch_assoc($query);
+        
+        if(password_verify($password, $user['password'])){
+
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['nama'] = $user['nama'];
+            $_SESSION['role'] = $user['role'];
+
+            header("Location: ../home/home.php");
+            exit;
+        }
+    }
+
+    $error = true;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +44,39 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
 </head>
+
+<?php if($error): ?>
+<div id="loginErrorPopup"
+    class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
+
+    <div class="w-[400px] bg-white/10 border border-white/20 backdrop-blur-xl rounded-3xl p-8 shadow-[0_0_30px_rgba(56,189,248,0.3)] text-center">
+        
+        <div class="flex justify-center">
+            <div class="w-20 h-20 rounded-full bg-red-500/20 border border-red-500 flex items-center justify-center">
+                <span class="text-red-400 text-4xl font-bold">!</span>
+            </div>
+        </div>
+        
+        <h2 class="mt-5 text-2xl font-bold text-white">
+            Login Gagal
+        </h2>
+        
+        <p class="mt-3 text-gray-300">
+            Email atau Password yang Anda masukkan salah.
+            <br>
+            Silakan periksa kembali data Anda.
+        </p>
+        
+        <button
+            onclick="document.getElementById('loginErrorPopup').style.display='none'"
+            class="mt-6 w-full py-3 rounded-xl bg-sky-400 text-white font-semibold transition duration-300 hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:scale-105">
+
+            Coba Lagi
+
+        </button>
+    </div>
+</div>
+<?php endif; ?>
 
 <body class="font-[Poppins] min-h-screen text-white overflow-x-hidden bg-[radial-gradient(circle_at_top_left,rgba(255,0,0,0.25),transparent_25%),radial-gradient(circle_at_bottom_right,rgba(255,0,0,0.2),transparent_20%),linear-gradient(135deg,#050505,#0b0b0b,#111111)]">
     
@@ -109,7 +175,7 @@
                 <!-- Form -->
                 <form 
                     class="mt-6"
-                    action="../process/login_process.php"
+                    action=""
                     method="POST"
                     >
 
