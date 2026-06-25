@@ -3,19 +3,31 @@ session_start();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .font-poppins { font-family: 'Poppins', sans-serif; }
+        .font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-panel {
+            background: linear-gradient(135deg, rgba(20, 20, 25, 0.7) 0%, rgba(10, 10, 12, 0.6) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
 </head>
 
-<body class="text-gray-800 font-sans font-[Poppins] min-h-screen text-white overflow-x-hidden bg-[radial-gradient(circle_at_top_left,rgba(255,0,0,0.25),transparent_25%),radial-gradient(circle_at_bottom_right,rgba(255,0,0,0.2),transparent_20%),linear-gradient(135deg,#050505,#0b0b0b,#111111)]">
+<body class="bg-[#060608] text-neutral-100 min-h-screen overflow-x-hidden selection:bg-sky-500 selection:text-white relative">
     
-    <nav class="w-[90%] max-w-[1200px] mx-auto px-10 py-4 flex items-center justify-between bg-white/10 border border-white/10 rounded-[60px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] mt-6">
+    <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-sky-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute top-[40vh] right-10 w-[400px] h-[400px] bg-sky-500/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+    <nav class="w-[90%] max-w-[1200px] mx-auto px-10 py-4 flex items-center justify-between bg-white/10 border border-white/10 rounded-[60px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] mt-6 font-poppins">
     
         <div>
             <img src="../AboutUS/img/LogoProfile.png" alt="logo"
@@ -82,76 +94,99 @@ session_start();
             <?php endif; ?>
         </div>
     </nav>
+    <main class="w-[92%] max-w-[1200px] mx-auto py-16 font-jakarta">
+        
+        <header class="mb-14 text-center">
+            <span class="text-xs font-bold tracking-widest text-sky-400 uppercase">Connect With Eclipse</span>
+            <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mt-1 bg-gradient-to-r from-white via-neutral-200 to-neutral-400 bg-clip-text text-transparent uppercase">
+                Contact Us
+            </h1>
+        </header>
 
-    <div class="p-4 flex flex-col items-center justify-center mt-10">
-        <div class="w-full max-w-4xl overflow-hidden">
-            <div class="p-6 md:p-10">
-                <h1 class="text-4xl font-bold text-center mb-8">Contact Us</h1>
-                
-                <form action="../process/contact_process.php" method="POST" class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="flex flex-col">
-                            <label for="nama" class="text-lg font-semibold mb-2 ml-2">Nama Anda:</label>
-                            <input type="text" id="nama" name="nama" required
-                                class="border-4 border-black rounded-full p-3 px-6 bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Nama">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            
+            <div class="lg:col-span-7">
+                <div class="glass-panel border border-neutral-800 p-8 md:p-10 rounded-3xl shadow-2xl h-full flex flex-col justify-center">
+                    <form action="../process/contact_process.php" method="POST" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="flex flex-col space-y-2">
+                                <label id="nama" class="text-xs font-bold tracking-wider text-neutral-400 uppercase">Nama Anda:</label>
+                                <input type="text" id="nama" name="nama" required
+                                    class="w-full bg-neutral-950/50 border border-neutral-800 rounded-xl px-5 py-3.5 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition duration-200" placeholder="Nama">
+                            </div>
+                            <div class="flex flex-col space-y-2">
+                                <label id="email" class="text-xs font-bold tracking-wider text-neutral-400 uppercase">Email Anda:</label>
+                                <input type="email" id="email" name="email" required
+                                    class="w-full bg-neutral-950/50 border border-neutral-800 rounded-xl px-5 py-3.5 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition duration-200" placeholder="Email">
+                            </div>
                         </div>
-                        <div class="flex flex-col">
-                            <label for="email" class="text-lg font-semibold mb-2 ml-2">Email Anda:</label>
-                            <input type="email" id="email" name="email" required
-                                class="border-4 border-black rounded-full p-3 px-6 bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Email">
+                        <div class="flex flex-col space-y-2">
+                            <label id="pesan" class="text-xs font-bold tracking-wider text-neutral-400 uppercase">Isi Pesan:</label>
+                            <textarea id="pesan" name="pesan" rows="5" required
+                                class="w-full bg-neutral-950/50 border border-neutral-800 rounded-2xl p-5 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition duration-200 resize-none" placeholder="Pesan Anda"></textarea>
                         </div>
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="pesan" class="text-lg font-semibold mb-2 ml-2">Isi</label>
-                        <textarea id="pesan" name="pesan" rows="5" required
-                            class="border-4 border-black rounded-[30px] p-5 bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none" placeholder="Pesan Anda"></textarea>
-                    </div>
-                    <div class="flex justify-center md:justify-start">
-                        <button type="submit" 
-                            class="bg-white text-black font-bold py-3 px-10 rounded-full border-4 border-black hover:bg-sky-400 hover:text-white hover:border-sky-400 transition-colors">
-                            KIRIM PESAN
-                        </button>
-                    </div>
-                </form>
+                        <div class="flex justify-center md:justify-start pt-2">
+                            <button type="submit" 
+                                class="w-full md:w-auto bg-gradient-to-r from-sky-500 via-sky-400 to-blue-600 text-white text-xs font-bold tracking-widest uppercase py-4 px-10 rounded-xl shadow-[0_4px_25px_rgba(56,189,248,0.2)] hover:shadow-[0_4px_35px_rgba(56,189,248,0.4)] transition duration-300 transform active:scale-[0.98]">
+                                KIRIM PESAN ⚡
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
 
-            <div class="p-6 md:p-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-center mt-4"> 
-                <div class="flex flex-col items-center">
-                    <div class="w-20 h-20 rounded-full bg-white mb-3 p-4 flex items-center justify-center shadow-lg">
+            <div class="lg:col-span-5 flex flex-col gap-5 justify-between">
+                
+                <div class="glass-panel border border-neutral-800/80 p-6 rounded-2xl flex items-center gap-5 transition hover:border-neutral-700 group flex-1">
+                    <div class="w-14 h-14 rounded-xl bg-white mb-0 p-3.5 flex items-center justify-center shadow-md shrink-0">
                         <img src="img/mails-logo.png" alt="GambarEmail" class="w-full h-full object-contain">
                     </div>
-                    <p class="text-sm font-bold text-gray-300">Email: <br><span class="text-white">eclipse@email.com</span></p>
+                    <div>
+                        <p class="text-[10px] uppercase font-bold tracking-widest text-neutral-500">Official Email</p>
+                        <h4 class="text-sm font-semibold text-white mt-0.5 break-all">eclipse@email.com</h4>
+                    </div>
                 </div>
-                <div class="flex flex-col items-center">
-                    <div class="w-20 h-20 rounded-full bg-white mb-3 p-4 flex items-center justify-center shadow-lg">
+
+                <div class="glass-panel border border-neutral-800/80 p-6 rounded-2xl flex items-center gap-5 transition hover:border-neutral-700 group flex-1">
+                    <div class="w-14 h-14 rounded-xl bg-white mb-0 p-3.5 flex items-center justify-center shadow-md shrink-0">
                         <img src="img/WA-logo.png" alt="GambarWA" class="w-full h-full object-contain">
                     </div>
-                    <p class="text-sm font-bold text-gray-300">No Tlp: <br><span class="text-white">081234567890</span></p>
+                    <div>
+                        <p class="text-[10px] uppercase font-bold tracking-widest text-neutral-500">Hotline Number</p>
+                        <h4 class="text-sm font-semibold text-white mt-0.5">081234567890</h4>
+                    </div>
                 </div>
-                <div class="flex flex-col items-center">
-                    <div class="w-20 h-20 rounded-full bg-white mb-3 p-4 flex items-center justify-center shadow-lg">
+
+                <a href="https://maps.google.com" target="_blank" 
+                   class="glass-panel border border-neutral-800/80 p-6 rounded-2xl flex items-center gap-5 transition hover:border-sky-500/40 group block flex-1">
+                    <div class="w-14 h-14 rounded-xl bg-white mb-0 p-3.5 flex items-center justify-center shadow-md shrink-0">
                         <img src="img/maps-logo.png" alt="GambarMaps" class="w-full h-full object-contain">
                     </div>
-                    <p class="text-lg flex justify-center text-gray-300">
-                        <a href="https://maps.google.com" target="_blank" class="hover:text-sky-400 italic font-medium transition">Lokasi (Klik Google-Map)</a>
-                    </p> 
-                </div>
+                    <div class="flex-1">
+                        <p class="text-[10px] uppercase font-bold tracking-widest text-neutral-500 flex items-center justify-between">
+                            Headquarter Location 
+                            <span class="text-[9px] text-sky-400 font-normal lowercase tracking-normal group-hover:underline">Klik Peta ↗</span>
+                        </p>
+                        <h4 class="text-sm font-semibold text-white mt-0.5">Yogyakarta, Indonesia</h4>
+                    </div>
+                </a>
+
             </div>
         </div>
-    </div>
+    </main>
 
-    <footer class="bg-black/40 border-t border-white/10 mt-20">
-        <div class="max-w-7xl mx-auto px-6 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
-                <div>
-                    <h2 class="text-2xl font-bold text-white">ECLIPSE</h2>
-                    <p class="text-gray-400 mt-4 leading-relaxed">
+    <footer class="bg-[#030304] border-t border-neutral-900 mt-24 font-jakarta">
+        <div class="max-w-7xl mx-auto px-8 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div class="space-y-4">
+                    <h2 class="text-xl font-bold text-white tracking-widest uppercase">ECLIPSE</h2>
+                    <p class="text-neutral-500 text-xs leading-relaxed">
                         Eclipse is a company that operates in the field of selling expensive cars that have original and trusted certification for all brands of cars sold.
                     </p>
                 </div>
                 <div>
-                    <h3 class="text-white font-semibold text-lg mb-4">Navigation</h3>
-                    <ul class="space-y-3 text-gray-400">
+                    <h3 class="text-white font-semibold text-sm tracking-wider uppercase mb-4">Navigation</h3>
+                    <ul class="space-y-2.5 text-xs text-neutral-400">
                         <li><a href="../home/home.php" class="hover:text-sky-400 transition">Home</a></li>
                         <li><a href="../Product-Detailed/product.php" class="hover:text-sky-400 transition">Product</a></li>
                         <li><a href="../contact/contact.php" class="hover:text-sky-400 transition">Contact</a></li>
@@ -159,29 +194,29 @@ session_start();
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-white font-semibold text-lg mb-4">Contact</h3>
-                    <ul class="space-y-3 text-gray-400">
+                    <h3 class="text-white font-semibold text-sm tracking-wider uppercase mb-4">Contact</h3>
+                    <ul class="space-y-2.5 text-xs text-neutral-400">
                         <li>Email : eclipse@email.com</li>
                         <li>Phone : +62 1234 5678 90</li>
                         <li>Indonesia</li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-white font-semibold text-lg mb-4">Follow Us</h3>
-                    <div class="flex gap-4">
-                        <a href="https://www.instagram.com/" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
-                            <img src="../home/img/ig.svg" class="w-5 invert">
+                    <h3 class="text-white font-semibold text-sm tracking-wider uppercase mb-4">Follow Us</h3>
+                    <div class="flex gap-3">
+                        <a href="https://www.instagram.com/" class="w-9 h-9 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center hover:bg-white hover:text-black transition duration-300">
+                            <img src="../home/img/ig.svg" class="w-4 invert opacity-70" alt="Instagram">
                         </a>
-                        <a href="https://www.facebook.com/" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
-                            <img src="../home/img/fb.svg" class="w-5 invert">
+                        <a href="https://www.facebook.com/" class="w-9 h-9 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center hover:bg-white hover:text-black transition duration-300">
+                            <img src="../home/img/fb.svg" class="w-4 invert opacity-70" alt="Facebook">
                         </a>
-                        <a href="https://www.tiktok.com/" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
-                            <img src="../home/img/tiktok.svg" class="w-5 invert">
+                        <a href="https://www.tiktok.com/" class="w-9 h-9 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center hover:bg-white hover:text-black transition duration-300">
+                            <img src="../home/img/tiktok.svg" class="w-4 invert opacity-70" alt="TikTok">
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="border-t border-white/10 mt-10 pt-6 text-center text-gray-500 text-sm">
+            <div class="border-t border-neutral-900 mt-12 pt-8 text-center text-neutral-600 text-xs tracking-wider">
                 © 2026 ECLIPSE. All Rights Reserved.
             </div>
         </div>
