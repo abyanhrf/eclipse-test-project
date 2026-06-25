@@ -22,25 +22,25 @@
         <div class="relative flex items-center gap-[18px]">
             
             <!-- HOME -->
-            <a href="../home/home.html"
+            <a href="../home/home.php"
                 class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
             Home
             </a>
 
             <!-- PRODUCT -->
-            <a href="../Product-Detailed/product.html"
+            <a href="../Product-Detailed/product.php"
                 class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
                 Product
             </a>
 
             <!-- CONTACT -->
-            <a  href="../contact/Contact.html"
+            <a  href="../contact/Contact.php"
                 class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
                 Contact
             </a>
 
             <!-- ABOUT -->
-            <a href="../aboutus/AboutUs.html"
+            <a href="../aboutus/AboutUs.php"
                 class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
                 About us
             </a>
@@ -183,25 +183,25 @@
 
                 <ul class="space-y-3 text-gray-400">
                     <li>
-                        <a href="../home/home.html" class="hover:text-sky-400 transition">
+                        <a href="../home/home.php" class="hover:text-sky-400 transition">
                             Home
                         </a>
                     </li>
 
                     <li>
-                        <a href="../Product-Detailed/product.html" class="hover:text-sky-400 transition">
+                        <a href="../Product-Detailed/product.php" class="hover:text-sky-400 transition">
                             Product
                         </a>
                     </li>
 
                     <li>
-                        <a href="../contact/Contact.html" class="hover:text-sky-400 transition">
+                        <a href="../contact/Contact.php" class="hover:text-sky-400 transition">
                             Contact
                         </a>
                     </li>
 
                     <li>
-                        <a href="../aboutus/AboutUs.html" class="hover:text-sky-400 transition">
+                        <a href="../aboutus/AboutUs.php" class="hover:text-sky-400 transition">
                             About us
                         </a>
                     </li>
@@ -229,17 +229,17 @@
 
                 <div class="flex gap-4">
 
-                    <a href="#"
+                    <a href="https://www.instagram.com/"
                     class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
                         <img src="img/ig.svg" class="w-5 invert">
                     </a>
 
-                    <a href="#"
+                    <a href="https://www.facebook.com/"
                     class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
                         <img src="img/fb.svg" class="w-5 invert">
                     </a>
 
-                    <a href="#"
+                    <a href="https://www.tiktok.com/"
                     class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
                         <img src="img/tiktok.svg" class="w-5 invert">
                     </a>

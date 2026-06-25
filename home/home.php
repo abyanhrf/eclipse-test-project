@@ -311,8 +311,8 @@ $result = mysqli_query($conn, $sql);
                     <ul class="space-y-3 text-gray-400">
                         <li><a href="home.php" class="hover:text-sky-400 transition">Home</a></li>
                         <li><a href="../Product-Detailed/product.php" class="hover:text-sky-400 transition">Product</a></li>
-                        <li><a href="../contact/Contact.html" class="hover:text-sky-400 transition">Contact</a></li>
-                        <li><a href="../aboutus/AboutUs.html" class="hover:text-sky-400 transition">About us</a></li>
+                        <li><a href="../contact/Contact.php" class="hover:text-sky-400 transition">Contact</a></li>
+                        <li><a href="../aboutus/AboutUs.php" class="hover:text-sky-400 transition">About us</a></li>
                     </ul>
                 </div>
                 <div>

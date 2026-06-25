@@ -222,17 +222,22 @@
                             <p class="text-gray-400 text-xs uppercase tracking-wide">Kilometer</p>
                             <h3 class="font-bold text-white mt-0.5 text-sm"><?= $car['kilometer']; ?></h3>
                         </div>
+                        <div>
+                            <p class="text-gray-400 text-sm">Stok Tersedia:</p>
+                            <h3 class="font-bold"><?= $car['stok']; ?></h3>
+                        </div>
                     </div>
                 </div>
 
                 <!-- ACTION BUTTONS -->
                 <div class="grid grid-cols-1 gap-3 mt-2">
-                    <button type="button" onclick="openModal()"
+                    <button type="button" onclick="handlePesan(<?= $car['stok']; ?>)"
                             class="w-full bg-sky-500 rounded-[20px] py-4 text-white font-bold cursor-pointer transition duration-300 hover:bg-sky-400 hover:shadow-[0_0_20px_rgba(56,189,248,0.6)] shadow-lg tracking-wider">
                             PESAN SEKARANG
                     </button>
 
                     <a href="../cart/cart.php?add_car_id=<?= $car['id']; ?>"
+                        data-stok="<?= $car['stok']; ?>"
                         class="w-full bg-white/10 border border-white/10 rounded-[20px] py-4 text-white font-bold flex items-center justify-center transition duration-300 hover:bg-white/20 tracking-wider">
                         MASUKKAN KE CART
                     </a>
@@ -243,7 +248,7 @@
 
         <!-- ANOTHER PRODUCT SECTION -->
         <h1 class="text-white text-2xl font-bold mt-16 mb-6 tracking-wide flex items-center gap-3">
-             <span class="w-2 h-2 bg-sky-400 rounded-full animate-pulse"></span> ANOTHER PRODUCT
+            <span class="w-2 h-2 bg-sky-400 rounded-full animate-pulse"></span> ANOTHER PRODUCT
         </h1>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
@@ -270,8 +275,8 @@
                     <!-- Image Wrapper -->
                     <div class="bg-neutral-900/50 p-4 flex items-center justify-center h-48 border-b border-white/5">
                         <img src="../uploads/<?= $otherCar['gambar']; ?>" 
-                             alt="<?= $otherCar['nama_mobil']; ?>" 
-                             class="max-w-full max-h-full object-contain transition duration-300 group-hover:scale-105">
+                            alt="<?= $otherCar['nama_mobil']; ?>" 
+                            class="max-w-full max-h-full object-contain transition duration-300 group-hover:scale-105">
                     </div>
 
                     <!-- Info Wrapper -->
@@ -379,6 +384,16 @@
         function closeModal() {
             document.getElementById('checkoutModal').classList.add('hidden');
         }
+
+        function handlePesan(stok) {
+        if (stok <= 0) {
+            alert("Maaf saat ini stok sedang habis");
+        } else {
+            // Jika stok ada, jalankan fungsi membuka modal bawaanmu
+            openModal();
+        }
+    }
+
     </script>
     
     <!-- SWEETALERT AJAX HANDLER -->
@@ -386,13 +401,29 @@
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         const tombolCart = document.querySelector('a[href*="add_car_id="]');
-        
+    
         if (tombolCart) {
             tombolCart.addEventListener("click", function(event) {
-                event.preventDefault(); 
-                
+                event.preventDefault(); // Cegah pindah halaman
+            
+                // 1. Cek stok terlebih dahulu sebelum melakukan fetch
+                const stok = parseInt(this.getAttribute('data-stok'));
+            
+                if (stok <= 0) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Stok Habis',
+                        text: 'Maaf saat ini stok mobil sedang habis.',
+                        background: '#0f172a',
+                        color: '#ffffff',
+                        confirmButtonColor: '#ef4444'
+                    });
+                    return; // Hentikan eksekusi di sini, jangan lanjut fetch
+                }
+            
+                // 2. Jika stok aman, baru lakukan proses masukkan ke keranjang (Fetch)
                 const urlTujuan = this.href; 
-                
+            
                 fetch(urlTujuan)
                     .then(response => response.json())
                     .then(data => {
