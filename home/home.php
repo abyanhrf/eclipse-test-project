@@ -103,7 +103,7 @@ $result = mysqli_query($conn, $sql);
 
                 <a href="../dashboard/dashboard.php"
                     class="px-3 py-2 rounded-lg bg-sky-500 text-white text-sm font-semibold hover:bg-sky-400 transition">
-                    Dashboard
+                    Admin
                 </a>
 
             <?php else : ?>
