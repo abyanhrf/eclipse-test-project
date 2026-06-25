@@ -89,7 +89,7 @@
 
                 <div class="mt-60">
                     <p class="font-medium">
-                        Sudah punya akun? <br> <a href="login.html" class="text-blue-400 hover:underline">
+                        Sudah punya akun? <br> <a href="login.php" class="text-blue-400 hover:underline">
                             Login disini
                         </a>
                     </p>

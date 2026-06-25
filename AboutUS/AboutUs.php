@@ -73,7 +73,7 @@ session_start();
 
             <?php if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'admin') : ?>
                 <a href="../dashboard/dashboard.php" class="px-4 py-1.5 rounded-full bg-sky-500 text-white text-sm font-semibold hover:bg-sky-400 transition shadow-[0_0_10px_rgba(56,189,248,0.4)]">
-                    Admin
+                    Dashboard
                 </a>
             <?php else : ?>
                 <a href="../cart/cart.php">

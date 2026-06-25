@@ -105,7 +105,7 @@
 
             <?php if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'admin') : ?>
                 <a href="../dashboard/dashboard.php" class="px-4 py-1.5 rounded-full bg-sky-500 text-white text-sm font-semibold hover:bg-sky-400 transition shadow-[0_0_10px_rgba(56,189,248,0.4)]">
-                    Admin
+                    Dashboard
                 </a>
             <?php else : ?>
                 <a href="../cart/cart.php">
@@ -218,12 +218,38 @@
               <h3 class="font-bold"><?= $car['kilometer']; ?></h3>
             </div>
 
+             <div>
+              <p class="text-gray-400 text-sm">Stok Tersedia:</p>
+              <h3 class="font-bold"><?= $car['stok']; ?></h3>
+            </div>
+
         </div>
 
     </div>
         <div class="grid grid-cols-2 gap-3 mt-6">
+    
+    <script>
+    function handlePesan(stok) {
+        if (stok <= 0) {
+            alert("Maaf saat ini stok sedang habis");
+        } else {
+            // Jika stok ada, jalankan fungsi membuka modal bawaanmu
+            openModal();
+        }
+    }
 
-    <button type="button" onclick="openModal()"
+    function handleCart(event, stok) {
+        if (stok <= 0) {
+            // Mencegah navigasi link href ke halaman cart
+            event.preventDefault(); 
+            alert("Maaf saat ini stok sedang habis");
+            return false;
+        }
+        return true;
+    }
+    </script>
+
+    <button type="button" onclick="handlePesan(<?= $car['stok']; ?>)"
             class="bg-white/10 border border-white/10 rounded-[20px] w-full
             backdrop-blur-md py-4 text-white font-bold cursor-pointer
             hover:bg-purple-800 transition">
@@ -231,6 +257,7 @@
     </button>
 
     <a href="../cart/cart.php?add_car_id=<?= $car['id']; ?>"
+        onclick="return handleCart(event, <?= $car['stok']; ?>)"
         class="bg-white/10 border border-white/10 rounded-[20px]
                backdrop-blur-md py-4 text-white font-bold flex items-center justify-center
                hover:bg-amber-600 transition">
