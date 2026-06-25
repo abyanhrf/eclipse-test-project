@@ -43,11 +43,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../src/output.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tambahan Google Font Poppins agar font-sans seragam -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body class="font-[Poppins] min-h-screen text-white overflow-x-hidden bg-[radial-gradient(circle_at_top_left,rgba(255,0,0,0.25),transparent_25%),radial-gradient(circle_at_bottom_right,rgba(255,0,0,0.2),transparent_20%),linear-gradient(135deg,#050505,#0b0b0b,#111111)]">
+<body class="font-[Poppins] min-h-screen text-white overflow-x-hidden bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.15),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(255,0,0,0.1),transparent_25%),linear-gradient(135deg,#050505,#0b0b0b,#111111)]">
     
-  <nav class="w-[90%] max-w-[1200px] mx-auto px-10 py-4 flex items-center justify-between bg-white/10 border border-white/10 rounded-[60px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] mt-4">
+    <!-- NAVBAR -->
+    <nav class="w-[90%] max-w-[1200px] mx-auto px-10 py-4 flex items-center justify-between bg-white/10 border border-white/10 rounded-[60px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] mt-4">
     
         <div>
             <img src="img/LogoProfile.png" alt="logo"
@@ -70,7 +73,7 @@
                 Contact
             </a>
 
-            <a href="../AboutUS/AboutUs.php"
+            <a href="aboutus.php"
                 class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
                 About us
             </a>
@@ -115,368 +118,318 @@
         </div>
     </nav>
     
-    <section class="max-w-5xl mx-auto py-10"><section class="bg-black py-10">
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="w-[90%] max-w-[1200px] mx-auto mt-10 px-4">
+        
+        <!-- HEADER TITLE -->
+        <div class="text-center py-6">
+            <h1 class="text-white text-4xl font-bold tracking-wide drop-shadow-[0_0_15px_rgba(56,189,248,0.3)]">
+                <?= $car['nama_mobil'];?>
+            </h1>
+        </div>
 
-    <h1 class="text-white text-3xl font-sans font-bold text-center">
-      <?= $car['nama_mobil'];?>
-    </h1>
-
-  </section>
-  <section class="max-w-6xl mx-auto py-10 px-6">
-
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-         <div class="lg:col-span-2">
-
-        <div class="bg-black p-4">
-
-        <?php
-        $index = 0;
-        $gambarUtama = mysqli_fetch_assoc($resultImg);
-        ?>
-
-        <img
-        id="mainImage"
-        src="../uploads/<?= $gambarUtama['gambar']; ?>"
-        class="w-full h-[450px] object-cover">
+        <!-- PRODUCT DETAIL GRID -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-6">
             
-          <div class="flex gap-3 mt-4">
-            <?php
-            mysqli_data_seek($resultImg,0);
-            while($img = mysqli_fetch_assoc($resultImg)) :
-            ?>
+            <!-- LEFT COLUMN: IMAGES & DESCRIPTION -->
+            <div class="lg:col-span-2 space-y-6">
+                
+                <!-- IMAGE GALLERY CARD -->
+                <div class="bg-white/5 border border-white/10 rounded-[30px] p-5 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.2)]">
+                    <?php
+                    $index = 0;
+                    $gambarUtama = mysqli_fetch_assoc($resultImg);
+                    ?>
 
-            <img src="../uploads/<?= $img['gambar']; ?>"
-            class="thumbnail w-28 h-20 object-cover cursor-pointer
-            <?= $index==0 ? 'border-4 border-purple-600' : ''; ?>">
+                    <img id="mainImage" src="../uploads/<?= $gambarUtama['gambar']; ?>" 
+                         class="w-full h-[450px] object-cover rounded-[20px] shadow-lg border border-white/5">
+                        
+                    <div class="flex gap-3 mt-4 overflow-x-auto pb-2">
+                        <?php
+                        mysqli_data_seek($resultImg, 0);
+                        while($img = mysqli_fetch_assoc($resultImg)) :
+                        ?>
+                        <img src="../uploads/<?= $img['gambar']; ?>"
+                             class="thumbnail w-28 h-20 object-cover cursor-pointer rounded-xl transition duration-300 hover:opacity-100 <?= $index==0 ? 'border-2 border-sky-400 shadow-[0_0_10px_#38bdf8]' : 'border border-white/10 opacity-60'; ?>">
+                        <?php $index++; endwhile; ?>
+                    </div> 
+                </div>   
 
-            <?php $index++; endwhile; ?>
-        </div>    
+                <!-- SPECIFICATIONS & DESCRIPTION CARD -->
+                <div class="bg-white/5 border border-white/10 rounded-[30px] backdrop-blur-md p-8 shadow-[0_8px_32px_rgba(0,0,0,0.2)]">
+                    <h2 class="text-2xl text-white font-bold mb-4 flex items-center gap-2">
+                        <span class="w-1.5 h-6 bg-sky-400 rounded-full"></span> Detail Kendaraan
+                    </h2>
 
-    <div class=" mt-6 p-6">
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6 text-gray-200 border-b border-white/10 pb-6 mb-6">
+                        <li class="flex items-center gap-2"><span class="text-sky-400 font-bold">•</span> Tahun: <?= $car['tahun']; ?></li>
+                        <li class="flex items-center gap-2"><span class="text-sky-400 font-bold">•</span> Kilometer: <?= $car['kilometer']; ?></li>
+                        <li class="flex items-center gap-2"><span class="text-sky-400 font-bold">•</span> Transmisi: <?= $car['transmisi']; ?> Transmission</li>
+                        <li class="flex items-center gap-2"><span class="text-sky-400 font-bold">•</span> Warna: <?= $car['warna']; ?></li>
+                        <li class="flex items-center gap-2"><span class="text-sky-400 font-bold">•</span> Mesin: <?= $car['kapasitas_mesin'] ?></li>
+                    </ul>
 
-          <h2 class="text-2xl text-white font-sans font-bold mb-4">
-            <?= $car['nama_mobil']; ?>
-          </h2>
+                    <div>
+                        <h3 class="text-lg font-semibold text-sky-400 mb-2">Deskripsi</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            <?= nl2br($car['deskripsi']); ?>
+                        </p>
+                    </div>
+                </div>
+            </div> 
 
-          <ul class="space-y-2 font-sans text-white">
+            <!-- RIGHT COLUMN: PRICE & ACTION PANEL -->
+            <div class="flex flex-col gap-6">
+                
+                <!-- PRICE CARD -->
+                <div class="bg-white/10 border border-white/15 rounded-[30px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] p-8 relative overflow-hidden group">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-sky-500/10 rounded-full blur-2xl"></div>
+                    
+                    <p class="text-sky-400 text-xs font-semibold tracking-wider uppercase mb-1">Harga Spesial</p>
+                    <h2 class="text-4xl font-extrabold text-white tracking-tight [text-shadow:0_0_15px_rgba(56,189,248,0.2)]">
+                         Rp<?= number_format($car['harga'],0,',','.'); ?>
+                    </h2>
+                    <p class="text-gray-400 text-xs mt-3 flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Harga dapat berubah sewaktu-waktu
+                    </p>
+                </div>
 
-            <li>• <?= $car['tahun']; ?></li>
-            <li>• Kilometer <?= $car['kilometer']; ?></li>
-            <li>• <?= $car['transmisi']; ?> Transmission</li>
-            <li>• Warna <?= $car['warna']; ?></li>
-            <li>• Mesin <?= $car['kapasitas_mesin'] ?></li>
-          </ul>
-        </div>
-        <div>
-            <p class="text-white font-sans mt-6">
-                <?= nl2br($car['deskripsi']); ?>
-            </p>
-        </div>
-    </div>
- </div> <div class="flex flex-col gap-6">
-        <div class="bg-white/10 border border-white/10 rounded-[40px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] p-8">
+                <!-- FAST SPECS GRID CARD -->
+                <div class="bg-white/5 border border-white/10 rounded-[30px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.2)] p-6">
+                    <div class="grid grid-cols-2 gap-5">
+                        <div class="bg-white/5 p-3 rounded-xl border border-white/5">
+                            <p class="text-gray-400 text-xs uppercase tracking-wide">Bahan Bakar</p>
+                            <h3 class="font-bold text-white mt-0.5 text-sm"><?= $car['bahan_bakar']; ?></h3>
+                        </div>
+                        <div class="bg-white/5 p-3 rounded-xl border border-white/5">
+                            <p class="text-gray-400 text-xs uppercase tracking-wide">Transmisi</p>
+                            <h3 class="font-bold text-white mt-0.5 text-sm"><?= $car['transmisi']; ?></h3>
+                        </div>
+                        <div class="bg-white/5 p-3 rounded-xl border border-white/5">
+                            <p class="text-gray-400 text-xs uppercase tracking-wide">Tahun</p>
+                            <h3 class="font-bold text-white mt-0.5 text-sm"><?= $car['tahun']; ?></h3>
+                        </div>
+                        <div class="bg-white/5 p-3 rounded-xl border border-white/5">
+                            <p class="text-gray-400 text-xs uppercase tracking-wide">Kapasitas</p>
+                            <h3 class="font-bold text-white mt-0.5 text-sm"><?= $car['kapasitas_mesin']; ?></h3>
+                        </div>
+                        <div class="bg-white/5 p-3 rounded-xl border border-white/5">
+                            <p class="text-gray-400 text-xs uppercase tracking-wide">Warna</p>
+                            <h3 class="font-bold text-white mt-0.5 text-sm"><?= $car['warna']; ?></h3>
+                        </div>
+                        <div class="bg-white/5 p-3 rounded-xl border border-white/5">
+                            <p class="text-gray-400 text-xs uppercase tracking-wide">Kilometer</p>
+                            <h3 class="font-bold text-white mt-0.5 text-sm"><?= $car['kilometer']; ?></h3>
+                        </div>
+                    </div>
+                </div>
 
-          <h2 class="text-3xl font-bold text-white">
-             Rp<?= number_format($car['harga'],0,',','.'); ?>
-          </h2>
+                <!-- ACTION BUTTONS -->
+                <div class="grid grid-cols-1 gap-3 mt-2">
+                    <button type="button" onclick="openModal()"
+                            class="w-full bg-sky-500 rounded-[20px] py-4 text-white font-bold cursor-pointer transition duration-300 hover:bg-sky-400 hover:shadow-[0_0_20px_rgba(56,189,248,0.6)] shadow-lg tracking-wider">
+                            PESAN SEKARANG
+                    </button>
 
-          <p class="text-white mt-2">
-            Harga dapat berubah sewaktu-waktu
-          </p>
-          
-        </div>
-        <div class="bg-white/10 border border-white/10 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] p-6">
-          <div class="grid grid-cols-2 gap-5">
+                    <a href="../cart/cart.php?add_car_id=<?= $car['id']; ?>"
+                        class="w-full bg-white/10 border border-white/10 rounded-[20px] py-4 text-white font-bold flex items-center justify-center transition duration-300 hover:bg-white/20 tracking-wider">
+                        MASUKKAN KE CART
+                    </a>
+                </div>
 
-            <div>
-              <p class="text-gray-400 text-sm">Bahan Bakar</p>
-              <h3 class="font-bold"><?= $car['bahan_bakar']; ?></h3>
-            </div>
+            </div> 
+        </div> 
 
-            <div>
-              <p class="text-gray-400 text-sm">Transmisi</p>
-              <h3 class="font-bold"><?= $car['transmisi']; ?></h3>
-            </div>
-
-            <div>
-              <p class="text-gray-400 text-sm">Tahun</p>
-              <h3 class="font-bold"><?= $car['tahun']; ?></h3>
-            </div>
-
-            <div>
-              <p class="text-gray-400 text-sm">Kapasitas</p>
-              <h3 class="font-bold"><?= $car['kapasitas_mesin']; ?></h3>
-            </div>
-
-            <div>
-              <p class="text-gray-400 text-sm">Warna</p>
-              <h3 class="font-bold"><?= $car['warna']; ?></h3>
-            </div>
-
-            <div>
-              <p class="text-gray-400 text-sm">Kilometer</p>
-              <h3 class="font-bold"><?= $car['kilometer']; ?></h3>
-            </div>
-
-        </div>
-
-    </div>
-        <div class="grid grid-cols-2 gap-3 mt-6">
-
-    <button type="button" onclick="openModal()"
-            class="bg-white/10 border border-white/10 rounded-[20px] w-full
-            backdrop-blur-md py-4 text-white font-bold cursor-pointer
-            hover:bg-purple-800 transition">
-            PESAN SEKARANG
-    </button>
-
-    <a href="../cart/cart.php?add_car_id=<?= $car['id']; ?>"
-        class="bg-white/10 border border-white/10 rounded-[20px]
-               backdrop-blur-md py-4 text-white font-bold flex items-center justify-center
-               hover:bg-amber-600 transition">
-        MASUKKAN KE CART
-    </a>
-
-</div>
-       </div> </div> </div> <h1 class="text-white text-2xl font-bold mt-8 mb-6">
-         ANOTHER PRODUCT
+        <!-- ANOTHER PRODUCT SECTION -->
+        <h1 class="text-white text-2xl font-bold mt-16 mb-6 tracking-wide flex items-center gap-3">
+             <span class="w-2 h-2 bg-sky-400 rounded-full animate-pulse"></span> ANOTHER PRODUCT
         </h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-
-<?php
-    $sql = "
-    SELECT
-    cars.id,
-    cars.nama_mobil,
-    cars.harga,
-    cars.deskripsi,
-    cars_img.gambar
-    FROM cars
-    LEFT JOIN cars_img
-    ON cars.id = cars_img.car_id
-    WHERE cars_img.gambar_utama = 1
-    LIMIT 4";
-    $result = mysqli_query($conn, $sql);
-?>
-<?php while($otherCar = mysqli_fetch_assoc($result)) : ?>
-
-<a href="Product.php?id=<?= $otherCar['id']; ?>">
-
-    <div class="group cursor-pointer">
-
-        <div class="bg-white p-2 flex items-center justify-center h-48 rounded-lg overflow-hidden">
-           
-
-            <img
-                src="../uploads/<?= $otherCar['gambar']; ?>"
-                alt="<?= $otherCar['nama_mobil']; ?>"
-                class="w-full h-44 object-contain transition duration-300 group-hover:scale-105"
-            >
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+            <?php
+                $sql = "
+                SELECT
+                cars.id,
+                cars.nama_mobil,
+                cars.harga,
+                cars.deskripsi,
+                cars_img.gambar
+                FROM cars
+                LEFT JOIN cars_img
+                ON cars.id = cars_img.car_id
+                WHERE cars_img.gambar_utama = 1
+                LIMIT 4";
+                $result = mysqli_query($conn, $sql);
+            ?>
+            <?php while($otherCar = mysqli_fetch_assoc($result)) : ?>
             
-        </div>
+            <a href="Product.php?id=<?= $otherCar['id']; ?>" class="group">
+                <div class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden backdrop-blur-md transition duration-300 hover:border-sky-500/50 hover:shadow-[0_0_20px_rgba(56,189,248,0.2)] flex flex-col h-full">
+                    
+                    <!-- Image Wrapper -->
+                    <div class="bg-neutral-900/50 p-4 flex items-center justify-center h-48 border-b border-white/5">
+                        <img src="../uploads/<?= $otherCar['gambar']; ?>" 
+                             alt="<?= $otherCar['nama_mobil']; ?>" 
+                             class="max-w-full max-h-full object-contain transition duration-300 group-hover:scale-105">
+                    </div>
 
-        <div class="bg-white/10 backdrop-blur-md p-4 rounded-b-lg">
+                    <!-- Info Wrapper -->
+                    <div class="p-4 flex-grow flex items-center justify-center bg-gradient-to-b from-transparent to-black/20">
+                        <h2 class="text-white text-center font-medium group-hover:text-sky-400 transition duration-300">
+                            <?= $otherCar['nama_mobil']; ?>
+                        </h2>
+                    </div>
+                </div>
+            </a>
 
-            <h2 class="text-white text-center font-semibold">
-                <?= $otherCar['nama_mobil']; ?>
-            </h2>
-
-        </div>
-
-    </div>
-
-</a>
-
-<?php endwhile; ?>
-</div> 
+            <?php endwhile; ?>
+        </div> 
+        
+    </main>
     
-  </section>
-  </section>
-    
+    <!-- MODAL INJECTION -->
     <?php include '../components/checkout-modal.php'; ?>
 
-  <footer class="bg-black/40 border-t border-white/10 mt-20">
+    <!-- FOOTER -->
+    <footer class="bg-black/40 border-t border-white/10 mt-20">
+        <div class="max-w-7xl mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+                <div>
+                    <h2 class="text-2xl font-bold text-white tracking-widest text-shadow-[0_0_10px_rgba(255,255,255,0.1)]">
+                        ECLIPSE
+                    </h2>
+                    <p class="text-gray-400 mt-4 leading-relaxed text-sm">
+                        Eclipse is a company that operates in the field of selling expensive cars that have original and trusted certification for all brands of cars sold.
+                    </p>
+                </div>
 
-    <div class="max-w-7xl mx-auto px-6 py-12">
+                <div>
+                    <h3 class="text-white font-semibold text-lg mb-4 text-sky-400">
+                        Navigation
+                    </h3>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="../home/home.php" class="hover:text-sky-400 transition">Home</a></li>
+                        <li><a href="../Product-Detailed/product.php" class="hover:text-sky-400 transition">Product</a></li>
+                        <li><a href="../contact/Contact.php" class="hover:text-sky-400 transition">Contact</a></li>
+                        <li><a href="../aboutus/AboutUs.php " class="hover:text-sky-400 transition">About us</a></li>
+                    </ul>
+                </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+                <div>
+                    <h3 class="text-white font-semibold text-lg mb-4 text-sky-400">
+                        Contact
+                    </h3>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li>Email : eclipse@email.com</li>
+                        <li>Phone : +62 1234 5678 90</li>
+                        <li>Indonesia</li>
+                    </ul>
+                </div>
 
-            <div>
-                <h2 class="text-2xl font-bold text-white">
-                    ECLIPSE
-                </h2>
-
-                <p class="text-gray-400 mt-4 leading-relaxed">
-                    Eclipse is a company that 
-                    operates in the field of selling expensive cars that have original 
-                    and trusted certification for all brands of cars sold.
-                </p>
-            </div>
-
-            <div>
-                <h3 class="text-white font-semibold text-lg mb-4">
-                    Navigation
-                </h3>
-
-                <ul class="space-y-3 text-gray-400">
-                    <li>
-                        <a href="../home/home.php" class="hover:text-sky-400 transition">
-                            Home
+                <div>
+                    <h3 class="text-white font-semibold text-lg mb-4 text-sky-400">
+                        Follow Us
+                    </h3>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8] group">
+                            <img src="img/ig.svg" class="w-5 invert opacity-70 group-hover:opacity-100">
                         </a>
-                    </li>
-
-                    <li>
-                        <a href="../Product-Detailed/product.php" class="hover:text-sky-400 transition">
-                            Product
+                        <a href="#" class="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8] group">
+                            <img src="img/fb.svg" class="w-5 invert opacity-70 group-hover:opacity-100">
                         </a>
-                    </li>
-
-                    <li>
-                        <a href="../contact/Contact.php" class="hover:text-sky-400 transition">
-                            Contact
+                        <a href="#" class="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8] group">
+                            <img src="img/tiktok.svg" class="w-5 invert opacity-70 group-hover:opacity-100">
                         </a>
-                    </li>
-
-                    <li>
-                        <a href="../aboutus/AboutUs.php " class="hover:text-sky-400 transition">
-                            About us
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <div>
-                <h3 class="text-white font-semibold text-lg mb-4">
-                    Contact
-                </h3>
-
-                <ul class="space-y-3 text-gray-400">
-                    <li>Email : eclipse@email.com</li>
-                    <li>Phone : +62 1234 5678 90</li>
-                    <li>Indonesia</li>
-                </ul>
-            </div>
-
-            <div>
-                <h3 class="text-white font-semibold text-lg mb-4">
-                    Follow Us
-                </h3>
-
-                <div class="flex gap-4">
-
-                    <a href="#"
-                    class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
-                        <img src="img/ig.svg" class="w-5 invert">
-                    </a>
-
-                    <a href="#"
-                    class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
-                        <img src="img/fb.svg" class="w-5 invert">
-                    </a>
-
-                    <a href="#"
-                    class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
-                        <img src="img/tiktok.svg" class="w-5 invert">
-                    </a>
-
+                    </div>
                 </div>
             </div>
 
+            <div class="border-t border-white/5 mt-10 pt-6 text-center text-gray-500 text-xs tracking-wider">
+                &copy; 2026 ECLIPSE. All Rights Reserved.
+            </div>
         </div>
+    </footer>
 
-        <div class="border-t border-white/10 mt-10 pt-6 text-center text-gray-500 text-sm">
-            © 2026 ECLIPSE. All Rights Reserved.
-        </div>
+    <!-- INTERACTIVE GALLERY SCRIPT -->
+    <script>
+        const mainImage = document.getElementById("mainImage");
+        const thumbnails = document.querySelectorAll(".thumbnail");
 
-    </div>
+        thumbnails.forEach((thumb) => {
+            thumb.addEventListener("click", function () {
+                // Ganti source gambar utama
+                mainImage.src = this.src;
 
-</footer>
-
- <script>
-
-    // ambil gambar utama
-    const mainImage = document.getElementById("mainImage");
-
-    // ambil semua thumbnail
-    const thumbnails = document.querySelectorAll(".thumbnail");
-
-    // looping thumbnail
-    thumbnails.forEach((thumb) => {
-
-      thumb.addEventListener("click", function () {
-
-        // ganti gambar utama
-        mainImage.src = this.src;
-
-        // hapus border semua thumbnail
-        thumbnails.forEach((item) => {
-          item.classList.remove("border-4", "border-purple-600");
-        });
-
-        // tambahkan border thumbnail aktif
-        this.classList.add("border-4", "border-purple-600");
-
-        });
-    });
-
-    function openModal() {
-        document.getElementById('checkoutModal').classList.remove('hidden');
-    }
-    function closeModal() {
-        document.getElementById('checkoutModal').classList.add('hidden');
-    }
-
-  </script>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    // 1. Cari tombol / link Tambah ke Keranjang yang mengarah ke cart.php
-    const tombolCart = document.querySelector('a[href*="add_car_id="]');
-    
-    if (tombolCart) {
-        tombolCart.addEventListener("click", function(event) {
-            event.preventDefault(); // Mencegah halaman berpindah atau refresh!
-            
-            const urlTujuan = this.href; // Mengambil link asli (contoh: ../cart/cart.php?add_car_id=28)
-            
-            // 2. Kirim data ke cart.php di balik layar
-            fetch(urlTujuan)
-                .then(response => response.json())
-                .then(data => {
-                    // 3. Tampilkan SweetAlert langsung di halaman produk tanpa loading ulang
-                    if (data.status === 'success') {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil!',
-                            text: 'Mobil berhasil dimasukkan ke keranjang!',
-                            background: '#1e293b',
-                            color: '#ffffff',
-                            confirmButtonColor: '#38bdf8'
-                        });
-                    } else if (data.status === 'already_exists') {
-                        Swal.fire({
-                            icon: 'info',
-                            title: 'Sudah Ada!',
-                            text: 'Mobil ini sudah ada di dalam keranjang Anda.',
-                            background: '#1e293b',
-                            color: '#ffffff',
-                            confirmButtonColor: '#38bdf8'
-                        });
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Terjadi kesalahan saat memproses data.',
-                    });
+                // Reset kelas border & opacity seluruh thumbnail ke keadaan semula
+                thumbnails.forEach((item) => {
+                    item.classList.remove("border-2", "border-sky-400", "shadow-[0_0_10px_#38bdf8]", "opacity-100");
+                    item.classList.add("border-white/10", "opacity-60");
                 });
-        });
-    }
-});
-</script>
 
+                // Terapkan glow & border aktif (warna biru langit) pada thumbnail terpilih
+                this.classList.remove("border-white/10", "opacity-60");
+                this.classList.add("border-2", "border-sky-400", "shadow-[0_0_10px_#38bdf8]", "opacity-100");
+            });
+        });
+
+        function openModal() {
+            document.getElementById('checkoutModal').classList.remove('hidden');
+        }
+        function closeModal() {
+            document.getElementById('checkoutModal').classList.add('hidden');
+        }
+    </script>
+    
+    <!-- SWEETALERT AJAX HANDLER -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const tombolCart = document.querySelector('a[href*="add_car_id="]');
+        
+        if (tombolCart) {
+            tombolCart.addEventListener("click", function(event) {
+                event.preventDefault(); 
+                
+                const urlTujuan = this.href; 
+                
+                fetch(urlTujuan)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Berhasil!',
+                                text: 'Mobil berhasil dimasukkan ke keranjang!',
+                                background: '#0f172a',
+                                color: '#ffffff',
+                                confirmButtonColor: '#38bdf8'
+                            });
+                        } else if (data.status === 'already_exists') {
+                            Swal.fire({
+                                icon: 'info',
+                                title: 'Sudah Ada!',
+                                text: 'Mobil ini sudah ada di dalam keranjang Anda.',
+                                background: '#0f172a',
+                                color: '#ffffff',
+                                confirmButtonColor: '#38bdf8'
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Terjadi kesalahan saat memproses data.',
+                            background: '#0f172a',
+                            color: '#ffffff',
+                            confirmButtonColor: '#ef4444'
+                        });
+                    });
+            });
+        }
+    });
+    </script>
 </body>
 </html>
