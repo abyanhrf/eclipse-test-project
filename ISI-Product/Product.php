@@ -232,16 +232,26 @@
 
                 <!-- ACTION BUTTONS -->
                 <div class="grid grid-cols-1 gap-3 mt-2">
-                    <button type="button" onclick="handlePesan(<?= $car['stok']; ?>)"
+                    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') : ?>
+        
+                        <div class="w-full bg-red-500/10 border border-red-500/20 text-red-400 font-semibold py-4 rounded-[20px] text-center text-sm tracking-wider">
+                            MODE ADMIN: TRANSAKSI DINONAKTIFKAN
+                        </div>
+
+                    <?php else : ?>
+
+                        <button type="button" onclick="handlePesan(<?= $car['stok']; ?>)"
                             class="w-full bg-sky-500 rounded-[20px] py-4 text-white font-bold cursor-pointer transition duration-300 hover:bg-sky-400 hover:shadow-[0_0_20px_rgba(56,189,248,0.6)] shadow-lg tracking-wider">
                             PESAN SEKARANG
-                    </button>
+                        </button>
 
-                    <a href="../cart/cart.php?add_car_id=<?= $car['id']; ?>"
-                        data-stok="<?= $car['stok']; ?>"
-                        class="w-full bg-white/10 border border-white/10 rounded-[20px] py-4 text-white font-bold flex items-center justify-center transition duration-300 hover:bg-white/20 tracking-wider">
-                        MASUKKAN KE CART
-                    </a>
+                        <a href="../cart/cart.php?add_car_id=<?= $car['id']; ?>"
+                            data-stok="<?= $car['stok']; ?>"
+                            class="w-full bg-white/10 border border-white/10 rounded-[20px] py-4 text-white font-bold flex items-center justify-center transition duration-300 hover:bg-white/20 tracking-wider">
+                            MASUKKAN KE CART
+                        </a>
+
+                    <?php endif; ?>
                 </div>
 
             </div> 
@@ -441,10 +451,15 @@
                             Swal.fire({
                                 icon: 'info',
                                 title: 'Sudah Ada!',
-                                text: 'Mobil ini sudah ada di dalam keranjang Anda.',
+                            });
+                        } else if (data.status === 'admin_blocked') { // <-- TAMBAHAN BARU
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Akses Ditolak',
+                                text: 'Akun Administrator tidak diizinkan melakukan pembelian.',
                                 background: '#0f172a',
                                 color: '#ffffff',
-                                confirmButtonColor: '#38bdf8'
+                                confirmButtonColor: '#ef4444'
                             });
                         }
                     })
