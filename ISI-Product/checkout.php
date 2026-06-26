@@ -2,6 +2,10 @@
 session_start();
 require_once "../config/database.php";
 
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+    die("Akses Ditolak: Akun Administrator tidak diizinkan membuat transaksi baru.");
+}
+
 $serverKey = getenv('MIDTRANS_SERVER_KEY'); 
 $clientKey = getenv('MIDTRANS_CLIENT_KEY');
 
