@@ -83,10 +83,12 @@ if (isset($_POST['hapus_foto'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../src/output.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
-<body class="font-[Poppins] min-h-screen text-white overflow-x-hidden bg-[radial-gradient(circle_at_top_left,rgba(255,0,0,0.25),transparent_25%),radial-gradient(circle_at_bottom_right,rgba(255,0,0,0.2),transparent_20%),linear-gradient(135deg,#050505,#0b0b0b,#111111)]">
-    <!-- NAVBAR -->
+<body class="font-['Poppins'] min-h-screen text-white overflow-x-hidden bg-[radial-gradient(circle_at_top_left,rgba(255,0,0,0.25),transparent_25%),radial-gradient(circle_at_bottom_right,rgba(255,0,0,0.2),transparent_20%),linear-gradient(135deg,#050505,#0b0b0b,#111111)]">
     <nav class="w-[90%] max-w-[1200px] mx-auto px-10 py-4 flex items-center justify-between bg-white/10 border border-white/10 rounded-[60px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] mt-4">
     
         <div>
@@ -101,7 +103,7 @@ if (isset($_POST['hapus_foto'])) {
             </a>
 
             <a href="../Product-Detailed/product.php"
-                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 bg-sky-400 text-white shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] [text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
+                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
                 Product
             </a>
 
@@ -155,7 +157,6 @@ if (isset($_POST['hapus_foto'])) {
         </div>
     </nav>
 
-    <!--halaman profil-->
     <div class="px-10 py-8 w-full max-w-[1200px] mx-auto flex justify-center items-start">
 
     <div class="bg-[#212b36]/80 border border-slate-700/50 p-8 rounded-3xl shadow-2xl w-full max-w-3xl mt-4">
@@ -254,14 +255,12 @@ if (isset($_POST['hapus_foto'])) {
     </div>
 </div>
 
-<!-- FOOTER -->
-    <footer class="bg-black/40 border-t border-white/10 mt-20">
+<footer class="bg-black/40 border-t border-white/10 mt-20">
 
         <div class="max-w-7xl mx-auto px-6 py-12">
 
             <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
 
-                <!-- BRAND -->
                 <div>
 
                     <h2 class="text-2xl font-bold text-white">
@@ -274,7 +273,6 @@ if (isset($_POST['hapus_foto'])) {
 
                 </div>
 
-                <!-- MENU -->
                 <div>
 
                     <h3 class="text-white font-semibold text-lg mb-4">
@@ -311,7 +309,6 @@ if (isset($_POST['hapus_foto'])) {
 
                 </div>
 
-                <!-- CONTACT -->
                 <div>
 
                     <h3 class="text-white font-semibold text-lg mb-4">
@@ -326,7 +323,6 @@ if (isset($_POST['hapus_foto'])) {
 
                 </div>
 
-                <!-- SOCIAL -->
                 <div>
 
                     <h3 class="text-white font-semibold text-lg mb-4">
@@ -362,9 +358,8 @@ if (isset($_POST['hapus_foto'])) {
 
             </div>
 
-            <!-- COPYRIGHT -->
             <div class="border-t border-white/10 mt-10 pt-6 text-center text-gray-500 text-sm">
-                Â© 2026 ECLIPSE. All Rights Reserved.
+                © 2026 ECLIPSE. All Rights Reserved.
             </div>
 
         </div>
