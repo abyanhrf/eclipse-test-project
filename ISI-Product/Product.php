@@ -79,15 +79,15 @@
             </a>
         </div>
 
-        <div class="flex items-center gap-5">
+        <div class="flex items-center gap-4 shrink-0">
             <?php if (isset($_SESSION['user_id'])) : ?>
                 <div class="relative group">
-                    <button class="flex items-center gap-2 mr-5 text-white font-semibold hover:text-sky-400 transition duration-300">
+                    <button class="flex items-center gap-2 text-white font-semibold hover:text-sky-400 transition duration-300 whitespace-nowrap">
                         <img src="../home/img/user2.png" alt="user" class="w-6 h-6 invert">
                         <?= $_SESSION['nama']; ?>
                     </button>
 
-                    <div class="absolute right-0 top-[95%] pt-2 w-40 hidden group-hover:block z-50">
+                    <div class="absolute right-0 top-full pt-3 w-40 hidden group-hover:block z-50">
                         <div class="bg-neutral-900 border border-white/10 rounded-lg shadow-lg overflow-hidden">
                             <a href="../profile/profile.php"
                             class="block px-4 py-2 text-sm text-gray-200 hover:text-white hover:bg-sky-500 transition">
@@ -107,7 +107,7 @@
             <?php endif; ?>
 
             <?php if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'admin') : ?>
-                <a href="../dashboard/dashboard.php" class="px-4 py-1.5 rounded-full bg-sky-500 text-white text-sm font-semibold hover:bg-sky-400 transition shadow-[0_0_10px_rgba(56,189,248,0.4)]">
+                <a href="../dashboard/dashboard.php" class="px-4 py-1.5 rounded-full bg-sky-500 text-white text-sm font-semibold hover:bg-sky-400 transition shadow-[0_0_10px_rgba(56,189,248,0.4)] whitespace-nowrap">
                     Dashboard
                 </a>
             <?php else : ?>
@@ -253,6 +253,9 @@
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
             <?php
+                // Casting $id menjadi integer untuk keamanan
+                $current_id = (int)$id;
+
                 $sql = "
                 SELECT
                 cars.id,
@@ -263,23 +266,24 @@
                 FROM cars
                 LEFT JOIN cars_img
                 ON cars.id = cars_img.car_id
-                WHERE cars_img.gambar_utama = 1
+                WHERE cars_img.gambar_utama = 1 AND cars.id != $current_id
+                ORDER BY RAND() 
                 LIMIT 4";
+                
                 $result = mysqli_query($conn, $sql);
             ?>
+            
             <?php while($otherCar = mysqli_fetch_assoc($result)) : ?>
             
             <a href="Product.php?id=<?= $otherCar['id']; ?>" class="group">
                 <div class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden backdrop-blur-md transition duration-300 hover:border-sky-500/50 hover:shadow-[0_0_20px_rgba(56,189,248,0.2)] flex flex-col h-full">
                     
-                    <!-- Image Wrapper -->
                     <div class="bg-neutral-900/50 p-4 flex items-center justify-center h-48 border-b border-white/5">
                         <img src="../uploads/<?= $otherCar['gambar']; ?>" 
                             alt="<?= $otherCar['nama_mobil']; ?>" 
                             class="max-w-full max-h-full object-contain transition duration-300 group-hover:scale-105">
                     </div>
 
-                    <!-- Info Wrapper -->
                     <div class="p-4 flex-grow flex items-center justify-center bg-gradient-to-b from-transparent to-black/20">
                         <h2 class="text-white text-center font-medium group-hover:text-sky-400 transition duration-300">
                             <?= $otherCar['nama_mobil']; ?>
@@ -289,7 +293,7 @@
             </a>
 
             <?php endwhile; ?>
-        </div> 
+        </div>
         
     </main>
     
