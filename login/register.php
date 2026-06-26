@@ -15,7 +15,7 @@
         <!-- LOGO -->
         <div>
             <img src="img/LogoProfile.png" alt="logo"
-            class="w-10 h-10 cursor-pointer transition duration-300 hover:scale-110">
+            class="w-10 h-10 cursor-pointer rounded-full transition duration-300 hover:scale-110">
         </div>
 
         <!-- MENU -->
