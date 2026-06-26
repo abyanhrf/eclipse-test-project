@@ -26,6 +26,13 @@ if (!$conn) {
 if (isset($_GET['add_car_id'])) {
     header('Content-Type: application/json'); // Deklarasikan bahwa respons berupa JSON
     
+    if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+        echo json_encode(['status' => 'admin_blocked']);
+        exit;
+    }
+
+    $car_id = mysqli_real_escape_string($conn, $_GET['add_car_id']);
+
     $car_id = mysqli_real_escape_string($conn, $_GET['add_car_id']);
     
     $cek_cart = mysqli_query($conn, "SELECT * FROM cart WHERE user_id = '$user_id' AND car_id = '$car_id'");
@@ -67,6 +74,14 @@ if (isset($_GET['remove_cart_id'])) {
     exit;
 }
 
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+    echo "<script>
+            alert('Akses Ditolak: Administrator tidak memiliki fitur keranjang.'); 
+            window.location.href='../dashboard/dashboard.php';
+          </script>";
+    exit;
+}
+
 // ========================================================
 // 3. MENGAMBIL DATA UNTUK DITAMPILKAN DI HALAMAN
 // ========================================================
@@ -98,7 +113,7 @@ $jumlah_item = mysqli_num_rows($result);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart</title>
+    <title>Eclipse</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

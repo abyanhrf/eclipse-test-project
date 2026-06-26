@@ -36,7 +36,7 @@
             }
         }
     </script>
-    <title>Document</title>
+    <title>Dashboard Eclipse</title>
 </head>
 <body class="bg-slate-900 font-sans flex h-screen overflow-hidden">
     <!--NAVBAR SAMPING-->
@@ -75,13 +75,10 @@
 
     <!--NAVBAR ATAS-->
     <main class="flex-1 flex flex-col h-screen overflow-y-auto relative">
-        <!---->
         <div class="w-full pt-6 pb-2 sticky top-0 z-50">
-            <!---->
             <nav class="w-[90%] max-w-[1200px] mx-auto px-10 py-4 flex items-center justify-between bg-white/10 border border-white/10 rounded-[60px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
-                <!---->
                 <div>
-                    <img src="img/LogoProfile.png" alt="logo" class="w-10 h-10 cursor-pointer transition duration-300 hover:scale-110">
+                    <img src="img/LogoProfile.png" alt="logo" class="rounded-full w-10 h-10 cursor-pointer transition duration-300 hover:scale-110">
                 </div>
 
                 <div class="relative flex items-center gap-[18px]">
@@ -91,7 +88,7 @@
                     <a href="../Product-Detailed/product.php" class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
                         Product
                     </a>
-                    <a  href="../contact/Contact.php" class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
+                    <a href="../contact/Contact.php" class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
                         Contact
                     </a>
                     <a href="../aboutus/AboutUs.php" class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
@@ -99,13 +96,27 @@
                     </a>
                 </div>
 
-                <div class="flex gap-5">
+                <div class="nav-icons">
+                    <?php if (isset($_SESSION['user_id'])) : ?>
+                        <div class="relative group">
+                            <button class="flex items-center gap-2 mr-5 text-white font-semibold hover:text-sky-400 transition duration-300">
+                            <img src="img/user2.png" alt="user" class="w-6 h-6 invert">
+                            <?= $_SESSION['nama']; ?>
+                            </button>
+
+                            <!-- <div class="absolute right-0 top-full w-40 bg-white rounded-lg shadow-lg hidden group-hover:block overflow-hidden z-50">
+                                <a href="../process/logout.php"
+                                class="block px-4 py-1.5 text-red-600 hover:bg-red-50 transition">
+                                Logout
+                                </a>
+                            </div> -->
+                        </div>
+                    <?php else : ?>
                     <a href="../login/login.php">
-                        <img src="img/user2.png" alt="user" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
-                    </a>
-                    <a href="../cart/cart.php">
-                        <img src="img/shopping-bag.png" alt="cart" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
-                    </a>
+                        <img src="img/user2.png" alt="user">
+                    </a>            
+                    <?php endif; ?>
+
                 </div>
             </nav>
         </div>

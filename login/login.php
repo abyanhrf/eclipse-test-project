@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login Account</title>
 
     <link href="../src/output.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <!-- LOGO -->
         <div>
             <img src="img/LogoProfile.png" alt="logo"
-            class="w-10 h-10 cursor-pointer transition duration-300 hover:scale-110">
+            class="w-10 h-10 cursor-pointer rounded-full transition duration-300 hover:scale-110">
         </div>
 
         <!-- MENU -->

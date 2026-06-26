@@ -7,7 +7,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us</title>
+    <title>Eclipse</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -85,7 +85,7 @@ session_start();
 
             <?php if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'admin') : ?>
                 <a href="../dashboard/dashboard.php" class="px-4 py-1.5 rounded-full bg-sky-500 text-white text-sm font-semibold hover:bg-sky-400 transition shadow-[0_0_10px_rgba(56,189,248,0.4)]">
-                    Admin
+                    Dashboard
                 </a>
             <?php else : ?>
                 <a href="../cart/cart.php">

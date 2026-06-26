@@ -122,7 +122,7 @@ session_start();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <title>Katalog Produk - ECLIPSE</title>
+    <title>Eclipse</title>
 </head>
 
 <body class="font-['Poppins',sans-serif] min-h-screen text-white overflow-x-hidden bg-[radial-gradient(circle_at_top_left,rgba(255,0,0,0.25),transparent_25%),radial-gradient(circle_at_bottom_right,rgba(255,0,0,0.2),transparent_20%),linear-gradient(135deg,#050505,#0b0b0b,#111111)]">
@@ -185,7 +185,7 @@ session_start();
 
             <?php if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'admin') : ?>
                 <a href="../dashboard/dashboard.php" class="px-4 py-1.5 rounded-full bg-sky-500 text-white text-sm font-semibold hover:bg-sky-400 transition shadow-[0_0_10px_rgba(56,189,248,0.4)]">
-                    Admin
+                    Dashboard
                 </a>
             <?php else : ?>
                 <a href="../cart/cart.php">

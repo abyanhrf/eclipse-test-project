@@ -45,6 +45,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Tambahan Google Font Poppins agar font-sans seragam -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Eclipse</title>
 </head>
 
 <body class="font-[Poppins] min-h-screen text-white overflow-x-hidden bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.15),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(255,0,0,0.1),transparent_25%),linear-gradient(135deg,#050505,#0b0b0b,#111111)]">
@@ -79,15 +80,15 @@
             </a>
         </div>
 
-        <div class="flex items-center gap-5">
+        <div class="flex items-center gap-4 shrink-0">
             <?php if (isset($_SESSION['user_id'])) : ?>
                 <div class="relative group">
-                    <button class="flex items-center gap-2 mr-5 text-white font-semibold hover:text-sky-400 transition duration-300">
+                    <button class="flex items-center gap-2 text-white font-semibold hover:text-sky-400 transition duration-300 whitespace-nowrap">
                         <img src="../home/img/user2.png" alt="user" class="w-6 h-6 invert">
                         <?= $_SESSION['nama']; ?>
                     </button>
 
-                    <div class="absolute right-0 top-[95%] pt-2 w-40 hidden group-hover:block z-50">
+                    <div class="absolute right-0 top-full pt-3 w-40 hidden group-hover:block z-50">
                         <div class="bg-neutral-900 border border-white/10 rounded-lg shadow-lg overflow-hidden">
                             <a href="../profile/profile.php"
                             class="block px-4 py-2 text-sm text-gray-200 hover:text-white hover:bg-sky-500 transition">
@@ -107,8 +108,8 @@
             <?php endif; ?>
 
             <?php if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'admin') : ?>
-                <a href="../dashboard/dashboard.php" class="px-4 py-1.5 rounded-full bg-sky-500 text-white text-sm font-semibold hover:bg-sky-400 transition shadow-[0_0_10px_rgba(56,189,248,0.4)]">
-                    Admin
+                <a href="../dashboard/dashboard.php" class="px-4 py-1.5 rounded-full bg-sky-500 text-white text-sm font-semibold hover:bg-sky-400 transition shadow-[0_0_10px_rgba(56,189,248,0.4)] whitespace-nowrap">
+                    Dashboard
                 </a>
             <?php else : ?>
                 <a href="../cart/cart.php">
@@ -222,20 +223,35 @@
                             <p class="text-gray-400 text-xs uppercase tracking-wide">Kilometer</p>
                             <h3 class="font-bold text-white mt-0.5 text-sm"><?= $car['kilometer']; ?></h3>
                         </div>
+                        <div>
+                            <p class="text-gray-400 text-sm">Stok Tersedia:</p>
+                            <h3 class="font-bold"><?= $car['stok']; ?></h3>
+                        </div>
                     </div>
                 </div>
 
                 <!-- ACTION BUTTONS -->
                 <div class="grid grid-cols-1 gap-3 mt-2">
-                    <button type="button" onclick="openModal()"
+                    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') : ?>
+        
+                        <div class="w-full bg-red-500/10 border border-red-500/20 text-red-400 font-semibold py-4 rounded-[20px] text-center text-sm tracking-wider">
+                            MODE ADMIN: TRANSAKSI DINONAKTIFKAN
+                        </div>
+
+                    <?php else : ?>
+
+                        <button type="button" onclick="handlePesan(<?= $car['stok']; ?>)"
                             class="w-full bg-sky-500 rounded-[20px] py-4 text-white font-bold cursor-pointer transition duration-300 hover:bg-sky-400 hover:shadow-[0_0_20px_rgba(56,189,248,0.6)] shadow-lg tracking-wider">
                             PESAN SEKARANG
-                    </button>
+                        </button>
 
-                    <a href="../cart/cart.php?add_car_id=<?= $car['id']; ?>"
-                        class="w-full bg-white/10 border border-white/10 rounded-[20px] py-4 text-white font-bold flex items-center justify-center transition duration-300 hover:bg-white/20 tracking-wider">
-                        MASUKKAN KE CART
-                    </a>
+                        <a href="../cart/cart.php?add_car_id=<?= $car['id']; ?>"
+                            data-stok="<?= $car['stok']; ?>"
+                            class="w-full bg-white/10 border border-white/10 rounded-[20px] py-4 text-white font-bold flex items-center justify-center transition duration-300 hover:bg-white/20 tracking-wider">
+                            MASUKKAN KE CART
+                        </a>
+
+                    <?php endif; ?>
                 </div>
 
             </div> 
@@ -243,11 +259,14 @@
 
         <!-- ANOTHER PRODUCT SECTION -->
         <h1 class="text-white text-2xl font-bold mt-16 mb-6 tracking-wide flex items-center gap-3">
-             <span class="w-2 h-2 bg-sky-400 rounded-full animate-pulse"></span> ANOTHER PRODUCT
+            <span class="w-2 h-2 bg-sky-400 rounded-full animate-pulse"></span> ANOTHER PRODUCT
         </h1>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
             <?php
+                // Casting $id menjadi integer untuk keamanan
+                $current_id = (int)$id;
+
                 $sql = "
                 SELECT
                 cars.id,
@@ -258,23 +277,24 @@
                 FROM cars
                 LEFT JOIN cars_img
                 ON cars.id = cars_img.car_id
-                WHERE cars_img.gambar_utama = 1
+                WHERE cars_img.gambar_utama = 1 AND cars.id != $current_id
+                ORDER BY RAND() 
                 LIMIT 4";
+                
                 $result = mysqli_query($conn, $sql);
             ?>
+            
             <?php while($otherCar = mysqli_fetch_assoc($result)) : ?>
             
             <a href="Product.php?id=<?= $otherCar['id']; ?>" class="group">
                 <div class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden backdrop-blur-md transition duration-300 hover:border-sky-500/50 hover:shadow-[0_0_20px_rgba(56,189,248,0.2)] flex flex-col h-full">
                     
-                    <!-- Image Wrapper -->
                     <div class="bg-neutral-900/50 p-4 flex items-center justify-center h-48 border-b border-white/5">
                         <img src="../uploads/<?= $otherCar['gambar']; ?>" 
-                             alt="<?= $otherCar['nama_mobil']; ?>" 
-                             class="max-w-full max-h-full object-contain transition duration-300 group-hover:scale-105">
+                            alt="<?= $otherCar['nama_mobil']; ?>" 
+                            class="max-w-full max-h-full object-contain transition duration-300 group-hover:scale-105">
                     </div>
 
-                    <!-- Info Wrapper -->
                     <div class="p-4 flex-grow flex items-center justify-center bg-gradient-to-b from-transparent to-black/20">
                         <h2 class="text-white text-center font-medium group-hover:text-sky-400 transition duration-300">
                             <?= $otherCar['nama_mobil']; ?>
@@ -284,7 +304,7 @@
             </a>
 
             <?php endwhile; ?>
-        </div> 
+        </div>
         
     </main>
     
@@ -379,6 +399,16 @@
         function closeModal() {
             document.getElementById('checkoutModal').classList.add('hidden');
         }
+
+        function handlePesan(stok) {
+        if (stok <= 0) {
+            alert("Maaf saat ini stok sedang habis");
+        } else {
+            // Jika stok ada, jalankan fungsi membuka modal bawaanmu
+            openModal();
+        }
+    }
+
     </script>
     
     <!-- SWEETALERT AJAX HANDLER -->
@@ -386,13 +416,29 @@
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         const tombolCart = document.querySelector('a[href*="add_car_id="]');
-        
+    
         if (tombolCart) {
             tombolCart.addEventListener("click", function(event) {
-                event.preventDefault(); 
-                
+                event.preventDefault(); // Cegah pindah halaman
+            
+                // 1. Cek stok terlebih dahulu sebelum melakukan fetch
+                const stok = parseInt(this.getAttribute('data-stok'));
+            
+                if (stok <= 0) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Stok Habis',
+                        text: 'Maaf saat ini stok mobil sedang habis.',
+                        background: '#0f172a',
+                        color: '#ffffff',
+                        confirmButtonColor: '#ef4444'
+                    });
+                    return; // Hentikan eksekusi di sini, jangan lanjut fetch
+                }
+            
+                // 2. Jika stok aman, baru lakukan proses masukkan ke keranjang (Fetch)
                 const urlTujuan = this.href; 
-                
+            
                 fetch(urlTujuan)
                     .then(response => response.json())
                     .then(data => {
@@ -409,10 +455,15 @@
                             Swal.fire({
                                 icon: 'info',
                                 title: 'Sudah Ada!',
-                                text: 'Mobil ini sudah ada di dalam keranjang Anda.',
+                            });
+                        } else if (data.status === 'admin_blocked') { // <-- TAMBAHAN BARU
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Akses Ditolak',
+                                text: 'Akun Administrator tidak diizinkan melakukan pembelian.',
                                 background: '#0f172a',
                                 color: '#ffffff',
-                                confirmButtonColor: '#38bdf8'
+                                confirmButtonColor: '#ef4444'
                             });
                         }
                     })
