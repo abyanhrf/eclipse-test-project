@@ -42,7 +42,7 @@ session_start();
             }
         }
     </script>
-    <title>Dashboard Admin - ECLIPSE</title>
+    <title>Dashboard Eclipse</title>
 </head>
 <body class="bg-slate-900 font-sans flex h-screen overflow-hidden">
     <aside class="w-[260px] bg-gradient-to-b from-[#3a0606] to-[#170101] text-[#94a3b8] h-screen flex flex-col shrink-0 border-r border-red-900/50">
