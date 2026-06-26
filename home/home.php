@@ -23,7 +23,7 @@ $result = mysqli_query($conn, $sql);
     
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <title>Home</title>
+    <title>Eclipse</title>
 
     <style>
         .anti-putih-banner {

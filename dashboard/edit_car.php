@@ -53,7 +53,7 @@
             }
         }
     </script>
-    <title>Dashboard Tambah Mobil</title>
+    <title>Dashboard Eclipse</title>
 </head>
 <body class="bg-slate-900 font-sans flex h-screen overflow-hidden">
     <!--NAVBAR SAMPING-->

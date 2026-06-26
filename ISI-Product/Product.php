@@ -45,6 +45,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Tambahan Google Font Poppins agar font-sans seragam -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Eclipse</title>
 </head>
 
 <body class="font-[Poppins] min-h-screen text-white overflow-x-hidden bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.15),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(255,0,0,0.1),transparent_25%),linear-gradient(135deg,#050505,#0b0b0b,#111111)]">

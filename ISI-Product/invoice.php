@@ -32,7 +32,7 @@ if (!$transaksi) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invoice #<?= $transaksi['order_id']; ?> - ECLIPSE</title>
+    <title>Eclipse</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gradient-to-br from-black via-red-950 to-black text-white font-[Poppins] min-h-screen flex items-center justify-center p-6">

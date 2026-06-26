@@ -91,7 +91,7 @@ if (mysqli_stmt_execute($stmt)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proses Pembayaran ECLIPSE</title>
+    <title>Eclipse</title>
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="<?php echo $clientKey; ?>"></script>
