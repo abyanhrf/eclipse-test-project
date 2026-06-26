@@ -7,39 +7,40 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+=======
     <title>Eclipse</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="text-gray-800 min-h-screen p-4 box-border font-sans font-[Poppins] text-white overflow-x-hidden bg-[radial-gradient(circle_at_top_left,rgba(255,0,0,0.25),transparent_25%),radial-gradient(circle_at_bottom_right,rgba(255,0,0,0.2),transparent_20%),linear-gradient(135deg,#050505,#0b0b0b,#111111)]">
+<body class="text-gray-800 min-h-screen p-4 box-border font-sans font-[Poppins] text-white overflow-x-hidden bg-[radial-gradient(circle_at_top_left,rgba(255,0,0,0.15),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(56,189,248,0.1),transparent_25%),linear-gradient(135deg,#050505,#0a0a0a,#121212)]">
     
-    <nav class="w-[90%] max-w-[1200px] mx-auto px-10 py-4 flex items-center justify-between bg-white/10 border border-white/10 rounded-[60px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.3)] mt-4">
+    <nav class="w-[90%] max-w-[1200px] mx-auto px-10 py-4 flex items-center justify-between bg-white/5 border border-white/10 rounded-[60px] backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.5)] mt-4 z-50 relative">
     
         <div>
             <img src="img/LogoProfile.png" alt="logo"
-            class="w-10 h-10 rounded-full overflow-hidden cursor-pointer transition duration-300 hover:scale-110">
+            class="w-10 h-10 rounded-full overflow-hidden cursor-pointer transition duration-300 hover:scale-110 shadow-[0_0_15px_rgba(255,255,255,0.2)]">
         </div>
 
-        <div class="relative flex items-center gap-[18px]">
+        <div class="relative hidden md:flex items-center gap-[18px]">
             <a href="../home/home.php"
-                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
+                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-medium text-[16px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
                 Home
             </a>
 
             <a href="../Product-Detailed/product.php"
-                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
+                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-medium text-[16px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
                 Product
             </a>
 
             <a href="../contact/Contact.php"
-                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
+                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-medium text-[16px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
                 Contact
             </a>
 
             <a href="aboutus.php"
-                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 bg-sky-400 text-white shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] [text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">
+                class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[16px] transition duration-300 bg-sky-400 shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.4)]">
                 About us
             </a>
         </div>
@@ -47,19 +48,19 @@ session_start();
         <div class="flex items-center gap-5">
             <?php if (isset($_SESSION['user_id'])) : ?>
                 <div class="relative group">
-                    <button class="flex items-center gap-2 mr-5 text-white font-semibold hover:text-sky-400 transition duration-300">
-                        <img src="../home/img/user2.png" alt="user" class="w-6 h-6 invert">
+                    <button class="flex items-center gap-2 mr-5 text-white font-medium hover:text-sky-400 transition duration-300">
+                        <img src="../home/img/user2.png" alt="user" class="w-5 h-5 invert">
                         <?= $_SESSION['nama']; ?>
                     </button>
 
-                    <div class="absolute right-0 top-[95%] pt-2 w-40 hidden group-hover:block z-50">
-                        <div class="bg-neutral-900 border border-white/10 rounded-lg shadow-lg overflow-hidden">
+                    <div class="absolute right-0 top-[120%] pt-2 w-40 hidden group-hover:block z-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div class="bg-neutral-900/90 backdrop-blur-md border border-white/10 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.8)] overflow-hidden">
                             <a href="../profile/profile.php"
-                            class="block px-4 py-2 text-sm text-gray-200 hover:text-white hover:bg-sky-500 transition">
+                            class="block px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-sky-500/80 transition">
                             Profil Saya
                             </a>
                             <a href="../process/logout.php"
-                            class="block px-4 py-2 text-sm text-red-400 hover:bg-red-950/40 transition border-t border-white/5">
+                            class="block px-4 py-2.5 text-sm text-red-400 hover:text-red-300 hover:bg-red-900/40 transition border-t border-white/5">
                             Logout
                             </a>
                         </div>
@@ -67,117 +68,152 @@ session_start();
                 </div>
             <?php else : ?>
                 <a href="../login/login.php">
-                    <img src="img/user2.png" alt="user" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
+                    <img src="img/user2.png" alt="user" class="w-7 h-7 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
                 </a>
             <?php endif; ?>
 
             <?php if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'admin') : ?>
+                <a href="../dashboard/dashboard.php" class="px-5 py-2 rounded-full bg-gradient-to-r from-sky-500 to-blue-600 text-white text-sm font-semibold hover:from-sky-400 hover:to-blue-500 transition shadow-[0_0_15px_rgba(56,189,248,0.4)]">
+                    Admin
+=======
                 <a href="../dashboard/dashboard.php" class="px-4 py-1.5 rounded-full bg-sky-500 text-white text-sm font-semibold hover:bg-sky-400 transition shadow-[0_0_10px_rgba(56,189,248,0.4)]">
                     Dashboard
                 </a>
             <?php else : ?>
                 <a href="../cart/cart.php">
-                    <img src="img/shopping-bag.png" alt="cart" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
+                    <img src="img/shopping-bag.png" alt="cart" class="w-7 h-7 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
                 </a>
             <?php endif; ?>
         </div>
     </nav>
 
-    <div class="max-w-6xl mx-auto p-4 flex flex-col justify-between mt-10">
-        <div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-12 mt-8">
+    <div class="max-w-7xl mx-auto px-6 py-12 flex flex-col justify-between mt-10 relative z-10">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             
-            <div class="md:w-1/2">
-                <h1 class="font-bold text-4xl text-center md:text-left mb-8 flex justify-center md:justify-start">About US</h1>
-                <p class="mb-6 leading-relaxed"> 
-                    <b class="text-4xl">K</b>ami adalah perusahaan yang bergerak dibidang usaha perdagangan Mobil Sport.
-                    Perusahaan kami berdiri sejak 2021, <b>KING AL FARZANI</b> selaku CEO mendirikan perusahaan 
-                    ini karena melihat potensi pasar mobil yang berkembang pesat.
-                    Saat ini kami telah berhasil menjual lebih dari 100 unit mobil dalam satu tahun terakhir.
-                </p> 
-                <p class="leading-relaxed">
-                    Kedepannya kami akan menggembangkan bisnis ini menjadi lebih luas lagi dengan 
-                    menambahkan Motor Sport sebagai bisnis utama. Kita nantinya juga akan membuat event
-                    untuk para penggemar sebagai salah satu media promosi kami.
-                </p>
-            </div>
-
-            <div class="md:w-1/2 flex flex-col items-center md:items-end">
-                <div class="w-full max-w-[400px]">
-                    <div class="w-full h-[250px] flex items-center justify-center overflow-hidden bg-white rounded-lg mb-4 shadow-md">
-                        <img src="./img/amikom.png" alt="lokasiamikom" class="object-cover w-full h-full">
-                    </div>
-                    <p class="text-gray-400 text-sm">
-                        Kami Berlima merupakan Pendiri dari grup <b>ECLIPSE</b>, berawal dari jokes 
-                        ingin membuat perusahaan yang anggotanya berisi satu sirkel. Tidak kami sangka ternyata 
-                        dapat terwujud dimasa sekarang.
+            <div class="space-y-8">
+                <div class="inline-block mb-4">
+                    <h1 class="font-bold text-4xl md:text-5xl text-white tracking-wider mb-3">ABOUT US</h1>
+                    <div class="h-1 w-2/3 bg-sky-400 rounded-full shadow-[0_0_15px_#38bdf8]"></div>
+                </div>
+                
+                <div class="text-gray-300 space-y-6 text-lg leading-relaxed font-light">
+                    <p class="text-justify"> 
+                        <span class="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 float-left mr-4 mt-[-10px]">K</span>
+                        ami adalah perusahaan yang bergerak dibidang usaha perdagangan Mobil Sport.
+                        Perusahaan kami berdiri sejak 2021, <strong class="text-white font-semibold">KING AL FARZANI</strong> selaku CEO mendirikan perusahaan 
+                        ini karena melihat potensi pasar mobil yang berkembang pesat.
+                        Saat ini kami telah berhasil menjual lebih dari <span class="text-sky-400 font-bold drop-shadow-[0_0_5px_rgba(56,189,248,0.5)]">100 unit</span> mobil dalam satu tahun terakhir.
+                    </p> 
+                    <p class="text-justify">
+                        Kedepannya kami akan menggembangkan bisnis ini menjadi lebih luas lagi dengan 
+                        menambahkan Motor Sport sebagai bisnis utama. Kita nantinya juga akan membuat event
+                        untuk para penggemar sebagai salah satu media promosi kami.
                     </p>
                 </div>
             </div>
 
+            <div class="flex flex-col items-center lg:items-end w-full">
+                <div class="w-full max-w-lg relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-sky-500 to-blue-600 rounded-[24px] blur opacity-20 group-hover:opacity-40 transition duration-700"></div>
+                    
+                    <div class="relative bg-neutral-900/80 backdrop-blur-sm border border-white/10 p-5 rounded-[20px] shadow-2xl">
+                        <div class="w-full aspect-video flex items-center justify-center overflow-hidden rounded-xl bg-black relative">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+                            <img src="./img/amikom.png" alt="lokasiamikom" class="object-cover w-full h-full opacity-80 group-hover:opacity-100 transition duration-700 group-hover:scale-105">
+                        </div>
+                        
+                        <div class="mt-6 px-3">
+                            <p class="text-gray-400 text-sm leading-relaxed border-l-2 border-sky-400 pl-4 text-justify">
+                                Kami Berlima merupakan Pendiri dari grup <strong class="text-white tracking-wider">ECLIPSE</strong>, berawal dari jokes 
+                                ingin membuat perusahaan yang anggotanya berisi satu sirkel. Tidak kami sangka ternyata 
+                                dapat terwujud dimasa sekarang.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <div class="flex justify-between items-end mb-8 w-full mt-16">
-            <div class="flex flex-col gap-2">
-                <span class="text-lg font-semibold text-gray-400">Motto Kami:</span>
-                <div class="w-[250px] md:w-[350px] h-[60px] flex items-center justify-center text-xl text-white font-bold px-4 text-center border-l-4 border-sky-400 bg-white/5">
-                    "Kepuasan Anda adalah kebahagiaan bagi Kami"
+        <div class="flex flex-col md:flex-row justify-between items-center md:items-end gap-10 mt-28 mb-10 w-full">
+            
+            <div class="flex flex-col gap-3 w-full md:w-auto">
+                <span class="text-sm font-semibold text-sky-400 uppercase tracking-[0.2em] ml-2">Motto Kami</span>
+                <div class="relative w-full md:w-[500px] bg-gradient-to-r from-white/5 to-transparent backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-2xl overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-1.5 h-full bg-sky-400 rounded-l-2xl shadow-[0_0_15px_#38bdf8]"></div>
+                    <p class="text-xl md:text-2xl text-white font-medium italic relative z-10">
+                        "Kepuasan Anda adalah kebahagiaan bagi Kami"
+                    </p>
+                    <div class="absolute -right-20 -top-20 w-40 h-40 bg-sky-400/10 rounded-full blur-3xl group-hover:bg-sky-400/20 transition duration-500"></div>
                 </div>
             </div>
             
-            <div class="w-16 h-16 rounded-full overflow-hidden border border-white/20 shadow-lg">
+            <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-white/20 shadow-[0_0_30px_rgba(255,255,255,0.05)] hover:shadow-[0_0_20px_rgba(56,189,248,0.3)] hover:border-sky-400/50 transition-all duration-300">
                 <img src="img/LogoProfile.png" alt="gambar-Logo" class="w-full h-full object-cover">
             </div>
+            
         </div>
     </div>
 
-    <footer class="bg-black/40 border-t border-white/10 mt-20">
-        <div class="max-w-7xl mx-auto px-6 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+    <footer class="bg-black/60 border-t border-white/10 mt-20 backdrop-blur-lg">
+        <div class="max-w-7xl mx-auto px-6 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
                 
-                <div>
-                    <h2 class="text-2xl font-bold text-white">ECLIPSE</h2>
-                    <p class="text-gray-400 mt-4 leading-relaxed">
+                <div class="md:col-span-1">
+                    <h2 class="text-3xl font-bold text-white tracking-wider">ECLIPSE</h2>
+                    <p class="text-gray-400 mt-5 leading-relaxed text-sm">
                         Eclipse is a company that operates in the field of selling expensive cars that have original and trusted certification for all brands of cars sold.
                     </p>
                 </div>
 
                 <div>
-                    <h3 class="text-white font-semibold text-lg mb-4">Navigation</h3>
-                    <ul class="space-y-3 text-gray-400">
-                        <li><a href="../home/home.php" class="hover:text-sky-400 transition">Home</a></li>
-                        <li><a href="../Product-Detailed/product.php" class="hover:text-sky-400 transition">Product</a></li>
-                        <li><a href="../contact/Contact.php" class="hover:text-sky-400 transition">Contact</a></li>
-                        <li><a href="aboutus.php" class="hover:text-sky-400 transition">About us</a></li>
+                    <h3 class="text-white font-semibold text-lg mb-6">Navigation</h3>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li><a href="../home/home.php" class="hover:text-sky-400 hover:pl-2 transition-all duration-300">Home</a></li>
+                        <li><a href="../Product-Detailed/product.php" class="hover:text-sky-400 hover:pl-2 transition-all duration-300">Product</a></li>
+                        <li><a href="../contact/Contact.php" class="hover:text-sky-400 hover:pl-2 transition-all duration-300">Contact</a></li>
+                        <li><a href="aboutus.php" class="text-sky-400 pl-2 transition-all duration-300">About us</a></li>
+                    </ul>
+                </div>
+
+                
+                <div>
+                    <h3 class="text-white font-semibold text-lg mb-6">Contact</h3>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+                            Email : eclipse@email.com
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+                            Phone : +62 1234 5678 90
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+                            Indonesia
+                        </li>
                     </ul>
                 </div>
 
                 <div>
-                    <h3 class="text-white font-semibold text-lg mb-4">Contact</h3>
-                    <ul class="space-y-3 text-gray-400">
-                        <li>Email : eclipse@email.com</li>
-                        <li>Phone : +62 1234 5678 90</li>
-                        <li>Indonesia</li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h3 class="text-white font-semibold text-lg mb-4">Follow Us</h3>
+                    <h3 class="text-white font-semibold text-lg mb-6">Follow Us</h3>
                     <div class="flex gap-4">
-                        <a href="https://www.instagram.com/" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
-                            <img src="../home/img/ig.svg" class="w-5 invert">
+                        <a href="https://www.instagram.com/" class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-sky-400 hover:border-sky-400 transition-all duration-300 hover:shadow-[0_0_20px_rgba(56,189,248,0.5)] group">
+                            <img src="../home/img/ig.svg" class="w-5 invert group-hover:scale-110 transition-transform">
                         </a>
-                        <a href="https://www.facebook.com/" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
-                            <img src="../home/img/fb.svg" class="w-5 invert">
+                        <a href="https://www.facebook.com/" class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-sky-400 hover:border-sky-400 transition-all duration-300 hover:shadow-[0_0_20px_rgba(56,189,248,0.5)] group">
+                            <img src="../home/img/fb.svg" class="w-5 invert group-hover:scale-110 transition-transform">
                         </a>
-                        <a href="https://www.tiktok.com/" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-sky-400 transition duration-300 hover:shadow-[0_0_15px_#38bdf8]">
-                            <img src="../home/img/tiktok.svg" class="w-5 invert">
+                        <a href="https://www.tiktok.com/" class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-sky-400 hover:border-sky-400 transition-all duration-300 hover:shadow-[0_0_20px_rgba(56,189,248,0.5)] group">
+                            <img src="../home/img/tiktok.svg" class="w-5 invert group-hover:scale-110 transition-transform">
                         </a>
                     </div>
                 </div>
 
             </div>
 
-            <div class="border-t border-white/10 mt-10 pt-6 text-center text-gray-500 text-sm">
+            <div class="border-t border-white/10 mt-12 pt-8 text-center text-gray-500 text-sm tracking-wide">
                 © 2026 ECLIPSE. All Rights Reserved.
             </div>
         </div>
