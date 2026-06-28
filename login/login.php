@@ -1,35 +1,6 @@
 <?php
 session_start();
-
-$conn = mysqli_connect("localhost", "root", "", "showroom_mobil");
-
-$error = false;
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    $query = mysqli_query($conn, "SELECT * FROM users WHERE email='$email'");
-
-    if(mysqli_num_rows($query) > 0){
-
-        $user = mysqli_fetch_assoc($query);
-        
-        if(password_verify($password, $user['password'])){
-
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['nama'] = $user['nama'];
-            $_SESSION['role'] = $user['role'];
-            $_SESSION['email'] = $user['email'];
-
-            header("Location: ../home/home.php");
-            exit;
-        }
-    }
-
-    $error = true;
-}
+$error = isset($_GET['error']) && $_GET['error'] == 'true';
 ?>
 
 <!DOCTYPE html>
@@ -176,7 +147,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <!-- Form -->
                 <form 
                     class="mt-6"
-                    action=""
+                    action="../process/login_process.php"
                     method="POST"
                     >
 
