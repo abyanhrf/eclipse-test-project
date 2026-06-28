@@ -35,17 +35,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $query = "INSERT INTO feedback (nama, email, pesan) VALUES ('$nama', '$email', '$pesan')";
 
     if (mysqli_query($conn, $query)) {
-        // Jika berhasil disimpan, munculkan notifikasi sukses
-        echo "<script>
-                alert('Pesan Anda berhasil dikirim! Terima kasih atas saran atau kritik Anda.');
-                window.location.href = '../contact/contact.php';
-              </script>";
+        // DIUBAH: Jika sukses, arahkan kembali dengan parameter ?status=success
+        header("Location: ../contact/contact.php?status=success");
+        exit();
     } else {
-        // Jika ada kesalahan pada query SQL
-        echo "<script>
-                alert('Gagal mengirim pesan: " . mysqli_error($conn) . "');
-                window.location.href = '../contact/contact.php';
-              </script>";
+        // Jika gagal karena sistem/database
+        header("Location: ../contact/contact.php?status=failed");
+        exit();
     }
 }
 
