@@ -152,64 +152,48 @@ session_start();
         </div>
     </div>
 
-    <footer class="bg-black/60 border-t border-white/10 mt-20 backdrop-blur-lg">
-        <div class="max-w-7xl mx-auto px-6 py-16">
+    <footer class="bg-[#030304] border-t border-neutral-900 mt-24 font-jakarta">
+        <div class="max-w-7xl mx-auto px-8 py-16">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
-                
-                <div class="md:col-span-1">
-                    <h2 class="text-3xl font-bold text-white tracking-wider">ECLIPSE</h2>
-                    <p class="text-gray-400 mt-5 leading-relaxed text-sm">
+                <div class="space-y-4">
+                    <h2 class="text-xl font-bold text-white tracking-widest uppercase">ECLIPSE</h2>
+                    <p class="text-neutral-500 text-xs leading-relaxed">
                         Eclipse is a company that operates in the field of selling expensive cars that have original and trusted certification for all brands of cars sold.
                     </p>
                 </div>
-
                 <div>
-                    <h3 class="text-white font-semibold text-lg mb-6">Navigation</h3>
-                    <ul class="space-y-4 text-gray-400 text-sm">
-                        <li><a href="../home/home.php" class="hover:text-sky-400 hover:pl-2 transition-all duration-300">Home</a></li>
-                        <li><a href="../Product-Detailed/product.php" class="hover:text-sky-400 hover:pl-2 transition-all duration-300">Product</a></li>
-                        <li><a href="../contact/Contact.php" class="hover:text-sky-400 hover:pl-2 transition-all duration-300">Contact</a></li>
-                        <li><a href="aboutus.php" class="text-sky-400 pl-2 transition-all duration-300">About us</a></li>
+                    <h3 class="text-white font-semibold text-sm tracking-wider uppercase mb-4">Navigation</h3>
+                    <ul class="space-y-2.5 text-xs text-neutral-400">
+                        <li><a href="../home/home.php" class="hover:text-sky-400 transition">Home</a></li>
+                        <li><a href="../Product-Detailed/product.php" class="hover:text-sky-400 transition">Product</a></li>
+                        <li><a href="../contact/contact.php" class="hover:text-sky-400 transition">Contact</a></li>
+                        <li><a href="../aboutus/aboutus.php" class="hover:text-sky-400 transition">About us</a></li>
                     </ul>
                 </div>
-
-                
                 <div>
-                    <h3 class="text-white font-semibold text-lg mb-6">Contact</h3>
-                    <ul class="space-y-4 text-gray-400 text-sm">
-                        <li class="flex items-center gap-3">
-                            <span class="w-2 h-2 rounded-full bg-sky-400"></span>
-                            Email : eclipse@email.com
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <span class="w-2 h-2 rounded-full bg-sky-400"></span>
-                            Phone : +62 1234 5678 90
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <span class="w-2 h-2 rounded-full bg-sky-400"></span>
-                            Indonesia
-                        </li>
+                    <h3 class="text-white font-semibold text-sm tracking-wider uppercase mb-4">Contact</h3>
+                    <ul class="space-y-2.5 text-xs text-neutral-400">
+                        <li>Email : eclipse@email.com</li>
+                        <li>Phone : +62 1234 5678 90</li>
+                        <li>Indonesia</li>
                     </ul>
                 </div>
-
                 <div>
-                    <h3 class="text-white font-semibold text-lg mb-6">Follow Us</h3>
-                    <div class="flex gap-4">
-                        <a href="https://www.instagram.com/" class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-sky-400 hover:border-sky-400 transition-all duration-300 hover:shadow-[0_0_20px_rgba(56,189,248,0.5)] group">
-                            <img src="../home/img/ig.svg" class="w-5 invert group-hover:scale-110 transition-transform">
+                    <h3 class="text-white font-semibold text-sm tracking-wider uppercase mb-4">Follow Us</h3>
+                    <div class="flex gap-3">
+                        <a href="https://www.instagram.com/" class="w-9 h-9 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center hover:bg-white hover:text-black transition duration-300">
+                            <img src="../home/img/ig.svg" class="w-4 invert opacity-70" alt="Instagram">
                         </a>
-                        <a href="https://www.facebook.com/" class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-sky-400 hover:border-sky-400 transition-all duration-300 hover:shadow-[0_0_20px_rgba(56,189,248,0.5)] group">
-                            <img src="../home/img/fb.svg" class="w-5 invert group-hover:scale-110 transition-transform">
+                        <a href="https://www.facebook.com/" class="w-9 h-9 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center hover:bg-white hover:text-black transition duration-300">
+                            <img src="../home/img/fb.svg" class="w-4 invert opacity-70" alt="Facebook">
                         </a>
-                        <a href="https://www.tiktok.com/" class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-sky-400 hover:border-sky-400 transition-all duration-300 hover:shadow-[0_0_20px_rgba(56,189,248,0.5)] group">
-                            <img src="../home/img/tiktok.svg" class="w-5 invert group-hover:scale-110 transition-transform">
+                        <a href="https://www.tiktok.com/" class="w-9 h-9 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center hover:bg-white hover:text-black transition duration-300">
+                            <img src="../home/img/tiktok.svg" class="w-4 invert opacity-70" alt="TikTok">
                         </a>
                     </div>
                 </div>
-
             </div>
-
-            <div class="border-t border-white/10 mt-12 pt-8 text-center text-gray-500 text-sm tracking-wide">
+            <div class="border-t border-neutral-900 mt-12 pt-8 text-center text-neutral-600 text-xs tracking-wider">
                 © 2026 ECLIPSE. All Rights Reserved.
             </div>
         </div>
