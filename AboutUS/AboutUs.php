@@ -116,7 +116,7 @@ session_start();
                     <div class="relative bg-neutral-900/80 backdrop-blur-sm border border-white/10 p-5 rounded-[20px] shadow-2xl">
                         <div class="w-full aspect-video flex items-center justify-center overflow-hidden rounded-xl bg-black relative">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
-                            <img src="./img/amikom.png" alt="lokasiamikom" class="object-cover w-full h-full opacity-80 group-hover:opacity-100 transition duration-700 group-hover:scale-105">
+                            <img src="./img/EclipseRoom.jpg" alt="Eclipse Room" class="object-cover w-full h-full opacity-80 group-hover:opacity-100 transition duration-700 group-hover:scale-105">
                         </div>
                         
                         <div class="mt-6 px-3">
