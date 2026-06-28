@@ -160,13 +160,42 @@ function hapusKeranjang(event, id) {
             <a href="../aboutus/AboutUs.php" class="relative z-10 w-[105px] h-[45px] flex items-center justify-center rounded-[14px] text-white font-semibold text-[18px] transition duration-300 hover:bg-sky-400 hover:text-white hover:shadow-[0_0_15px_#38bdf8,0_0_30px_rgba(56,189,248,0.6)] hover:[text-shadow:0_0_5px_#38bdf8,0_0_10px_#38bdf8,0_0_20px_#38bdf8]">About us</a>
         </div>
 
-        <div class="relative flex items-center gap-5">
-            <a href="../login/login.php">
-                <img src="../AboutUS/img/user2.png" alt="user" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
-            </a>
-            <a href="cart.php">
-                <img src="../AboutUS/img/shopping-bag.png" alt="cart" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
-            </a>
+        <div class="flex items-center gap-5">
+            <?php if (isset($_SESSION['user_id'])) : ?>
+                <div class="relative group">
+                    <button class="flex items-center gap-2 mr-5 text-white font-semibold hover:text-sky-400 transition duration-300">
+                        <img src="../home/img/user2.png" alt="user" class="w-6 h-6 invert">
+                        <?= $_SESSION['nama']; ?>
+                    </button>
+
+                    <div class="absolute right-0 top-[95%] pt-2 w-40 hidden group-hover:block z-50">
+                        <div class="bg-neutral-900 border border-white/10 rounded-lg shadow-lg overflow-hidden">
+                            <a href="../profile/profile.php"
+                            class="block px-4 py-2 text-sm text-gray-200 hover:text-white hover:bg-sky-500 transition">
+                            Profil Saya
+                            </a>
+                            <a href="../process/logout.php"
+                            class="block px-4 py-2 text-sm text-red-400 hover:bg-red-950/40 transition border-t border-white/5">
+                            Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <?php else : ?>
+                <a href="../login/login.php">
+                    <img src="img/user2.png" alt="user" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
+                </a>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'admin') : ?>
+                <a href="../dashboard/dashboard.php" class="px-4 py-1.5 rounded-full bg-sky-500 text-white text-sm font-semibold hover:bg-sky-400 transition shadow-[0_0_10px_rgba(56,189,248,0.4)]">
+                    Dashboard
+                </a>
+            <?php else : ?>
+                <a href="../cart/cart.php">
+                    <img src="img/shopping-bag.png" alt="cart" class="w-8 h-8 cursor-pointer transition duration-300 invert hover:scale-110 hover:drop-shadow-[0_0_10px_#38bdf8]">
+                </a>
+            <?php endif; ?>
         </div>
     </nav>
 
