@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+$status = isset($_GET['status']) ? $_GET['status'] : '';
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +11,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eclipse</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;500;600&family=Plus+Jakarta+Sans:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .font-poppins { font-family: 'Poppins', sans-serif; }
@@ -21,6 +23,35 @@ session_start();
         }
     </style>
 </head>
+
+<?php if ($status == 'success') : ?>
+<div id="successPopup" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+    <div class="w-[420px] bg-neutral-900 border border-emerald-500/30 backdrop-blur-xl rounded-3xl p-8 shadow-[0_0_50px_rgba(16,185,129,0.2)] text-center font-jakarta transform transition duration-300 scale-100">
+        
+        <div class="flex justify-center">
+            <div class="w-20 h-20 rounded-full bg-emerald-500/10 border border-emerald-500/50 flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.2)] animate-pulse">
+                <svg class="w-10 h-10 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+        </div>
+        
+        <h2 class="mt-6 text-2xl font-bold text-white tracking-wide uppercase">
+            Pesan Terkirim!
+        </h2>
+        
+        <p class="mt-3 text-neutral-400 text-sm leading-relaxed">
+            Terima kasih! Pesan Anda telah berhasil kami terima. Tim Eclipse akan segera meninjau pesan dari Anda.
+        </p>
+        
+        <button
+            onclick="document.getElementById('successPopup').style.display='none'; window.history.replaceState({}, document.title, window.location.pathname);"
+            class="mt-6 w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold text-xs tracking-widest uppercase transition duration-300 hover:shadow-[0_0_20px_rgba(16,185,129,0.5)] hover:scale-[1.02] active:scale-[0.98]">
+            Selesai 
+        </button>
+    </div>
+</div>
+<?php endif; ?>
 
 <body class="bg-[#060608] text-neutral-100 min-h-screen overflow-x-hidden selection:bg-sky-500 selection:text-white relative">
     
@@ -61,7 +92,7 @@ session_start();
                 <div class="relative group">
                     <button class="flex items-center gap-2 mr-5 text-white font-semibold hover:text-sky-400 transition duration-300">
                         <img src="../home/img/user2.png" alt="user" class="w-6 h-6 invert">
-                        <?= $_SESSION['nama']; ?>
+                        <?= htmlspecialchars($_SESSION['nama']); ?>
                     </button>
 
                     <div class="absolute right-0 top-[95%] pt-2 w-40 hidden group-hover:block z-50">
@@ -94,6 +125,7 @@ session_start();
             <?php endif; ?>
         </div>
     </nav>
+    
     <main class="w-[92%] max-w-[1200px] mx-auto py-16 font-jakarta">
         
         <header class="mb-14 text-center">
@@ -107,31 +139,56 @@ session_start();
             
             <div class="lg:col-span-7">
                 <div class="glass-panel border border-neutral-800 p-8 md:p-10 rounded-3xl shadow-2xl h-full flex flex-col justify-center">
-                    <form action="../process/contact_process.php" method="POST" class="space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="flex flex-col space-y-2">
-                                <label id="nama" class="text-xs font-bold tracking-wider text-neutral-400 uppercase">Nama Anda:</label>
-                                <input type="text" id="nama" name="nama" required
-                                    class="w-full bg-neutral-950/50 border border-neutral-800 rounded-xl px-5 py-3.5 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition duration-200" placeholder="Nama">
+                    
+                    <?php if (isset($_SESSION['user_id'])) : ?>
+                        <form action="../process/contact_process.php" method="POST" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="flex flex-col space-y-2">
+                                    <label class="text-xs font-bold tracking-wider text-neutral-400 uppercase">Nama Anda:</label>
+                                    <input type="text" id="nama" name="nama" required 
+                                        value="<?= htmlspecialchars($_SESSION['nama']); ?>" readonly
+                                        class="w-full bg-neutral-900/50 border border-neutral-800/80 rounded-xl px-5 py-3.5 text-sm text-neutral-400 cursor-not-allowed focus:outline-none" placeholder="Nama">
+                                </div>
+                                <div class="flex flex-col space-y-2">
+                                    <label class="text-xs font-bold tracking-wider text-neutral-400 uppercase">Email Anda:</label>
+                                    <input type="email" id="email" name="email" required 
+                                        value="<?= isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : ''; ?>" readonly
+                                        class="w-full bg-neutral-900/50 border border-neutral-800/80 rounded-xl px-5 py-3.5 text-sm text-neutral-400 cursor-not-allowed focus:outline-none" placeholder="Email">
+                                </div>
                             </div>
                             <div class="flex flex-col space-y-2">
-                                <label id="email" class="text-xs font-bold tracking-wider text-neutral-400 uppercase">Email Anda:</label>
-                                <input type="email" id="email" name="email" required
-                                    class="w-full bg-neutral-950/50 border border-neutral-800 rounded-xl px-5 py-3.5 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition duration-200" placeholder="Email">
+                                <label class="text-xs font-bold tracking-wider text-neutral-400 uppercase">Isi Pesan:</label>
+                                <textarea id="pesan" name="pesan" rows="5" required
+                                    class="w-full bg-neutral-950/50 border border-neutral-800 rounded-2xl p-5 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition duration-200 resize-none" placeholder="Ketik pesan Anda di sini..."></textarea>
+                                </div>
+                            <div class="flex justify-center md:justify-start pt-2">
+                                <button type="submit" 
+                                    class="w-full md:w-auto bg-gradient-to-r from-sky-500 via-sky-400 to-blue-600 text-white text-xs font-bold tracking-widest uppercase py-4 px-10 rounded-xl shadow-[0_4px_25px_rgba(56,189,248,0.2)] hover:shadow-[0_4px_35px_rgba(56,189,248,0.4)] transition duration-300 transform active:scale-[0.98]"
+                                    action="KirimPesan.php">
+                                    KIRIM PESAN ⚡
+                                </button>
+                            </div>
+                        </form>
+                    <?php else : ?>
+                        <div class="text-center py-8 space-y-5">
+                            <div class="w-16 h-16 bg-sky-500/10 border border-sky-500/20 text-sky-400 rounded-full flex items-center justify-center mx-auto text-2xl shadow-[0_0_20px_rgba(56,189,248,0.1)]">
+                                🔒
+                            </div>
+                            <div class="space-y-2">
+                                <h3 class="text-xl font-bold tracking-tight text-white">Fitur Pesan Khusus Member</h3>
+                                <p class="text-sm text-neutral-400 max-w-sm mx-auto leading-relaxed">
+                                    Untuk menghindari aktivitas spam, kirim pesan ke Eclipse memerlukan otentikasi akun.
+                                </p>
+                            </div>
+                            <div class="pt-2">
+                                <a href="../login/login.php" 
+                                   class="inline-block bg-neutral-900 border border-neutral-800 text-white hover:bg-sky-500 hover:border-sky-400 hover:shadow-[0_0_20px_rgba(56,189,248,0.4)] text-xs font-bold tracking-widest uppercase py-3.5 px-8 rounded-xl transition duration-300">
+                                    Login / Daftar Sekarang
+                                </a>
                             </div>
                         </div>
-                        <div class="flex flex-col space-y-2">
-                            <label id="pesan" class="text-xs font-bold tracking-wider text-neutral-400 uppercase">Isi Pesan:</label>
-                            <textarea id="pesan" name="pesan" rows="5" required
-                                class="w-full bg-neutral-950/50 border border-neutral-800 rounded-2xl p-5 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition duration-200 resize-none" placeholder="Pesan Anda"></textarea>
-                        </div>
-                        <div class="flex justify-center md:justify-start pt-2">
-                            <button type="submit" 
-                                class="w-full md:w-auto bg-gradient-to-r from-sky-500 via-sky-400 to-blue-600 text-white text-xs font-bold tracking-widest uppercase py-4 px-10 rounded-xl shadow-[0_4px_25px_rgba(56,189,248,0.2)] hover:shadow-[0_4px_35px_rgba(56,189,248,0.4)] transition duration-300 transform active:scale-[0.98]">
-                                KIRIM PESAN ⚡
-                            </button>
-                        </div>
-                    </form>
+                    <?php endif; ?>
+
                 </div>
             </div>
 

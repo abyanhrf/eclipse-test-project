@@ -65,5 +65,7 @@ ALTER TABLE cars
     ADD kilometer INT AFTER warna;
 
 
-
 ALTER TABLE cars_img ADD gambar_utama TINYINT(1) DEFAULT 0
+
+
+ALTER TABLE users ADD profile_pic VARCHAR(255) NULL;
