@@ -121,14 +121,14 @@ $error = isset($_GET['error']) && $_GET['error'] == 'true';
                 </div>
                 <!--login admin-->
                 <div class="mt-20">
-                    <p>
+                    <!-- <p>
                         Login sebagai admin<br> 
                         <a
                             href="../login/login2.html"
                             class="text-blue-200 font-bold hover:underline">
                             Klik disini
                         </a>
-                    </p>
+                    </p> -->
                 </div>
             </div>
 
